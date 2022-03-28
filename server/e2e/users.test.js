@@ -5,7 +5,7 @@ describe('GET /api/users', () => {
   test('should return a list of users', () => supertest(app)
     .get('/api/users')
     .expect(200)
-    .expect('Content-Type', /application-json/)
+    .expect('Content-Type', /application\/json/)
     .expect((res) => {
       const { status, data } = res.body;
 
