@@ -1,13 +1,32 @@
-body {
+@font-face {
+  font-family: vegan;
+  src: url('/public/fonts/vegan.ttf');
+}
+
+@font-face {
+  font-family: open-sans;
+  src: url('/public/fonts/OpenSans.ttf');
+}
+
+:root {
+  --yellow: #FECE62;
+  --metal: #545454;
+  --dark-blue: #00286E;
+  --light-blue: #DBECFC;
+  --light-gray: #e5e5e580;
+}
+
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  color: var(--metal);
 }
