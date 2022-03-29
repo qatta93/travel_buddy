@@ -70,17 +70,23 @@ const createTrip = async (newTrip) => {
 
   const [trip] = await createTripDB(authorId, description, maxPassengers, summary, budget, images);
 
-  for (const country of countries) {
-    await addCountryToTripDB(trip.id, country);
+  if (countries) {
+    for (const country of countries) {
+      await addCountryToTripDB(trip.id, country);
+    }
   }
 
-  for (const activity of activities) {
-    await addActivityToTripDB(trip.id, activity);
+  if (activities) {
+    for (const activity of activities) {
+      await addActivityToTripDB(trip.id, activity);
+    }
   }
 
-  for (const place of places) {
-    const placeId = await getPlaceIdOrCreate(place);
-    await addPlaceToTripDB(trip.id, placeId);
+  if (places) {
+    for (const place of places) {
+      const placeId = await getPlaceIdOrCreate(place);
+      await addPlaceToTripDB(trip.id, placeId);
+    }
   }
 
   return { id: trip.id };

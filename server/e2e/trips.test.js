@@ -1,7 +1,7 @@
 const supertest = require('supertest');
 const app = require('../app');
 const sql = require('../db');
-const { deleteTripById, getTripById } = require('../trips/helpers');
+const { deleteTripById, getTripById, createTrip } = require('../trips/helpers');
 
 afterAll(() => sql.end());
 
@@ -100,5 +100,30 @@ describe('POST /api/trips', () => {
       expect(trip.activities).toEqual(expect.arrayContaining(newTrip.activities));
       expect(trip.places).toEqual(expect.arrayContaining(newTrip.places));
       expect(trip.passengers).toEqual([]);
+    }));
+});
+
+describe('DELETE /api/trips/:id', () => {
+  const trip = {
+    authorId: 2,
+    description: 'a trip test',
+    maxPassengers: 3,
+  };
+
+  let tripId;
+
+  beforeAll(async () => {
+    const { id } = await createTrip(trip);
+    tripId = id;
+  });
+
+  test('should delete an existing trip', () => supertest(app)
+    .delete(`/api/trips/${tripId}`)
+    .expect(200)
+    .expect(async (res) => {
+      const { status } = res.body;
+      expect(status).toBe('success');
+      const user = await getTripById(tripId);
+      expect(user).toBeNull();
     }));
 });
