@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './components/Home';
 import './App.css';
 
-const host = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5500';
+// const host = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5500';
 
-const App = () => {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`${host}/api`);
-      const data = await response.json();
-      setMessage(data.message);
-    };
-    fetchData();
-  }, []);
-
-  return (
-    <div className="App">
-      <h1>{message}</h1>
-    </div>
-  );
-};
+const App = () => (
+  <div className="App">
+    <Header />
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
+    <Footer />
+  </div>
+);
 
 export default App;

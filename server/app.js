@@ -19,9 +19,10 @@ app.use((req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   console.error(err.message);
-  next(err);
+  return res.status(500).json({ status: 'error', message: err.message });
 });
 
 module.exports = app;
