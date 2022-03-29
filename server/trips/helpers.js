@@ -1,12 +1,22 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
+
 const {
   getAllTripsDB,
   getTripByIdDB,
+  createTripDB,
+  deleteTripByIdDB,
+  addCountryToTripDB,
+  addActivityToTripDB,
+  createPlaceDB,
+  getPlaceByNameDB,
+  addPlaceToTripDB,
 } = require('./db');
 
 const findIndexById = (array, id) => array.findIndex((ele) => ele.id === id);
 
 const removeDuplicated = (array) => array
-  .filter((val, index) => array.indexOf(val) === index);
+  .filter((val, index) => array.indexOf(val) === index && val !== null);
 
 const addData = (field, newField) => (array, trip) => {
   const allFieldValues = array
@@ -44,7 +54,43 @@ const getTripById = async (id) => {
   return parsedTrip.length > 0 ? parsedTrip[0] : null;
 };
 
+const getPlaceIdOrCreate = async (place) => {
+  const data = await getPlaceByNameDB(place);
+  if (data) {
+    return data.id;
+  }
+  const newPlace = await createPlaceDB(place);
+  return newPlace[0].id;
+};
+
+const createTrip = async (newTrip) => {
+  const {
+    authorId, summary, description, budget, activities, countries, places, images, maxPassengers,
+  } = newTrip;
+
+  const [trip] = await createTripDB(authorId, description, maxPassengers, summary, budget, images);
+
+  for (const country of countries) {
+    await addCountryToTripDB(trip.id, country);
+  }
+
+  for (const activity of activities) {
+    await addActivityToTripDB(trip.id, activity);
+  }
+
+  for (const place of places) {
+    const placeId = await getPlaceIdOrCreate(place);
+    await addPlaceToTripDB(trip.id, placeId);
+  }
+
+  return { id: trip.id };
+};
+
+const deleteTripById = async (id) => deleteTripByIdDB(id);
+
 module.exports = {
   getAllTrips,
   getTripById,
+  createTrip,
+  deleteTripById,
 };

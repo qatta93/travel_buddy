@@ -123,8 +123,10 @@ describe('DELETE /api/users/:id', () => {
 
   test('should create a new user', () => supertest(app)
     .delete(`/api/users/${userId}`)
-    .expect(204)
-    .expect(async () => {
+    .expect(200)
+    .expect(async (res) => {
+      const { status } = res.body;
+      expect(status).toBe('success');
       const user = await getUserById(userId);
       expect(user).toBeNull();
     }));

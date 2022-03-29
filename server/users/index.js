@@ -24,8 +24,8 @@ const validateId = async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await getAllUsers();
-    return res.json({ status: 'success', data: users });
+    const data = await getAllUsers();
+    return res.json({ status: 'success', data });
   } catch (err) {
     return next(err);
   }
@@ -51,7 +51,7 @@ router.post('/', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
   try {
     await deleteUserById(req.params.id);
-    return res.status(204).end();
+    return res.json({ status: 'success' });
   } catch (err) {
     return next(err);
   }
