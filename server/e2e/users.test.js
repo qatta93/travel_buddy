@@ -21,6 +21,7 @@ describe('GET /api/users', () => {
       expect(Array.isArray(data)).toBe(true);
 
       data.forEach((user) => {
+        expect(user.id).not.toBeUndefined();
         expect(user.username).not.toBeUndefined();
         expect(user.email).not.toBeUndefined();
         expect(user.name).not.toBeUndefined();
@@ -42,14 +43,14 @@ describe('GET /api/users/:id', () => {
       const { status, data } = res.body;
       expect(status).toBe('success');
 
+      expect(data.id).toBe(1);
       expect(data.username).toBe('qatta');
       expect(data.email).toBe('panasiuk.patrycja@gmail.com');
       expect(data.name).toBe('Patrycja');
       expect(data.gender).toBe('male');
       expect(data.country).toBe('Poland');
       expect(data.age).toBe(18);
-      expect(Array.isArray(data.languages)).toBe(true);
-      expect(data.languages.length > 0).toBe(true);
+      expect(data.languages).toEqual(expect.arrayContaining(['English', 'Polish', 'Spanish']));
       expect(data.languages).toContain('English');
       expect(data.languages).toContain('Polish');
     }));

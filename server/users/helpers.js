@@ -12,7 +12,9 @@ const {
 const findIndexById = (array, id) => array.findIndex((ele) => ele.id === id);
 
 const addLanguages = (array, user) => {
-  const languages = array.filter((u) => u.id === user.id).map((u) => u.language);
+  const languages = array
+    .filter((u) => u.id === user.id)
+    .map((u) => u.language);
   return {
     ...user,
     languages,
@@ -21,7 +23,7 @@ const addLanguages = (array, user) => {
 
 const parseUsers = (users) => {
   const newUsers = users
-    .filter((user, index, arr) => findIndexById(arr, user.id) === index)
+    .filter((user, index) => findIndexById(users, user.id) === index)
     .map((user) => addLanguages(users, user));
   return newUsers;
 };

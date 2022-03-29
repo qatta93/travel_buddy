@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const usersRouter = require('./users');
+const tripsRouter = require('./trips');
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.use('/api/users', usersRouter);
+app.use('/api/trips', tripsRouter);
 
 app.use((req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
