@@ -1,6 +1,6 @@
 const sql = require('../db');
 
-const getAllUsers = async () => {
+const getAllUsersDB = async () => {
   const users = await sql`
     SELECT u.id, u.username, u.email, u.name, u.age, u.summary, u.gender, c.country, l.language FROM users AS u
     JOIN countries AS c ON c.id=u.country_id
@@ -10,7 +10,7 @@ const getAllUsers = async () => {
   return users;
 };
 
-const getUserById = async (id) => {
+const getUserByIdDB = async (id) => {
   const users = await sql`
     SELECT u.id, u.username, u.email, u.name, u.age, u.summary, u.gender, c.country, l.language FROM users AS u
     JOIN countries AS c ON c.id=u.country_id
@@ -21,23 +21,23 @@ const getUserById = async (id) => {
   return users;
 };
 
-const getCountryIdByName = async (name) => {
-  const countryId = await sql`
-    SELECT id FROM countries WHERE country = ${name};
+const getCountryByNameDB = async (name) => {
+  const data = await sql`
+    SELECT * FROM countries WHERE country = ${name};
   `;
-  return countryId[0].id;
+  return data;
 };
 
-const createUser = async (email, username, name, gender, age, countryId, summary = '') => {
+const createUserDB = async (email, username, name, gender, age, countryId, summary = '') => {
   const data = await sql`
     INSERT INTO users (email, username, name, gender, age, summary, country_id)
     VALUES (${email}, ${username}, ${name}, ${gender}, ${age}, ${summary}, ${countryId})
-    RETURNING id, username;
+    RETURNING *;
   `;
-  return data[0];
+  return data;
 };
 
-const addLanguageToUser = async (userId, language) => {
+const addLanguageToUserDB = async (userId, language) => {
   const data = await sql`
     INSERT INTO users_languages (user_id, language_id)
     VALUES (${userId}, (SELECT id FROM languages WHERE language = ${language}));
@@ -46,34 +46,34 @@ const addLanguageToUser = async (userId, language) => {
   return data;
 };
 
-const getLanguagesByUserId = async (id) => {
+const getLanguagesByUserIdDB = async (id) => {
   const data = await sql`
     SELECT l.language FROM users_languages AS ul
     JOIN languages AS l ON ul.language_id=l.id
     WHERE user_id = ${id};
   `;
-  return data.map((obj) => obj.language);
+  return data;
 };
 
-const deleteUserById = async (id) => {
+const deleteUserByIdDB = async (id) => {
   await sql`
     DELETE FROM users WHERE id = ${id};
   `;
 };
 
-const deleteAllTestUsers = async () => {
+const deleteAllTestUsersDB = async () => {
   await sql`
     DELETE FROM users WHERE username ILIKE '%test%';
   `;
 };
 
 module.exports = {
-  getAllUsers,
-  getUserById,
-  getCountryIdByName,
-  createUser,
-  getLanguagesByUserId,
-  deleteUserById,
-  addLanguageToUser,
-  deleteAllTestUsers,
+  getAllUsersDB,
+  getUserByIdDB,
+  getCountryByNameDB,
+  createUserDB,
+  getLanguagesByUserIdDB,
+  deleteUserByIdDB,
+  addLanguageToUserDB,
+  deleteAllTestUsersDB,
 };

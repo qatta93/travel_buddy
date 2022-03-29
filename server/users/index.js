@@ -1,8 +1,7 @@
 const express = require('express');
 const {
-  getAllUsers, getUserById, getCountryIdByName, createUser, deleteUserById, addLanguageToUser,
-} = require('./db');
-const { parseUsers } = require('./helpers');
+  getAllUsers, getUserById, createUser, deleteUserById,
+} = require('./helpers');
 
 const router = express.Router();
 
@@ -12,12 +11,10 @@ const validateId = async (req, res, next) => {
     if (!Number.isInteger(id) || id <= 0) {
       return res.status(404).json({ status: 'error', message: 'user not found' });
     }
-    const users = await getUserById(req.params.id);
-    const parsedUsers = parseUsers(users);
-    if (parsedUsers.length === 0) {
+    const user = await getUserById(req.params.id);
+    if (!user) {
       return res.status(404).json({ status: 'error', message: 'user not found' });
     }
-    const user = parsedUsers[0];
     req.locals = user;
     return next();
   } catch (err) {
@@ -28,8 +25,7 @@ const validateId = async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const users = await getAllUsers();
-    const parsedUsers = parseUsers(users);
-    return res.json({ status: 'success', data: parsedUsers });
+    return res.json({ status: 'success', data: users });
   } catch (err) {
     return next(err);
   }
@@ -39,20 +35,14 @@ router.get('/:id', validateId, async (req, res) => res.json({ status: 'success',
 
 router.post('/', async (req, res, next) => {
   try {
-    const countryId = await getCountryIdByName(req.body.country);
     const {
-      email, username, name, gender, age, summary, languages,
+      email, username, name, gender, age, summary, languages, country,
     } = req.body;
-    const newUser = await createUser(email, username, name, gender, age, countryId, summary);
-
-    const newLanguagesPromises = languages.map((lang) => addLanguageToUser(newUser.id, lang));
-
-    await Promise.all(newLanguagesPromises);
-
+    const data = await createUser(email, username, name, gender, age, country, summary, languages);
     return res
       .status(201)
-      .location(`/api/users/${newUser.id}`)
-      .json({ status: 'success', data: newUser });
+      .location(`/api/users/${data.id}`)
+      .json({ status: 'success', data });
   } catch (err) {
     return next(err);
   }
@@ -60,8 +50,7 @@ router.post('/', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    const id = Number(req.params.id);
-    await deleteUserById(id);
+    await deleteUserById(req.params.id);
     return res.status(204).end();
   } catch (err) {
     return next(err);

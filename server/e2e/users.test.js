@@ -2,11 +2,10 @@ const supertest = require('supertest');
 const app = require('../app');
 const sql = require('../db');
 const {
-  getLanguagesByUserId, deleteUserById, createUser, deleteAllTestUsers, getUserById,
-} = require('../users/db');
+  getLanguagesByUserId, deleteUserById, createUser, getUserById,
+} = require('../users/helpers');
 
 afterAll(async () => {
-  await deleteAllTestUsers();
   sql.end();
 });
 
@@ -110,14 +109,14 @@ describe('DELETE /api/users/:id', () => {
     username: 'test_username',
     email: 'test@username.com',
     age: 20,
-    countryId: 55,
+    country: 'Chile',
     gender: 'female',
   };
 
   let userId;
 
   beforeAll(async () => {
-    const { id } = await createUser(u.email, u.username, u.name, u.gender, u.age, u.countryId);
+    const { id } = await createUser(u.email, u.username, u.name, u.gender, u.age, u.country);
     userId = id;
   });
 
@@ -126,6 +125,6 @@ describe('DELETE /api/users/:id', () => {
     .expect(204)
     .expect(async () => {
       const user = await getUserById(userId);
-      expect(user).toHaveLength(0);
+      expect(user).toBeNull();
     }));
 });
