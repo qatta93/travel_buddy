@@ -33,6 +33,9 @@
   --dark-blue: #00286E;
   --light-blue: #DBECFC;
   --light-gray: #e5e5e580;
+  --green: #6BEB4B;
+  --red: #fb0d0dbd;
+  --shadow: rgb(207, 207, 207);
 }
 
 * {

@@ -7,7 +7,7 @@ const Home = () => (
     <section className="home__content">
       <h1 className="home__title">FIND YOUR TRAVEL BUDDIES</h1>
       <div className="home__btn-container">
-        <Link to="/" className="home__btn home__btn--primary">Find trip</Link>
+        <Link to="/search" className="home__btn home__btn--primary">Find trip</Link>
         <Link to="/" className="home__btn">Create trip</Link>
       </div>
     </section>
