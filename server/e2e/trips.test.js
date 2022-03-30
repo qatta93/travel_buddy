@@ -20,6 +20,8 @@ describe('GET /api/trips', () => {
         expect(trip.id).not.toBeUndefined();
         expect(trip.authorId).not.toBeUndefined();
         expect(trip.authorUsername).not.toBeUndefined();
+        expect(trip.authorGender).not.toBeUndefined();
+        expect(trip.authorAge).not.toBeUndefined();
         expect(trip.description).not.toBeUndefined();
         expect(trip.from).not.toBeUndefined();
         expect(trip.to).not.toBeUndefined();
@@ -49,6 +51,8 @@ describe('GET /api/trips/:id', () => {
       expect(data.id).toBe(1);
       expect(data.authorId).toBe(1);
       expect(data.authorUsername).toBe('qatta');
+      expect(data.authorGender).toBe('male');
+      expect(data.authorAge).toBe(18);
       expect(data.description).toBe('dream trip');
       expect(data.from).toEqual((new Date('2022-03-30').toISOString()));
       expect(data.to).toEqual((new Date('2022-03-30').toISOString()));
