@@ -1,0 +1,49 @@
+.trips__offer {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  margin: 1rem 0;
+  border-radius: 0.2rem;
+  box-shadow: 3px 5px 3px var(--shadow);
+}
+
+.trips__info {
+  width: 70%;
+  color: var(--dark-blue);
+}
+
+.trips__header,
+.trips__details,
+.trips__host {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  padding: 0.5rem;
+}
+
+.trips__description {
+  font-size: 0.7rem;
+  padding: 0.4rem 0.5rem;
+}
+
+.trips__country {
+  font-size: 1rem;
+}
+
+.trips__date {
+  font-size: 1rem;
+}
+
+.trips__host {
+  padding: 0.5rem;
+  background-color: var(--light-blue);
+}
+
+.trips__pic {
+  width: 30%;
+  background-color: aliceblue;
+  background-image: url(https://exotiskvarld.se/wp-content/uploads/2021/05/Portugal-870x480.jpg);
+  background-position: center;
+  background-size: cover;
+}

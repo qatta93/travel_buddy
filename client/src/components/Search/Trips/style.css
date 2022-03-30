@@ -1,0 +1,16 @@
+.trips {
+  margin-bottom: 2rem;
+}
+
+.trips__title {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1rem;
+  color: white;
+  background-color: var(--dark-blue);
+}
+
+.trips__list {
+  padding: 1.2rem;
+  background-color: var(--light-gray);
+}
