@@ -22,9 +22,9 @@ const Header = () => {
             { isNavExpanded ? <CloseIcon /> : <HamburgerIcon />}
           </button>
           <ul className={`header__links-container ${isNavExpanded ? 'header__links-container--visible' : ''}`}>
-            <li className="header__link">1</li>
-            <li className="header__link">2</li>
-            <li className="header__link">3</li>
+            <li className="header__link">link 1</li>
+            <li className="header__link">link 2</li>
+            <li className="header__link">link 3</li>
           </ul>
         </div>
       </nav>
