@@ -50,7 +50,7 @@
 
 .header__link {
   display: block;
-  margin: 0.5rem 2rem;
+  padding: 0.5rem 2rem;
   text-decoration: none;
   color: var(--metal);
 }
@@ -66,5 +66,9 @@
     flex-direction: row;
     min-height: auto;
     background-color: transparent;
+  }
+
+  .header__link:hover {
+    background-color: var(--yellow);
   }
 }
