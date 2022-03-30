@@ -1,5 +1,14 @@
 import React from 'react';
+import './style.css';
 
-const Footer = () => <h1>I am the footer</h1>;
+const Footer = () => (
+  <footer className="footer">
+    <p className="footer__text">
+      Created with
+      <span className="footer__heart">🖤</span>
+      by Coding Nomads
+    </p>
+  </footer>
+);
 
 export default Footer;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import HamburgerIcon from './HamburgerIcon';
 import CloseIcon from './CloseIcon';
 import './style.css';
@@ -22,9 +23,10 @@ const Header = () => {
             { isNavExpanded ? <CloseIcon /> : <HamburgerIcon />}
           </button>
           <ul className={`header__links-container ${isNavExpanded ? 'header__links-container--visible' : ''}`}>
-            <li className="header__link">link 1</li>
-            <li className="header__link">link 2</li>
-            <li className="header__link">link 3</li>
+            <Link to="/" className="header__link">HOME</Link>
+            <Link to="/trips" className="header__link">TRIPS</Link>
+            <Link to="/login" className="header__link">LOGIN</Link>
+            <Link to="/about-us" className="header__link">ABOUT US</Link>
           </ul>
         </div>
       </nav>

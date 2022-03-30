@@ -1,0 +1,9 @@
+.footer__text {
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.footer__heart {
+  padding-right: 0.5rem;
+  padding-left: 0.3rem;
+}

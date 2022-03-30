@@ -51,9 +51,11 @@
 .header__link {
   display: block;
   margin: 0.5rem 2rem;
+  text-decoration: none;
+  color: var(--metal);
 }
 
-@media screen and (min-width: 30rem) {
+@media screen and (min-width: 50rem) {
   .header__button {
     display: none;
   }
