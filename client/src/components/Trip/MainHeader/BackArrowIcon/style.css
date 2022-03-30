@@ -1,0 +1,8 @@
+.back-arrow {
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0.1rem 0.2rem;
+  border: 1px solid var(--metal);
+  border-radius: 0.2rem;
+  margin-right: 1rem;
+}

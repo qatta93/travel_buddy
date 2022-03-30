@@ -1,0 +1,27 @@
+.trip__info {
+  padding-top: 1.5rem;
+}
+
+.trip__dates {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 15rem;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: var(--dark-blue);
+}
+
+.trip__description {
+  min-height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trip__other {
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--dark-blue);
+  color: white;
+  padding: 1.5rem;
+}
