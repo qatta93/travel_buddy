@@ -65,10 +65,31 @@ const getPlaceIdOrCreate = async (place) => {
 
 const createTrip = async (newTrip) => {
   const {
-    authorId, summary, description, budget, activities, countries, places, images, maxPassengers,
+    authorId,
+    summary,
+    description,
+    from,
+    to,
+    budget,
+    activities,
+    countries,
+    places,
+    images,
+    maxPassengers,
   } = newTrip;
 
-  const [trip] = await createTripDB(authorId, description, maxPassengers, summary, budget, images);
+  const createTripArgs = {
+    authorId,
+    description,
+    from,
+    to,
+    maxPassengers,
+    summary: summary || '',
+    budget: budget || 0,
+    images: images || '',
+  };
+
+  const [trip] = await createTripDB(createTripArgs);
 
   if (countries) {
     for (const country of countries) {

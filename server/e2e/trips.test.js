@@ -21,6 +21,8 @@ describe('GET /api/trips', () => {
         expect(trip.authorId).not.toBeUndefined();
         expect(trip.authorUsername).not.toBeUndefined();
         expect(trip.description).not.toBeUndefined();
+        expect(trip.from).not.toBeUndefined();
+        expect(trip.to).not.toBeUndefined();
         expect(trip.maxPassengers).not.toBeUndefined();
         expect(Array.isArray(trip.countries)).toBe(true);
         expect(trip.countries.length > 0).toBe(true);
@@ -48,6 +50,8 @@ describe('GET /api/trips/:id', () => {
       expect(data.authorId).toBe(1);
       expect(data.authorUsername).toBe('qatta');
       expect(data.description).toBe('dream trip');
+      expect(data.from).toEqual((new Date('2022-03-30').toISOString()));
+      expect(data.to).toEqual((new Date('2022-03-30').toISOString()));
       expect(data.maxPassengers).toBe(5);
       expect(data.countries).toEqual(expect.arrayContaining(['Chile', 'Canada']));
       expect(data.activities).toEqual(expect.arrayContaining(['beach']));
@@ -62,6 +66,8 @@ describe('POST /api/trips', () => {
     summary: 'a great test trip',
     budget: 5000,
     description: 'just read this',
+    from: '2022-05-30',
+    to: '2022-07-01',
     maxPassengers: 5,
     countries: ['Estonia', 'Poland'],
     activities: ['Hiking', 'Mountains'],
@@ -95,6 +101,8 @@ describe('POST /api/trips', () => {
       expect(trip.summary).toBe(newTrip.summary);
       expect(trip.description).toBe(newTrip.description);
       expect(trip.budget).toBe(newTrip.budget);
+      expect(trip.from.toISOString()).toEqual((new Date(newTrip.from)).toISOString());
+      expect(trip.to.toISOString()).toEqual((new Date(newTrip.to)).toISOString());
       expect(trip.maxPassengers).toBe(newTrip.maxPassengers);
       expect(trip.countries).toEqual(expect.arrayContaining(newTrip.countries));
       expect(trip.activities).toEqual(expect.arrayContaining(newTrip.activities));
@@ -107,6 +115,8 @@ describe('DELETE /api/trips/:id', () => {
   const trip = {
     authorId: 2,
     description: 'a trip test',
+    from: '2022-05-30',
+    to: '2022-07-01',
     maxPassengers: 3,
   };
 
