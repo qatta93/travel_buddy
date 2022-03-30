@@ -16,3 +16,15 @@ export interface ITrip {
   places: string[],
   passengers: number[],
 }
+
+export interface IUser {
+  id: number,
+  username: string,
+  email: string,
+  name: string,
+  age: number,
+  summary: string,
+  gender: string,
+  country: string,
+  languages: string[],
+}

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { fetchApi } from '../../helpers/api';
 import { ITrip } from '../../types';
 import MainHeader from './MainHeader';
+import UserCard from './UserCard';
 import './style.css';
 
 const Trip = () => {
@@ -42,7 +43,7 @@ const Trip = () => {
             <p className="trip__description">{trip.description}</p>
             <div className="trip__other">
               <p>
-                {trip.maxPassengers}
+                {trip.maxPassengers - trip.passengers.length}
                 {' '}
                 seats left
               </p>
@@ -55,6 +56,18 @@ const Trip = () => {
               )}
             </div>
           </section>
+          <section className="trip__additional">
+            <div className="trip__img-container">
+              <img src={trip.images || '/images/rockies.jpeg'} alt="trip" className="trip__img" />
+            </div>
+            <UserCard id={trip.authorId} />
+          </section>
+          <button
+            className="trip__request-button"
+            type="button"
+          >
+            Send request!
+          </button>
         </>
       ) : <p>Loading...</p>}
     </main>
