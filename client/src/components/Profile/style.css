@@ -1,0 +1,38 @@
+.profile {
+
+}
+
+.profile__buttons {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+.profile__btn {
+  width: 13rem;
+  margin: 0.5rem auto;
+  background-color: white;
+  border: 1px solid var(--yellow);
+  padding: 0.6rem 0;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  font-weight: 100;
+  color: var(--metal);
+  box-shadow: 3px 5px 3px var(--shadow);
+}
+
+.profile__btn--logout {
+  width: 100%;
+  border-radius: 0;
+  border: none;
+  background-color: var(--red);
+  margin-top: 0.7rem;
+  padding: 1rem;
+  color: white;
+  font-weight: 400;
+}
+
+.profile__img {
+  width: 100vw;
+  opacity: 40%;
+}

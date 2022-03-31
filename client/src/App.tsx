@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import Home from './components/Home';
+import Profile from './components/Profile';
 import Search from './components/Search';
 import About from './components/About';
 import Trip from './components/Trip';
@@ -20,6 +21,7 @@ const App = () => (
         <Route path=":id" element={<Trip />} />
       </Route>
       <Route path="login" element={<Login />} />
+      <Route path="profile" element={<Profile />} />
     </Routes>
     <Footer />
   </div>
