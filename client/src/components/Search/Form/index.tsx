@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { SearchFilters } from '../../../types';
 import './style.css';
 
 interface Gender {
@@ -31,11 +32,25 @@ const searchInputInitialValue = {
   },
 };
 
-const Form = () => {
+interface FormProps {
+  setFilters: React.Dispatch<React.SetStateAction<SearchFilters>>,
+}
+
+const Form = ({ setFilters }: FormProps) => {
   const [searchInput, setSearchInput] = useState<SearchInput>(searchInputInitialValue);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    setFilters((currentState) => ({
+      ...currentState,
+      countries: searchInput.countries,
+      ageFrom: Number(searchInput.ageFrom),
+      ageTo: Number(searchInput.ageTo),
+      dateFrom: searchInput.dateFrom || undefined,
+      dateTo: searchInput.dateTo || undefined,
+      budget: Number(searchInput.budget),
+      gender: searchInput.gender,
+    }));
   };
 
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {

@@ -39,9 +39,9 @@ const Trip = () => {
           </section>
           <section className="trip__info">
             <div className="trip__dates">
-              <p>{trip.from.toString().slice(0, 10)}</p>
+              <p>{trip.from.slice(0, 10)}</p>
               <p className="trip__dates-dash">-</p>
-              <p>{trip.to.toString().slice(0, 10)}</p>
+              <p>{trip.to.slice(0, 10)}</p>
             </div>
             <p className="trip__description">{trip.description}</p>
           </section>
@@ -51,7 +51,7 @@ const Trip = () => {
               {' '}
               seats left
             </p>
-            <p>{parseGenderRestrictions(trip.genderRestriction)}</p>
+            <p>{parseGenderRestrictions(trip.genderRestrictions)}</p>
             {trip.budget && (
               <p>
                 USD$

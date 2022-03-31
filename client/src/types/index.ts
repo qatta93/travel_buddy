@@ -7,15 +7,15 @@ export interface ITrip {
   budget: number,
   summary: string,
   description: string,
-  from: Date,
-  to: Date,
+  from: string,
+  to: string,
   images: string,
   maxPassengers: number,
   countries: string[],
   ativities: string[],
   places: string[],
   passengers: number[],
-  genderRestriction: string | null,
+  genderRestrictions: string | null,
 }
 
 export interface IUser {
@@ -29,4 +29,18 @@ export interface IUser {
   country: string,
   languages: string[],
   avatar: string | null,
+}
+
+export interface SearchFilters {
+  countries: string[],
+  ageFrom: number | undefined,
+  ageTo: number | undefined,
+  dateFrom: string | undefined,
+  dateTo: string | undefined,
+  budget: number | undefined,
+  gender: {
+    male: boolean,
+    female: boolean,
+    other: boolean,
+  },
 }
