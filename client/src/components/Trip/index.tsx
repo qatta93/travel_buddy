@@ -40,7 +40,7 @@ const Trip = () => {
           <section className="trip__info">
             <div className="trip__dates">
               <p>{trip.from.toString().slice(0, 10)}</p>
-              <p>-</p>
+              <p className="trip__dates-dash">-</p>
               <p>{trip.to.toString().slice(0, 10)}</p>
             </div>
             <p className="trip__description">{trip.description}</p>
