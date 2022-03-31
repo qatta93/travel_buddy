@@ -1,3 +1,9 @@
 .search {
   margin-top: 0.3rem;
 }
+
+.search__message {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--dark-blue);
+}

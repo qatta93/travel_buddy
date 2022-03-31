@@ -22,13 +22,13 @@ const TripCard = ({ trip }:TripCardProps) => {
     getUsersData();
   }, []);
 
-  const dateFromMonth = trip.from.toString().split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[0];
-  const dateFromDay = trip.from.toString().split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[1];
+  const dateFromMonth = trip.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[0];
+  const dateFromDay = trip.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[1];
   const dateFrom = `${dateFromDay}-${dateFromMonth}`;
 
-  const dateToYear = trip.to.toString().split(/T.+/g)[0].split('-')[0].split(/^.{2}/)[1];
-  const dateToMonth = trip.to.toString().split(/T.+/g)[0].split('-')[1];
-  const dateToDay = trip.to.toString().split(/T.+/g)[0].split('-')[2];
+  const dateToYear = trip.to.split(/T.+/g)[0].split('-')[0].split(/^.{2}/)[1];
+  const dateToMonth = trip.to.split(/T.+/g)[0].split('-')[1];
+  const dateToDay = trip.to.split(/T.+/g)[0].split('-')[2];
   const dateTo = `${dateToDay}-${dateToMonth}-${dateToYear}`;
 
   const countries = trip.countries.join(' | ');
@@ -56,7 +56,7 @@ const TripCard = ({ trip }:TripCardProps) => {
             seats
           </p>
           <p className="trips__gender">
-            {parseGenderRestrictions(trip.genderRestriction)}
+            {parseGenderRestrictions(trip.genderRestrictions)}
           </p>
           <p className="trips__budget">
             {trip.budget === null ? '' : `${trip.budget}$`}
