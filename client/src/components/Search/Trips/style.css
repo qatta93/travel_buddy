@@ -11,6 +11,39 @@
 }
 
 .trips__list {
-  padding: 1.2rem;
+  padding: 2rem 1.2rem;
   background-color: var(--light-gray);
+}
+
+.trips__car-bcg {
+  margin-top: 4rem;
+  opacity: 40%;
+  height: 10rem;
+  background-image: url('../../../../public/images/bg_desktop.png');
+  background-position: top;
+  background-size: cover;
+}
+
+@media screen and (min-width: 30rem) {
+  .trips__list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .trips__item {
+    max-width: 35rem;
+    padding: 2rem;
+  }
+  .trips__car-bcg {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 80rem) {
+  .trips__item {
+    width: 40rem;
+    padding: 2rem;
+  }
 }

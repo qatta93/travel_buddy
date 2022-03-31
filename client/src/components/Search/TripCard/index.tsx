@@ -22,8 +22,6 @@ const TripCard = ({ trip }:TripCardProps) => {
     getUsersData();
   }, []);
 
-  console.log(user);
-
   const dateFromMonth = trip.from.toString().split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[0];
   const dateFromDay = trip.from.toString().split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[1];
   const dateFrom = `${dateFromDay}-${dateFromMonth}`;

@@ -19,16 +19,19 @@ const Trips = () => {
     getTripsData();
   }, []);
 
+  console.log(trips);
+
   return (
     <section className="trips">
       <h1 className="trips__title">Dream trips list:</h1>
       <div className="trips__list">
         {trips.map((trip:ITrip) => (
-          <Link to={`/trips/${trip.id}`}>
+          <Link to={`/trips/${trip.id}`} className="trips__item">
             <TripCard key={trip.id} trip={trip} />
           </Link>
         ))}
       </div>
+      <div className="trips__car-bcg" />
     </section>
   );
 };
