@@ -33,3 +33,10 @@
   margin-bottom: 0.5rem;
   margin-top: 1rem;
 }
+
+.main-header__back {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.3rem;
+}

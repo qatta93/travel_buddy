@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import BackArrowIcon from './BackArrowIcon';
 import './style.css';
 
@@ -14,6 +14,7 @@ interface MainHeaderProps {
 }
 
 const MainHeader = ({ links, title }: MainHeaderProps) => {
+  const navigate = useNavigate();
   const Links = links
     .map((link, index) => {
       if (index === links.length - 1) {
@@ -38,7 +39,9 @@ const MainHeader = ({ links, title }: MainHeaderProps) => {
   return (
     <header className="main-header">
       <div className="main-header__nav">
-        <BackArrowIcon />
+        <button className="main-header__back" type="button" onClick={() => navigate(-1)}>
+          <BackArrowIcon />
+        </button>
         {Links}
       </div>
       <h1 className="main-header__title">{title}</h1>
