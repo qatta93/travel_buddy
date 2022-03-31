@@ -61,3 +61,27 @@
     background-color: rgba(255, 255, 255, 0.945);
   }
 }
+
+@media screen and (min-width: 30rem) {
+  .login__button-title {
+    font-size: 2.5rem;
+  }
+  
+  .login__button-img {
+    margin: 0.1rem 0;
+    height: 2rem;
+  }
+  
+  .login__register {
+    font-size: 1.2rem;
+    margin: 3rem 0;
+  }
+  
+  .login__register-span {
+    font-size: 0.9rem;
+  }
+  
+  .login__img {
+    height: 12rem;
+  }
+}
