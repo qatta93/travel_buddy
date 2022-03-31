@@ -33,8 +33,7 @@
     width: 100%;
   }
   .trips__item {
-    max-width: 35rem;
-    padding: 2rem;
+    max-width: 40rem;
   }
   .trips__car-bcg {
     display: none;

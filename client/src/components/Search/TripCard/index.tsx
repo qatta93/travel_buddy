@@ -47,7 +47,7 @@ const TripCard = ({ trip }:TripCardProps) => {
           </h2>
         </div>
         <p className="trips__description">
-          {trip.description}
+          {trip.summary}
         </p>
         <div className="trips__details">
           <p className="trips__seats">
