@@ -8,7 +8,7 @@ require('dotenv').config();
 const sqlUrl = process.env.SQL_URL_DEV;
 
 const sql = postgres(sqlUrl, {
-  max: 3,
+  max: 2,
 });
 
 module.exports = sql;

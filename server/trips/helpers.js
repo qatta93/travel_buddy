@@ -1,6 +1,3 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-restricted-syntax */
-
 const {
   getAllTripsDB,
   getTripByIdDB,
@@ -94,22 +91,18 @@ const createTrip = async (newTrip) => {
   const [trip] = await createTripDB(createTripArgs);
 
   if (countries) {
-    for (const country of countries) {
-      await addCountryToTripDB(trip.id, country);
-    }
+    await Promise.all(countries.map(async (country) => addCountryToTripDB(trip.id, country)));
   }
 
   if (activities) {
-    for (const activity of activities) {
-      await addActivityToTripDB(trip.id, activity);
-    }
+    await Promise.all(activities.map(async (activity) => addActivityToTripDB(trip.id, activity)));
   }
 
   if (places) {
-    for (const place of places) {
+    await Promise.all(places.map(async (place) => {
       const placeId = await getPlaceIdOrCreate(place);
       await addPlaceToTripDB(trip.id, placeId);
-    }
+    }));
   }
 
   return { id: trip.id };
