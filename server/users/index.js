@@ -35,10 +35,8 @@ router.get('/:id', validateId, async (req, res) => res.json({ status: 'success',
 
 router.post('/', async (req, res, next) => {
   try {
-    const {
-      email, username, name, gender, age, summary, languages, country,
-    } = req.body;
-    const data = await createUser(email, username, name, gender, age, country, summary, languages);
+    const newUser = req.body;
+    const data = await createUser(newUser);
     return res
       .status(201)
       .location(`/api/users/${data.id}`)

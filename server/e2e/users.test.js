@@ -47,12 +47,11 @@ describe('GET /api/users/:id', () => {
       expect(data.username).toBe('qatta');
       expect(data.email).toBe('panasiuk.patrycja@gmail.com');
       expect(data.name).toBe('Patrycja');
-      expect(data.gender).toBe('male');
+      expect(data.gender).toBe('female');
       expect(data.country).toBe('Poland');
       expect(data.age).toBe(18);
-      expect(data.languages).toEqual(expect.arrayContaining(['English', 'Polish', 'Spanish']));
-      expect(data.languages).toContain('English');
-      expect(data.languages).toContain('Polish');
+      expect(data.languages).toEqual(expect.arrayContaining(['EN', 'PL', 'ES']));
+      expect(data.avatar).toBe('https://avatars.githubusercontent.com/u/57223600?v=4');
     }));
 
   test('should return error message for wrong id', () => supertest(app)
@@ -76,6 +75,7 @@ describe('POST /api/users', () => {
     country: 'Estonia',
     languages: ['Estonian', 'English'],
     gender: 'female',
+    avatar: 'link 1',
   };
 
   let userId;
@@ -100,7 +100,7 @@ describe('POST /api/users', () => {
       userId = data.id;
 
       const languages = await getLanguagesByUserId(data.id);
-      expect(languages).toEqual(expect.arrayContaining(['Estonian', 'English']));
+      expect(languages).toEqual(expect.arrayContaining(['ET', 'EN']));
     }));
 });
 
@@ -112,12 +112,13 @@ describe('DELETE /api/users/:id', () => {
     age: 20,
     country: 'Chile',
     gender: 'female',
+    languages: ['English'],
   };
 
   let userId;
 
   beforeAll(async () => {
-    const { id } = await createUser(u.email, u.username, u.name, u.gender, u.age, u.country);
+    const { id } = await createUser(u);
     userId = id;
   });
 

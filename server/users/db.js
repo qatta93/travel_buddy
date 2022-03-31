@@ -2,7 +2,9 @@ const sql = require('../db');
 
 const getAllUsersDB = async () => {
   const users = await sql`
-    SELECT u.id, u.username, u.email, u.name, u.age, u.summary, u.gender, c.country, l.language FROM users AS u
+    SELECT
+    u.id, u.username, u.email, u.name, u.age, u.summary, u.gender, u.avatar, c.country, l.language_code AS "language"
+    FROM users AS u
     JOIN countries AS c ON c.id=u.country_id
     JOIN users_languages AS ul ON ul.user_id=u.id
     JOIN languages AS l ON l.id=ul.language_id;
@@ -12,7 +14,9 @@ const getAllUsersDB = async () => {
 
 const getUserByIdDB = async (id) => {
   const users = await sql`
-    SELECT u.id, u.username, u.email, u.name, u.age, u.summary, u.gender, c.country, l.language FROM users AS u
+    SELECT
+    u.id, u.username, u.email, u.name, u.age, u.summary, u.gender, u.avatar, c.country, l.language_code AS "language"
+    FROM users AS u
     JOIN countries AS c ON c.id=u.country_id
     LEFT JOIN users_languages AS ul ON ul.user_id=u.id
     LEFT JOIN languages AS l ON l.id=ul.language_id
@@ -28,10 +32,11 @@ const getCountryByNameDB = async (name) => {
   return data;
 };
 
-const createUserDB = async (email, username, name, gender, age, countryId, summary = '') => {
+const createUserDB = async (user) => {
   const data = await sql`
-    INSERT INTO users (email, username, name, gender, age, summary, country_id)
-    VALUES (${email}, ${username}, ${name}, ${gender}, ${age}, ${summary}, ${countryId})
+    INSERT INTO users (email, username, name, gender, age, summary, country_id, avatar) VALUES 
+    (${user.email}, ${user.username}, ${user.name}, ${user.gender}, ${user.age}, ${user.summary}, 
+      ${user.countryId}, ${user.avatar})
     RETURNING *;
   `;
   return data;
@@ -48,7 +53,7 @@ const addLanguageToUserDB = async (userId, language) => {
 
 const getLanguagesByUserIdDB = async (id) => {
   const data = await sql`
-    SELECT l.language FROM users_languages AS ul
+    SELECT l.language_code AS "language" FROM users_languages AS ul
     JOIN languages AS l ON ul.language_id=l.id
     WHERE user_id = ${id};
   `;
