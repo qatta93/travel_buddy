@@ -1,0 +1,32 @@
+export interface ITrip {
+  id: number,
+  authorId: number,
+  authorUsername: string,
+  authorAge: number,
+  authorGender: string,
+  budget: number,
+  summary: string,
+  description: string,
+  from: Date,
+  to: Date,
+  images: string,
+  maxPassengers: number,
+  countries: string[],
+  ativities: string[],
+  places: string[],
+  passengers: number[],
+  genderRestriction: string | null,
+}
+
+export interface IUser {
+  id: number,
+  username: string,
+  email: string,
+  name: string,
+  age: number,
+  summary: string,
+  gender: string,
+  country: string,
+  languages: string[],
+  avatar: string | null,
+}
