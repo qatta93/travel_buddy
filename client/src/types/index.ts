@@ -44,3 +44,10 @@ export interface SearchFilters {
     other: boolean,
   },
 }
+
+export interface ICountry {
+  id: number,
+  code: string,
+  country: string,
+  country_code: string,
+}

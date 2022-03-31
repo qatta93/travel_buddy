@@ -4,7 +4,7 @@ import Trips from './Trips';
 import { fetchApi } from '../../helpers/api';
 import MainHeader from '../MainHeader';
 import { ITrip, SearchFilters } from '../../types';
-import { filterTripSearch } from '../../helpers/misc';
+import { filterTripSearch } from '../../helpers/search';
 import './style.css';
 
 const filtersInitialValue = {

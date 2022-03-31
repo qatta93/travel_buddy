@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { SearchFilters } from '../../../types';
+import React, { useState, useEffect } from 'react';
+import { fetchApi } from '../../../helpers/api';
+import { SearchFilters, ICountry } from '../../../types';
 import './style.css';
 
 interface Gender {
@@ -36,8 +37,27 @@ interface FormProps {
   setFilters: React.Dispatch<React.SetStateAction<SearchFilters>>,
 }
 
+const countriesInitialValue = [
+  {
+    id: 999, country: 'All', code: 'ALL', country_code: 'ALL',
+  },
+];
+
 const Form = ({ setFilters }: FormProps) => {
   const [searchInput, setSearchInput] = useState<SearchInput>(searchInputInitialValue);
+  const [countries, setCountries] = useState<ICountry[]>(countriesInitialValue);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      const data = await fetchApi<ICountry[]>('/api/countries');
+      if (data.status === 'error') {
+        return;
+      }
+      setCountries((currentState) => currentState.concat(data.data));
+    };
+
+    fetchCountries();
+  }, []);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -89,8 +109,9 @@ const Form = ({ setFilters }: FormProps) => {
             className="search-form__select"
             multiple
           >
-            <option value="All">All</option>
-            <option value="Canada">Canada</option>
+            {countries.map((country) => (
+              <option key={country.id} value={country.country}>{country.country}</option>
+            ))}
           </select>
         </label>
         <label htmlFor="date" className="search-form__label search-form__label--date">
