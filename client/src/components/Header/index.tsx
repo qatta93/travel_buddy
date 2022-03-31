@@ -32,7 +32,7 @@ const Header = () => {
             <button type="button" className="header__link" onClick={() => handleLink('/')}>Home Page</button>
             <button type="button" className="header__link" onClick={() => handleLink('/trips')}>Trips</button>
             <button type="button" className="header__link" onClick={() => handleLink('/create-trip')}>Create Trip</button>
-            <button type="button" className="header__link header__link--yellow" onClick={() => handleLink('/create-trip')}>Login</button>
+            <button type="button" className="header__link header__link--yellow" onClick={() => handleLink('/login')}>Login</button>
             <button type="button" className="header__link header__link--blue" onClick={() => handleLink('/about-us')}>About Us</button>
           </ul>
         </div>

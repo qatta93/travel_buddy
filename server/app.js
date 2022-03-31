@@ -4,6 +4,10 @@ const path = require('path');
 const usersRouter = require('./users');
 const tripsRouter = require('./trips');
 const countriesRouter = require('./countries');
+// const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth');
+const session = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(session);
 
 const app = express();
 
@@ -16,6 +20,8 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use('/api/users', usersRouter);
 app.use('/api/trips', tripsRouter);
 app.use('/api/countries', countriesRouter);
+// app.use('/api/auth', indexRouter);
+app.use('/api/auth', authRouter);
 
 app.use((req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));

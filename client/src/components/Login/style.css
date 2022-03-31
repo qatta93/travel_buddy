@@ -1,0 +1,49 @@
+.login__google {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login__title {
+  margin: 3rem 0 2rem 0;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.login__button {
+  background-color: white;
+  border: 2px solid var(--yellow);
+  border-radius: 0.3rem;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding: 0.1rem 0.5rem;
+  box-shadow: 3px 5px 3px var(--shadow);
+}
+
+.login__button-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  padding: 0 0.5rem;
+}
+
+.login__button-img {
+  margin: 0.1rem 0;
+  height: 2rem;
+}
+
+.login__register {
+  font-size: 0.8rem;
+  margin: 2rem 0;
+}
+
+.login__register-span {
+  margin-left: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.login__img {
+  margin-top: 2rem;
+  height: 10rem;
+}

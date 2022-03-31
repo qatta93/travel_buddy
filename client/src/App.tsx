@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Login from './components/Login';
 import Home from './components/Home';
 import Search from './components/Search';
 import About from './components/About';
@@ -18,6 +19,7 @@ const App = () => (
         <Route index element={<Search />} />
         <Route path=":id" element={<Trip />} />
       </Route>
+      <Route path="login" element={<Login />} />
     </Routes>
     <Footer />
   </div>
