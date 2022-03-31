@@ -63,8 +63,11 @@
 }
 
 @media screen and (min-width: 30rem) {
+  .login__title {
+    font-size: 1.8rem;
+  }
   .login__button-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .login__button-img {
