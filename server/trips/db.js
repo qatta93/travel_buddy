@@ -5,7 +5,7 @@ const getAllTripsDB = async () => {
     SELECT 
     t.id, t.author_id AS "authorId", u.username AS "authorUsername", u.age AS "authorAge", u.gender AS "authorGender", 
     t.budget, t.summary, t.description, t.from, t.to, t.images, t.max_passengers AS "maxPassengers", c.country, 
-    a.activity, p.place, pa.id AS passenger
+    a.activity, p.place, pa.id AS passenger, t.gender_restrictions AS "genderRestrictions"
     FROM trips AS t
     JOIN users AS u ON u.id=t.author_id
     JOIN trips_countries AS tc ON tc.trip_id=t.id
@@ -24,7 +24,7 @@ const getTripByIdDB = async (id) => {
     SELECT 
     t.id, t.author_id AS "authorId", u.username AS "authorUsername", u.age AS "authorAge", u.gender AS "authorGender", 
     t.budget, t.summary, t.description, t.from, t.to, t.images, t.max_passengers AS "maxPassengers", c.country, 
-    a.activity, p.place, pa.id AS passenger
+    a.activity, p.place, pa.id AS passenger, t.gender_restrictions AS "genderRestrictions"
     FROM trips AS t
     JOIN users AS u ON u.id=t.author_id
     LEFT JOIN trips_countries AS tc ON tc.trip_id=t.id
@@ -41,9 +41,12 @@ const getTripByIdDB = async (id) => {
 
 const createTripDB = async (trip) => {
   const data = await sql`
-  INSERT INTO trips (author_id, description, max_passengers, "from", "to", summary, budget, images)
-  VALUES (${trip.authorId}, ${trip.description}, ${trip.maxPassengers}, ${trip.from}, ${trip.to}, ${trip.summary}, ${trip.budget}, ${trip.images})
-  RETURNING *;
+  INSERT INTO 
+  trips (author_id, description, max_passengers, "from", "to", summary, budget, images, gender_restrictions) 
+  VALUES 
+  (${trip.authorId}, ${trip.description}, ${trip.maxPassengers}, ${trip.from}, ${trip.to}, 
+  ${trip.summary}, ${trip.budget}, ${trip.images}, ${trip.genderRestrictions})
+  RETURNING *, gender_restrictions AS "genderRestrictions";
   `;
 
   return data;

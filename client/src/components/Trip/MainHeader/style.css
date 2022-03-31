@@ -1,0 +1,36 @@
+.main-header {
+  background-color: var(--light-blue);
+  padding: 0.5rem 1.5rem 1rem;
+  margin-top: 0;
+}
+
+.main-header__nav {
+  display: flex;
+  align-items: center;
+}
+
+.main-header__pipe {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.main-header__link {
+  padding: 0.3rem 0.5rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--metal);
+  font-weight: 300;
+}
+
+.main-header__link--active {
+  font-weight: normal;
+}
+
+.main-header__title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}

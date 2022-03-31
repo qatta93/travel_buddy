@@ -14,7 +14,7 @@ const findIndexById = (array, id) => array.findIndex((ele) => ele.id === id);
 const addLanguages = (array, user) => {
   const languages = array
     .filter((u) => u.id === user.id)
-    .map((u) => u.language);
+    .map((u) => u.language.toUpperCase());
   return {
     ...user,
     languages,
@@ -39,17 +39,28 @@ const getUserById = async (id) => {
   return parsedUser.length > 0 ? parsedUser[0] : null;
 };
 
-const createUser = async (email, username, name, gender, age, country, summary = '', languages = []) => {
-  const [{ id: countryId }] = await getCountryByNameDB(country);
-  const [newUser] = await createUserDB(email, username, name, gender, age, countryId, summary);
-  const newLanguagesPromises = languages.map((lang) => addLanguageToUserDB(newUser.id, lang));
+const createUser = async (newUser) => {
+  const [{ id: countryId }] = await getCountryByNameDB(newUser.country);
+  const newUserData = {
+    email: newUser.email,
+    username: newUser.username,
+    name: newUser.name,
+    gender: newUser.gender,
+    age: newUser.age,
+    countryId,
+    summary: newUser.summary || '',
+    avatar: newUser.avatar || '',
+  };
+  const [userDB] = await createUserDB(newUserData);
+  const newLanguagesPromises = newUser.languages
+    .map((lang) => addLanguageToUserDB(userDB.id, lang));
   await Promise.all(newLanguagesPromises);
-  return { id: newUser.id, username: newUser.username };
+  return { id: userDB.id, username: userDB.username };
 };
 
 const getLanguagesByUserId = async (id) => {
   const data = await getLanguagesByUserIdDB(id);
-  return data.map((obj) => obj.language);
+  return data.map((obj) => obj.language.toUpperCase());
 };
 
 const deleteUserById = async (id) => deleteUserByIdDB(id);

@@ -76,6 +76,7 @@ const createTrip = async (newTrip) => {
     places,
     images,
     maxPassengers,
+    genderRestrictions,
   } = newTrip;
 
   const createTripArgs = {
@@ -87,6 +88,7 @@ const createTrip = async (newTrip) => {
     summary: summary || '',
     budget: budget || 0,
     images: images || '',
+    genderRestrictions: genderRestrictions || null,
   };
 
   const [trip] = await createTripDB(createTripArgs);

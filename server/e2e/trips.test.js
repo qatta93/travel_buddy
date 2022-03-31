@@ -51,7 +51,7 @@ describe('GET /api/trips/:id', () => {
       expect(data.id).toBe(1);
       expect(data.authorId).toBe(1);
       expect(data.authorUsername).toBe('qatta');
-      expect(data.authorGender).toBe('male');
+      expect(data.authorGender).toBe('female');
       expect(data.authorAge).toBe(18);
       expect(data.description).toBe('dream trip');
       expect(data.from).toEqual((new Date('2022-03-30').toISOString()));
@@ -61,6 +61,7 @@ describe('GET /api/trips/:id', () => {
       expect(data.activities).toEqual(expect.arrayContaining(['beach']));
       expect(data.places).toEqual(expect.arrayContaining(['The Rockies']));
       expect(data.passengers).toEqual(expect.arrayContaining([1, 2]));
+      expect(data.genderRestrictions).toBeNull();
     }));
 });
 
@@ -76,6 +77,7 @@ describe('POST /api/trips', () => {
     countries: ['Estonia', 'Poland'],
     activities: ['Hiking', 'Mountains'],
     places: ['Forests', 'Windowm lake'],
+    genderRestrictions: 'female',
   };
 
   let tripId;
@@ -111,6 +113,7 @@ describe('POST /api/trips', () => {
       expect(trip.countries).toEqual(expect.arrayContaining(newTrip.countries));
       expect(trip.activities).toEqual(expect.arrayContaining(newTrip.activities));
       expect(trip.places).toEqual(expect.arrayContaining(newTrip.places));
+      expect(trip.genderRestrictions).toEqual('female');
       expect(trip.passengers).toEqual([]);
     }));
 });
