@@ -1,35 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { parseGenderRestrictions } from '../../../helpers/misc';
 import './style.css';
-
-interface CardInterface {
-  id: number,
-  authorId: number,
-  authorUsername: string,
-  authorAge: number,
-  authorGender: string,
-  from: string,
-  to: string,
-  maxPassengers: number,
-  summary: string,
-  budget: number,
-  description: string,
-  images: string,
-  countries: string[],
-  passengers: number[],
-}
+import { ITrip, IUser } from '../../../types';
 
 interface TripCardProps {
-  trip: CardInterface
-}
-
-interface UserInterface {
-  id: number,
-  languages: string[],
-  country: string,
+  trip: ITrip
 }
 
 const TripCard = ({ trip }:TripCardProps) => {
-  const [user, setUser] = useState<UserInterface | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
 
   const userId = trip.authorId;
 
@@ -45,13 +24,13 @@ const TripCard = ({ trip }:TripCardProps) => {
 
   console.log(user);
 
-  const dateFromMonth = trip.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[0];
-  const dateFromDay = trip.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[1];
+  const dateFromMonth = trip.from.toString().split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[0];
+  const dateFromDay = trip.from.toString().split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[1];
   const dateFrom = `${dateFromDay}-${dateFromMonth}`;
 
-  const dateToYear = trip.to.split(/T.+/g)[0].split('-')[0].split(/^.{2}/)[1];
-  const dateToMonth = trip.to.split(/T.+/g)[0].split('-')[1];
-  const dateToDay = trip.to.split(/T.+/g)[0].split('-')[2];
+  const dateToYear = trip.to.toString().split(/T.+/g)[0].split('-')[0].split(/^.{2}/)[1];
+  const dateToMonth = trip.to.toString().split(/T.+/g)[0].split('-')[1];
+  const dateToDay = trip.to.toString().split(/T.+/g)[0].split('-')[2];
   const dateTo = `${dateToDay}-${dateToMonth}-${dateToYear}`;
 
   const countries = trip.countries.join(' | ');
@@ -78,7 +57,9 @@ const TripCard = ({ trip }:TripCardProps) => {
             {' '}
             seats
           </p>
-          <p className="trips__gender">F / M</p>
+          <p className="trips__gender">
+            {parseGenderRestrictions(trip.genderRestriction)}
+          </p>
           <p className="trips__budget">
             {trip.budget === null ? '' : `${trip.budget}$`}
           </p>

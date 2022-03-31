@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchApi } from '../../helpers/api';
 import { ITrip } from '../../types';
-import MainHeader from './MainHeader';
+import MainHeader from '../MainHeader';
 import UserCard from './UserCard';
 import { parseGenderRestrictions } from '../../helpers/misc';
 import './style.css';

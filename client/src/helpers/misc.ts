@@ -2,7 +2,7 @@ export const capitalizeFirstLetter = (str: string) => str[0].toUpperCase + str.s
 
 export const parseGenderRestrictions = (genderRestrictions: string | null): string => {
   if (!genderRestrictions) {
-    return 'M/F';
+    return 'M/F/Other';
   }
   if (genderRestrictions === 'female') {
     return 'F';
