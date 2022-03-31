@@ -95,7 +95,7 @@ const TripCard = ({ trip }:TripCardProps) => {
           {/* <p className="trips__host-reviews">4.8 ★</p> */}
         </div>
       </div>
-      <div className="trips__pic" />
+      <img src="https://media.istockphoto.com/photos/aerial-photograph-rural-landscape-farms-villages-picturesque-green-picture-id1292399669?s=612x612" alt="trip img" className="trips__pic" />
     </article>
   );
 };
