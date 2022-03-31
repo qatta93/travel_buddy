@@ -72,6 +72,10 @@
   color: white;
 }
 
+.header__link--yellow {
+  background-color: var(--yellow);
+}
+
 @media screen and (min-width: 50rem) {
   .header__button {
     display: none;
