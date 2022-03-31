@@ -3,24 +3,16 @@
   flex-direction: column;
 }
 
-.about__content-container {
-  position: absolute;
-  z-index: +1;
-}
-
 .about__title {
-  margin-top: 2rem;
+  margin: 1rem;
   text-align: center;
   font-size: 1.5rem;
   font-weight: 600;
 }
 
 .about__paragraph {
-  padding: 0 3rem;
+  padding: 1rem 3rem;
   font-size: 1.2rem;
-  color:black;
-  background-color: var(--light-blue);
-  opacity: 0.5;
 }
 
 .about__bg {
@@ -34,9 +26,38 @@
   height: 95vh;
 }
 
+.about__team-image {
+  max-width: 100%;
+  padding: 1rem 0;
+}
 
-@media screen and (orientation: landscape) {
+.about__team-text {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 60rem) {
   .home__bg-image {
     height: auto;
+  }
+
+  .about__content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 3rem;
+  }
+
+  .about__team-image {
+    max-width: 50vw;
+    padding: 1rem 0;
+    margin-right: 2rem;
+  }
+  
+  .about__paragraph {
+    max-width: 40rem;
+    margin: auto;
   }
 }

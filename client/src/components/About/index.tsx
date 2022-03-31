@@ -3,14 +3,25 @@ import './style.css';
 
 const About = () => (
   <section className="about">
+    <h1 className="about__title">About Us</h1>
+    <p className="about__team-text">
+      Coding Nomads team
+    </p>
+    <p className="about__team-text">
+      Alejandro Patrycja Thomas
+    </p>
     <section className="about__content-container">
-      <h1 className="about__title">About Us</h1>
       <p className="about__paragraph">
-        Some text for travel buddies that you maybe, probably, surely,
-        are going to find interesting. Stay tuned... you are going to
-        that trip you were planning. You are going to find tour travel
-        buddy here!
+        Hi and welcome to our final project! We are three aspirant web developers
+        who went through the salt bootcamp by learning and working on labs together.
+        We would like to think we are a friendly and dynamic team. We all have
+        worked/studied and travelled in far places and are now based in Oslo/Stockholm
+        aspiring to launch our careers as web developers. Feel free to have a chat
+        with any of us.
       </p>
+      <section className="about_team">
+        <img className="about__team-image" src="/images/codingNomads.jpg" alt="coding nomads team" />
+      </section>
     </section>
     {/* <video poster="/images/bg_desktop.png" autoplay="autoplay"
     loop="loop" controls="controls" width="640" height="360">
