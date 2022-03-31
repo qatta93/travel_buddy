@@ -28,11 +28,11 @@
 }
 
 .trips__country {
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .trips__date {
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .trips__host {
@@ -42,7 +42,6 @@
 
 .trips__pic {
   width: 30%;
-  background-color: aliceblue;
   background-image: url(https://exotiskvarld.se/wp-content/uploads/2021/05/Portugal-870x480.jpg);
   background-position: center;
   background-size: cover;
