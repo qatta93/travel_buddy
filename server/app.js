@@ -1,13 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+// const session = require('express-session');
+// const SQLiteStore = require('connect-sqlite3')(session);
 const usersRouter = require('./users');
 const tripsRouter = require('./trips');
 const countriesRouter = require('./countries');
 // const indexRouter = require('./routes/index');
-const authRouter = require('./routes/auth');
-const session = require('express-session');
-const SQLiteStore = require('connect-sqlite3')(session);
+const authRouter = require('./auth');
 
 const app = express();
 
