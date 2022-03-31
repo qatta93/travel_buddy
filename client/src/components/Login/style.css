@@ -47,3 +47,17 @@
   margin-top: 2rem;
   height: 10rem;
 }
+
+@media screen and (min-width: 30rem) {
+  .login {
+    background-image: url('../../../public/images/bg_desktop.png');
+    background-position: center;
+    background-size: cover;
+  }
+  .login__google {
+    margin: 0 auto;
+    height: 100%;
+    width: 60%;
+    background-color: rgba(255, 255, 255, 0.945);
+  }
+}
