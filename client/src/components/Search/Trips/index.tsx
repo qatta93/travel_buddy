@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchApi } from '../../../helpers/api';
 import TripCard from '../TripCard';
 import { ITrip } from '../../../types';
@@ -23,7 +24,9 @@ const Trips = () => {
       <h1 className="trips__title">Dream trips list:</h1>
       <div className="trips__list">
         {trips.map((trip:ITrip) => (
-          <TripCard key={trip.id} trip={trip} />
+          <Link to={`/trips/${trip.id}`}>
+            <TripCard key={trip.id} trip={trip} />
+          </Link>
         ))}
       </div>
     </section>
