@@ -15,6 +15,7 @@ export interface ITrip {
   ativities: string[],
   places: string[],
   passengers: number[],
+  genderRestriction: string | null,
 }
 
 export interface IUser {
@@ -27,4 +28,5 @@ export interface IUser {
   gender: string,
   country: string,
   languages: string[],
+  avatar: string | null,
 }
