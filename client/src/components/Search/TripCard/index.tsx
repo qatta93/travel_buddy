@@ -76,7 +76,8 @@ const TripCard = ({ trip }:TripCardProps) => {
           {/* <p className="trips__host-reviews">4.8 ★</p> */}
         </div>
       </div>
-      <img src="https://media.istockphoto.com/photos/aerial-photograph-rural-landscape-farms-villages-picturesque-green-picture-id1292399669?s=612x612" alt="trip img" className="trips__pic" />
+      {trip.images === null ? <img src="https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZH/MW-HE536_airpla_20190225131547_ZH.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7" alt="trip img" className="trips__pic" />
+        : <img src={trip.images} alt="trip img" className="trips__pic" />}
     </article>
   );
 };
