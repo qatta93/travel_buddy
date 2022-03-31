@@ -9,7 +9,6 @@
     "images"
     "user"
     "button";
-  justify-content: center;
   margin-bottom: auto;
 }
 
@@ -57,12 +56,13 @@
   display: flex;
   flex-wrap: wrap;
   padding: 0 2rem;
-  margin-bottom: 1rem;
-  height: fit-content;
+  margin-bottom: 1.5rem;
+  align-items: center;
 }
 
 .trip__img {
   max-width: 100%;
+  margin: auto;
 }
 
 .trip__user-card {
@@ -89,7 +89,7 @@
   padding: 1.2rem;
 }
 
-@media screen and (min-width: 30rem) {
+@media screen and (min-width: 45rem) {
   .trip {
     grid-template-areas:
       "header header"
@@ -119,7 +119,8 @@
   }
 
   .trip__user-card {
-    margin-bottom: 2rem;
+    margin: 0 auto 2rem;
+    max-width: 50rem;
   }
 
   .trip__button-container {
@@ -127,7 +128,7 @@
   }
 }
 
-@media screen and (min-width: 60rem) {
+@media screen and (min-width: 85rem) {
   .trip {
     grid-template-areas:
       "header header header"
@@ -135,6 +136,10 @@
       "info images button"
       "other other other";
     grid-template-columns: 2fr 2fr 3fr;
+  }
+
+  .trip__info {
+    margin-bottom: 0;
   }
 
   .trip__img-container {
@@ -145,6 +150,7 @@
 
   .trip__img {
     object-fit: cover;
+    height: 100%;
   }
   
   .trip__user-card {

@@ -14,7 +14,7 @@ const getAllTripsDB = async () => {
     JOIN activities AS a ON a.id=ta.activity_id
     JOIN trips_places AS tp ON tp.trip_id=t.id
     JOIN places AS p ON tp.place_id=p.id
-    JOIN passengers AS pa ON pa.trip_id=t.id
+    LEFT JOIN passengers AS pa ON pa.trip_id=t.id
   `;
   return data;
 };

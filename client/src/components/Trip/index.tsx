@@ -33,7 +33,7 @@ const Trip = () => {
               links={[
                 { href: '/', name: 'Home' },
                 { href: '/trips', name: 'Trips' },
-                { href: `/trips/${id}`, name: 'This trip' },
+                { href: `/trips/${id}`, name: 'Details' },
               ]}
             />
           </section>
