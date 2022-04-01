@@ -51,6 +51,7 @@ const Form = ({ setFilters }: FormProps) => {
     const fetchCountries = async () => {
       const data = await fetchApi<ICountry[]>('/api/countries');
       if (data.status === 'error') {
+        console.error(data.message);
         return;
       }
       setCountries((currentState) => currentState.concat(data.data));

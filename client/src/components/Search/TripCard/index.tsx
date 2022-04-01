@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { parseGenderRestrictions } from '../../../helpers/misc';
-import './style.css';
+import { fetchApi } from '../../../helpers/api';
 import { ITrip, IUser } from '../../../types';
+import './style.css';
 
 interface TripCardProps {
   trip: ITrip
@@ -14,8 +15,11 @@ const TripCard = ({ trip }:TripCardProps) => {
 
   useEffect(() => {
     const getUsersData = async () => {
-      const response = await fetch(`http://localhost:5500/api/users/${userId}`);
-      const data = await response.json();
+      const data = await fetchApi<IUser>(`/api/users/${userId}`);
+      if (data.status === 'error') {
+        console.error(data.message);
+        return;
+      }
       const userInfo = await data.data;
       setUser(userInfo);
     };

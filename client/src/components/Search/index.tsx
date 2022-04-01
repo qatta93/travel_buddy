@@ -29,6 +29,7 @@ const Search = () => {
     const getTripsData = async () => {
       const data = await fetchApi<ITrip[]>('/api/trips');
       if (data.status === 'error') {
+        console.error(data.message);
         return;
       }
       const trip = await data.data;

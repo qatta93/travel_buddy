@@ -14,6 +14,7 @@ const UserCard = ({ id }: UserCardProps) => {
     const fetchUser = async () => {
       const data = await fetchApi<IUser>(`/api/users/${id}`);
       if (data.status === 'error') {
+        console.error(data.message);
         return;
       }
       setUser(data.data);

@@ -49,7 +49,7 @@ describe('GET /api/users/:id', () => {
       expect(data.name).toBe('Patrycja');
       expect(data.gender).toBe('female');
       expect(data.country).toBe('Poland');
-      expect(data.age).toBe(18);
+      expect(data.age).toBe(28);
       expect(data.languages).toEqual(expect.arrayContaining(['EN', 'PL', 'ES']));
       expect(data.avatar).toBe('https://avatars.githubusercontent.com/u/57223600?v=4');
     }));
