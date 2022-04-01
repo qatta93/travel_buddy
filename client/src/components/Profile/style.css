@@ -36,7 +36,7 @@
 @media screen and (min-width: 30rem) {
   .profile__bcg {
     background-image: url('../../../public/images/bg_desktop.png');
-    background-position: center;
+    background-position: bottom;
     background-size: cover;
     width: 100vw;
     height: 90%;
@@ -55,14 +55,12 @@
     width: 17rem;
     margin: 0.7rem auto;
     padding: 1rem 0;
-    border-radius: 0.3rem;
     font-size: 1.2rem;
     color: var(--metal);
     box-shadow: 3px 5px 3px var(--shadow);
   }
   .profile__btn--logout {
-    width: 100%;
-    border-radius: 0;
+    border-radius: 0.3rem;
     border: none;
     background-color: var(--red);
     margin-top: 1.2rem;
