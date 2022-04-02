@@ -11,8 +11,7 @@ const Profile = () => {
       <div className="profile__bcg">
         <section className="profile__buttons">
           <button type="submit" className="profile__btn">My profile account</button>
-          <button type="submit" className="profile__btn">My reviews</button>
-          <button type="submit" className="profile__btn">Messages</button>
+          <button type="submit" className="profile__btn">Requests</button>
           <button type="submit" className="profile__btn">My trips</button>
           <button type="submit" className="profile__btn profile__btn--logout">LOGOUT</button>
         </section>

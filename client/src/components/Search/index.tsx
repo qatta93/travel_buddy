@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Form from './Form';
+import FormSearchTrip from './FormSearchTrip';
 import Trips from './Trips';
 import { fetchApi } from '../../helpers/api';
 import MainHeader from '../MainHeader';
@@ -29,6 +29,7 @@ const Search = () => {
     const getTripsData = async () => {
       const data = await fetchApi<ITrip[]>('/api/trips');
       if (data.status === 'error') {
+        console.error(data.message);
         return;
       }
       const trip = await data.data;
@@ -50,7 +51,7 @@ const Search = () => {
         ]}
       />
       <section className="search__form">
-        <Form setFilters={setFilters} />
+        <FormSearchTrip setFilters={setFilters} />
         {filteredTrips.length > 0 ? (
           <Trips trips={filteredTrips} />
         ) : <p className="search__message">No trips matched your search</p>}

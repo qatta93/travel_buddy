@@ -52,13 +52,13 @@ describe('GET /api/trips/:id', () => {
       expect(data.authorId).toBe(1);
       expect(data.authorUsername).toBe('qatta');
       expect(data.authorGender).toBe('female');
-      expect(data.authorAge).toBe(18);
-      expect(data.description).toBe('dream trip');
+      expect(data.authorAge).toBe(28);
+      expect(data.description).not.toBeUndefined();
       expect(data.from).toEqual((new Date('2022-03-30').toISOString()));
       expect(data.to).toEqual((new Date('2022-03-30').toISOString()));
       expect(data.maxPassengers).toBe(5);
       expect(data.countries).toEqual(expect.arrayContaining(['Chile', 'Canada']));
-      expect(data.activities).toEqual(expect.arrayContaining(['beach']));
+      expect(data.activities).toEqual(expect.arrayContaining(['Beach']));
       expect(data.places).toEqual(expect.arrayContaining(['The Rockies']));
       expect(data.passengers).toEqual(expect.arrayContaining([1, 2]));
       expect(data.genderRestrictions).toBeNull();

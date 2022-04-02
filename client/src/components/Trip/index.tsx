@@ -15,6 +15,7 @@ const Trip = () => {
     const fetchTrip = async () => {
       const data = await fetchApi<ITrip>(`/api/trips/${id}`);
       if (data.status === 'error') {
+        console.error(data.message);
         return;
       }
       setTrip(data.data);

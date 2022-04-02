@@ -8,6 +8,7 @@ import Profile from './components/Profile';
 import Search from './components/Search';
 import About from './components/About';
 import Trip from './components/Trip';
+import CreateTrip from './components/CreateTrip';
 import './App.css';
 
 const App = () => (
@@ -16,6 +17,7 @@ const App = () => (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="about-us" element={<About />} />
+      <Route path="create-trip" element={<CreateTrip />} />
       <Route path="trips">
         <Route index element={<Search />} />
         <Route path=":id" element={<Trip />} />

@@ -9,6 +9,8 @@ const tripsRouter = require('./trips');
 const countriesRouter = require('./countries');
 const indexRouter = require('./auth');
 const authRouter = require('./auth');
+const activitiesRouter = require('./activities');
+const requestsRouter = require('./requests');
 
 require('dotenv').config();
 
@@ -32,6 +34,10 @@ app.use('/api/trips', tripsRouter);
 app.use('/api/countries', countriesRouter);
 app.use('/api/auth', indexRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/activities', activitiesRouter);
+app.use('/api/requests', requestsRouter);
+
+app.use('/api', (req, res) => res.status(404).end());
 
 
 app.use((req, res) => {

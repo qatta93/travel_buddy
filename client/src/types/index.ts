@@ -51,3 +51,8 @@ export interface ICountry {
   country: string,
   country_code: string,
 }
+
+export interface IActivity {
+  id: number,
+  activity: string,
+}
