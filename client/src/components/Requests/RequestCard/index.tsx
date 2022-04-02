@@ -22,9 +22,6 @@ const RequestCard = ({ request }:RequestCardProps) => {
         body: JSON.stringify(newRequest),
       };
       await fetch(`http://localhost:5500/api/requests/${requestId}`, requestOptions);
-      // const response = await fetch(`http://localhost:5500/api/requests/${requestId}`, requestOptions);
-      // const data = await response.json();
-      // console.log(data);
       setStatus('accepted');
     };
     putStatusData();
@@ -48,17 +45,32 @@ const RequestCard = ({ request }:RequestCardProps) => {
     putStatusData();
   };
 
-  console.log(status);
   return (
-    <article className="request-card">
-      <header className="request-card__header">
+    <article className={`request-card request-card--${status}`}>
+      <header className={`request-card__header request-card__header--${status}`}>
         <h1 className="request-card__title">Thomas, 22.03</h1>
         <p className="request-card__email">fff@gmail.com</p>
       </header>
       <p className="request-card__text">{request.message}</p>
       <div className="request-card__buttons">
-        <button type="button" className="request-card__button request-card__button--accept" onClick={() => acceptRequest()}>accept</button>
-        <button type="button" className="request-card__button request-card__button--reject" onClick={() => rejectRequest()}>reject</button>
+        {status === 'pending'
+          ? (
+            <>
+              <button type="button" className="request-card__button request-card__button--accept" onClick={() => acceptRequest()}>accept</button>
+              <button type="button" className="request-card__button request-card__button--reject" onClick={() => rejectRequest()}>reject</button>
+            </>
+          )
+          : ''}
+        {status === 'accepted'
+          ? (
+            <button type="button" className="request-card__button request-card__button--accepted">accepted</button>
+          )
+          : ''}
+        {status === 'rejected'
+          ? (
+            <button type="button" className="request-card__button request-card__button--rejected">rejected</button>
+          )
+          : ''}
       </div>
     </article>
   );

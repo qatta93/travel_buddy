@@ -6,9 +6,19 @@
   width: 80%;
 }
 
+.request-card--accepted,
+.request-card--rejected {
+  border: 2px solid var(--light-gray);
+}
+
 .request-card__header {
   padding: 0.5rem;
   background-color: var(--yellow);
+}
+
+.request-card__header--accepted,
+.request-card__header--rejected {
+  background-color: var(--light-gray);
 }
 
 .request-card__title {
@@ -42,7 +52,15 @@
   box-shadow: 1px 3px 3px var(--shadow);
 }
 
+.request-card__button--accepted {
+  border: 1px solid var(--green);
+}
+
 .request-card__button--reject {
   background-color: var(--red);
   box-shadow: 1px 3px 3px var(--shadow);
+}
+
+.request-card__button--rejected {
+  border: 1px solid var(--red);
 }
