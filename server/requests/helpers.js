@@ -2,14 +2,25 @@ const {
   getAllRequestsDB, getRequestByIdDB, createRequestDB, deleteRequestByIdDB, updateRequestByIdDB,
 } = require('./db');
 
+const parseUser = (request) => ({
+  ...request,
+  user: {
+    id: request.userId,
+    name: request.name,
+    username: request.username,
+    email: request.email,
+  },
+});
+
 const getAllRequests = async () => {
   const data = await getAllRequestsDB();
-  return data;
+  return data.map((request) => parseUser(request));
 };
 
 const getRequestById = async (id) => {
   const data = await getRequestByIdDB(id);
-  return data.length > 0 ? data[0] : null;
+  const parsedData = data.map((request) => parseUser(request));
+  return parsedData.length > 0 ? parsedData[0] : null;
 };
 
 const createRequest = async (newTrip) => {

@@ -21,7 +21,11 @@ describe('GET /api/requests', () => {
       data.forEach((request) => {
         expect(request.id).not.toBeUndefined();
         expect(request.trip_id).not.toBeUndefined();
-        expect(request.user_id).not.toBeUndefined();
+        expect(request.user).not.toBeUndefined();
+        expect(request.user.id).not.toBeUndefined();
+        expect(request.user.name).not.toBeUndefined();
+        expect(request.user.username).not.toBeUndefined();
+        expect(request.user.email).not.toBeUndefined();
         expect(request.status).toMatch(/^(pending|rejected|accepted|cancelled)$/);
       });
     }));
@@ -39,7 +43,10 @@ describe('GET /api/requests/:id', () => {
 
       expect(data.id).toBe(2);
       expect(data.trip_id).toBe(138);
-      expect(data.user_id).toBe(1);
+      expect(data.user.id).toBe(1);
+      expect(data.user.name).toBe('Patrycja');
+      expect(data.user.username).toBe('qatta');
+      expect(data.user.email).toBe('panasiuk.patrycja@gmail.com');
       expect(data.status).toMatch(/^(pending|rejected|accepted|cancelled)$/);
       expect(data.message).toBe('I would love to join you!');
     }));
@@ -74,7 +81,10 @@ describe('POST /api/requests', () => {
 
       const request = await getRequestById(requestId);
       expect(request.trip_id).toEqual(newRequest.trip_id);
-      expect(request.user_id).toEqual(newRequest.user_id);
+      expect(request.user.id).toEqual(newRequest.user_id);
+      expect(request.user.name).toEqual('Alejandro');
+      expect(request.user.username).toEqual('aburto22');
+      expect(request.user.email).toEqual('aburto22@gmail.com');
       expect(request.status).toEqual('pending');
       expect(request.message).toEqual(newRequest.message);
     }));
