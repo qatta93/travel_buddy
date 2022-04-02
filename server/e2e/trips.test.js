@@ -27,14 +27,20 @@ describe('GET /api/trips', () => {
         expect(trip.from).not.toBeUndefined();
         expect(trip.to).not.toBeUndefined();
         expect(trip.maxPassengers).not.toBeUndefined();
-        expect(Array.isArray(trip.countries)).toBe(true);
-        expect(trip.countries.length > 0).toBe(true);
         expect(Array.isArray(trip.activities)).toBe(true);
         expect(trip.activities.length > 0).toBe(true);
         expect(Array.isArray(trip.places)).toBe(true);
         expect(trip.places.length > 0).toBe(true);
         expect(Array.isArray(trip.passengers)).toBe(true);
         expect(trip.passengers.length >= 0).toBe(true);
+        expect(Array.isArray(trip.countries)).toBe(true);
+
+        trip.countries.forEach((country) => {
+          expect(country.id).not.toBeUndefined();
+          expect(country.country).not.toBeUndefined();
+          expect(country.code).not.toBeUndefined();
+          expect(country.countryCode).not.toBeUndefined();
+        });
       });
     }));
 });
@@ -58,11 +64,17 @@ describe('GET /api/trips/:id', () => {
       expect(data.from).toEqual((new Date('2022-03-30').toISOString()));
       expect(data.to).toEqual((new Date('2022-03-30').toISOString()));
       expect(data.maxPassengers).toBe(5);
-      expect(data.countries).toEqual(expect.arrayContaining(['Chile', 'Canada']));
       expect(data.activities).toEqual(expect.arrayContaining(['Beach']));
       expect(data.places).toEqual(expect.arrayContaining(['The Rockies']));
       expect(data.passengers).toEqual(expect.arrayContaining([1, 2]));
       expect(data.genderRestrictions).toBeNull();
+
+      data.countries.forEach((country) => {
+        expect([41, 46]).toContain(country.id);
+        expect(['Chile', 'Canada']).toContain(country.country);
+        expect(['CL', 'CA']).toContain(country.code);
+        expect(['CHL', 'CAN']).toContain(country.countryCode);
+      });
     }));
 });
 
@@ -111,11 +123,17 @@ describe('POST /api/trips', () => {
       expect(trip.from.toISOString()).toEqual((new Date(newTrip.from)).toISOString());
       expect(trip.to.toISOString()).toEqual((new Date(newTrip.to)).toISOString());
       expect(trip.maxPassengers).toBe(newTrip.maxPassengers);
-      expect(trip.countries).toEqual(expect.arrayContaining(newTrip.countries));
       expect(trip.activities).toEqual(expect.arrayContaining(newTrip.activities));
       expect(trip.places).toEqual(expect.arrayContaining(newTrip.places));
       expect(trip.genderRestrictions).toEqual('female');
       expect(trip.passengers).toEqual([]);
+
+      trip.countries.forEach((country) => {
+        expect([70, 177]).toContain(country.id);
+        expect(['Estonia', 'Poland']).toContain(country.country);
+        expect(['EST', 'POL']).toContain(country.countryCode);
+        expect(['EE', 'PL']).toContain(country.code);
+      });
     }));
 });
 

@@ -13,7 +13,15 @@ const {
 const findIndexById = (array, id) => array.findIndex((ele) => ele.id === id);
 
 const removeDuplicated = (array) => array
-  .filter((val, index) => array.indexOf(val) === index && val !== null);
+  .filter((ele, index) => {
+    if (ele === null) {
+      return false;
+    }
+    if (typeof ele === 'object') {
+      return array.findIndex((obj) => obj.id === ele.id) === index;
+    }
+    return array.indexOf(ele) === index;
+  });
 
 const addData = (field, newField) => (array, trip) => {
   const allFieldValues = array
@@ -28,10 +36,27 @@ const addData = (field, newField) => (array, trip) => {
   };
 };
 
-const addCountries = addData('country', 'countries');
 const addPlaces = addData('place', 'places');
 const addActivities = addData('activity', 'activities');
 const addPassengers = addData('passenger', 'passengers');
+
+const addCountries = (array, trip) => {
+  const allFieldValues = array
+    .filter((t) => t.id === trip.id)
+    .map((t) => ({
+      id: t.countryId,
+      code: t.code,
+      country: t.country,
+      countryCode: t.countryCode,
+    }));
+
+  const fieldValues = removeDuplicated(allFieldValues);
+
+  return {
+    ...trip,
+    countries: fieldValues,
+  };
+};
 
 const addAuthor = (trip) => ({
   ...trip,
