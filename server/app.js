@@ -5,6 +5,7 @@ const usersRouter = require('./users');
 const tripsRouter = require('./trips');
 const countriesRouter = require('./countries');
 const activitiesRouter = require('./activities');
+const requestsRouter = require('./requests');
 
 const app = express();
 
@@ -18,6 +19,9 @@ app.use('/api/users', usersRouter);
 app.use('/api/trips', tripsRouter);
 app.use('/api/countries', countriesRouter);
 app.use('/api/activities', activitiesRouter);
+app.use('/api/requests', requestsRouter);
+
+app.use('/api', (req, res) => res.status(404).end());
 
 app.use((req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
