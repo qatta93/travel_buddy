@@ -82,11 +82,3 @@ export interface IRequest {
   status: 'pending' | 'accepted' | 'rejected' | 'cancelled',
   sentOn: string,
 }
-
-export interface IRequest {
-  id: number,
-  trip_id: number,
-  user_id: number,
-  status: string,
-  message: string,
-}
