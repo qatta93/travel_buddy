@@ -1,6 +1,7 @@
 const supertest = require('supertest');
 const app = require('../app');
 const sql = require('../db');
+const { getRequestById } = require('../requests/helpers');
 
 afterAll(async () => {
   sql.end();
@@ -41,5 +42,40 @@ describe('GET /api/requests/:id', () => {
       expect(data.user_id).toBe(1);
       expect(data.status).toMatch(/^(pending|rejected|accepted|cancelled)$/);
       expect(data.message).toBe('I would love to join you!');
+    }));
+});
+
+describe('POST /api/users', () => {
+  const newRequest = {
+    trip_id: 140,
+    user_id: 2,
+    message: 'test request',
+  };
+
+  let requestId;
+
+  // afterAll(async () => {
+  //   await deleteUserById(userId);
+  // });
+
+  test('should create a new request', () => supertest(app)
+    .post('/api/requests')
+    .set('Accept', 'application/json')
+    .send(newRequest)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+    .expect('Location', /^\/api\/requests\/\d+$/)
+    .expect(async (res) => {
+      const { status, data } = res.body;
+      expect(status).toBe('success');
+      expect(data.id).not.toBeUndefined();
+
+      requestId = data.id;
+
+      const request = await getRequestById(requestId);
+      expect(request.trip_id).toEqual(newRequest.trip_id);
+      expect(request.user_id).toEqual(newRequest.user_id);
+      expect(request.status).toEqual('pending');
+      expect(request.message).toEqual(newRequest.message);
     }));
 });

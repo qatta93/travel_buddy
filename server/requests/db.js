@@ -14,7 +14,16 @@ const getRequestByIdDB = async (id) => {
   return data;
 };
 
+const createRequestDB = async (newTrip) => {
+  const data = await sql`
+    INSERT INTO requests ${sql(newTrip)}
+    RETURNING *
+  `;
+  return data;
+};
+
 module.exports = {
   getAllRequestsDB,
   getRequestByIdDB,
+  createRequestDB,
 };
