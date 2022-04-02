@@ -11,6 +11,13 @@ export interface ITripAuthor {
   gender: string,
 }
 
+export interface ICountry {
+  id: number,
+  country: string,
+  code: string,
+  countryCode: string,
+}
+
 export interface ITrip {
   id: number,
   author: ITripAuthor
@@ -21,7 +28,7 @@ export interface ITrip {
   to: string,
   images: string,
   maxPassengers: number,
-  countries: string[],
+  countries: ICountry[],
   ativities: string[],
   places: string[],
   passengers: number[],
@@ -53,13 +60,6 @@ export interface SearchFilters {
     female: boolean,
     other: boolean,
   },
-}
-
-export interface ICountry {
-  id: number,
-  code: string,
-  country: string,
-  country_code: string,
 }
 
 export interface IActivity {

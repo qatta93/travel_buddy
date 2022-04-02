@@ -35,7 +35,7 @@ const TripCard = ({ trip }:TripCardProps) => {
   const dateToDay = trip.to.split(/T.+/g)[0].split('-')[2];
   const dateTo = `${dateToDay}-${dateToMonth}-${dateToYear}`;
 
-  const countries = trip.countries.join(' | ');
+  const countries = trip.countries.map((c) => c.country).join(' | ');
 
   return (
     <article className="trips__offer">

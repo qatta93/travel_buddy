@@ -55,7 +55,7 @@ const filterTripByCountries = (trip: ITrip, countries: string[]): boolean => {
   if (countries.includes('All')) {
     return true;
   }
-  if (countries.some((country) => trip.countries.includes(country))) {
+  if (countries.some((country) => trip.countries.map((c) => c.country).includes(country))) {
     return true;
   }
   return false;

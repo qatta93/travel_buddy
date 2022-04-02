@@ -30,7 +30,7 @@ const Trip = () => {
         <>
           <section className="trip__main-header">
             <MainHeader
-              title={`trip with ${trip.author.username} to ${trip.countries.join(', ')}`}
+              title={`trip with ${trip.author.username} to ${trip.countries.map((c) => c.country).join(', ')}`}
               links={[
                 { href: '/', name: 'Home' },
                 { href: '/trips', name: 'Trips' },
