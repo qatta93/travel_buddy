@@ -1,0 +1,47 @@
+.request-card {
+  margin: 1rem auto;
+  border: 2px solid var(--yellow);
+  border-radius: 0.4rem;
+  box-shadow: 2px 5px 3px var(--shadow);
+  width: 80%;
+}
+
+.request-card__header {
+  padding: 0.5rem;
+  background-color: var(--yellow);
+}
+
+.request-card__title {
+  padding: 0.5rem 0;
+}
+
+.request-card__email {
+  font-size: 0.8rem;
+}
+
+.request-card__text {
+  padding: 1rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.request-card__buttons {
+  padding: 0 0.5rem 0.5rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.request-card__button {
+  padding: 0.3rem 2.5rem;
+  border: none;
+  border-radius: 0.2rem;
+}
+
+.request-card__button--accept {
+  background-color: var(--green);
+  box-shadow: 1px 3px 3px var(--shadow);
+}
+
+.request-card__button--reject {
+  background-color: var(--red);
+  box-shadow: 1px 3px 3px var(--shadow);
+}

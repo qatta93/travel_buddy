@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Search from './components/Search';
 import About from './components/About';
+import Requests from './components/Requests';
 import Trip from './components/Trip';
 import CreateTrip from './components/CreateTrip';
 import './App.css';
@@ -20,6 +21,7 @@ const App = () => (
         <Route index element={<Search />} />
         <Route path=":id" element={<Trip />} />
       </Route>
+      <Route path="requests" element={<Requests />} />
     </Routes>
     <Footer />
   </div>
