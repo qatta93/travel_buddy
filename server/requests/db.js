@@ -22,8 +22,16 @@ const createRequestDB = async (newTrip) => {
   return data;
 };
 
+const deleteRequestByIdDB = async (id) => {
+  const data = await sql`
+    DELETE FROM requests WHERE id = ${id}
+  `;
+  return data;
+};
+
 module.exports = {
   getAllRequestsDB,
   getRequestByIdDB,
   createRequestDB,
+  deleteRequestByIdDB,
 };

@@ -1,7 +1,7 @@
 const supertest = require('supertest');
 const app = require('../app');
 const sql = require('../db');
-const { getRequestById } = require('../requests/helpers');
+const { getRequestById, createRequest, deleteRequestById } = require('../requests/helpers');
 
 afterAll(async () => {
   sql.end();
@@ -45,7 +45,7 @@ describe('GET /api/requests/:id', () => {
     }));
 });
 
-describe('POST /api/users', () => {
+describe('POST /api/requests', () => {
   const newRequest = {
     trip_id: 140,
     user_id: 2,
@@ -54,11 +54,11 @@ describe('POST /api/users', () => {
 
   let requestId;
 
-  // afterAll(async () => {
-  //   await deleteUserById(userId);
-  // });
+  afterAll(async () => {
+    await deleteRequestById(requestId);
+  });
 
-  test('should create a new request', () => supertest(app)
+  test('should delete a new request', () => supertest(app)
     .post('/api/requests')
     .set('Accept', 'application/json')
     .send(newRequest)
@@ -77,5 +77,32 @@ describe('POST /api/users', () => {
       expect(request.user_id).toEqual(newRequest.user_id);
       expect(request.status).toEqual('pending');
       expect(request.message).toEqual(newRequest.message);
+    }));
+});
+
+describe('DELETE /api/users/:id', () => {
+  const newRequest = {
+    trip_id: 140,
+    user_id: 2,
+    message: 'test request',
+  };
+
+  let requestId;
+
+  beforeAll(async () => {
+    const { id } = await createRequest(newRequest);
+    requestId = id;
+  });
+
+  test('should delete a request', () => supertest(app)
+    .delete(`/api/requests/${requestId}`)
+    .set('Accept', 'application/json')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+    .expect(async (res) => {
+      const { status } = res.body;
+      expect(status).toBe('success');
+      const request = await getRequestById(requestId);
+      expect(request).toBeNull();
     }));
 });

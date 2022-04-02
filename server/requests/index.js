@@ -1,5 +1,7 @@
 const express = require('express');
-const { getAllRequests, getRequestById, createRequest } = require('./helpers');
+const {
+  getAllRequests, getRequestById, createRequest, deleteRequestById,
+} = require('./helpers');
 
 const router = express.Router();
 
@@ -33,6 +35,15 @@ router.post('/', async (req, res, next) => {
       .status(201)
       .location(`/api/requests/${data.id}`)
       .json({ status: 'success', data });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    await deleteRequestById(req.params.id);
+    return res.json({ status: 'success' });
   } catch (err) {
     return next(err);
   }

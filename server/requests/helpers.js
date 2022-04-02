@@ -1,4 +1,6 @@
-const { getAllRequestsDB, getRequestByIdDB, createRequestDB } = require('./db');
+const {
+  getAllRequestsDB, getRequestByIdDB, createRequestDB, deleteRequestByIdDB,
+} = require('./db');
 
 const getAllRequests = async () => {
   const data = await getAllRequestsDB();
@@ -15,8 +17,11 @@ const createRequest = async (newTrip) => {
   return { id: data[0].id };
 };
 
+const deleteRequestById = async (id) => deleteRequestByIdDB(id);
+
 module.exports = {
   getAllRequests,
   getRequestById,
   createRequest,
+  deleteRequestById,
 };
