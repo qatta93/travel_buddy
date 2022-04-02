@@ -1,3 +1,9 @@
+export interface ILanguage {
+  id: number,
+  language: string,
+  languageCode: string,
+}
+
 export interface ITrip {
   id: number,
   authorId: number,
@@ -27,7 +33,7 @@ export interface IUser {
   summary: string,
   gender: string,
   country: string,
-  languages: string[],
+  languages: ILanguage[],
   avatar: string | null,
 }
 

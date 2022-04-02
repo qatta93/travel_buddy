@@ -40,7 +40,9 @@ const UserCard = ({ id }: UserCardProps) => {
             <p className="user-card__summary">{user.summary || 'This is a fake description for the user'}</p>
             <div className="user-card__footer">
               <p>{user.country}</p>
-              <p>{user.languages.join(', ')}</p>
+              <p>
+                {user.languages.map((l) => l.languageCode).join(', ')}
+              </p>
             </div>
           </div>
           <img src={user.avatar || '/images/avatar.webp'} alt="avatar" className="user-card__avatar" />

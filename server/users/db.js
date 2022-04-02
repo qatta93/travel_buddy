@@ -3,7 +3,8 @@ const sql = require('../db');
 const getAllUsersDB = async () => {
   const users = await sql`
     SELECT
-    u.id, u.username, u.email, u.name, u.age, u.summary, u.gender, u.avatar, c.country, l.language_code AS "language"
+    u.id, u.username, u.email, u.name, u.age, u.summary, u.gender, u.avatar, c.country,
+    l.id AS "languageId", l.language_code AS "language", l.language_code AS "languageCode"
     FROM users AS u
     JOIN countries AS c ON c.id=u.country_id
     JOIN users_languages AS ul ON ul.user_id=u.id
@@ -15,7 +16,8 @@ const getAllUsersDB = async () => {
 const getUserByIdDB = async (id) => {
   const users = await sql`
     SELECT
-    u.id, u.username, u.email, u.name, u.age, u.summary, u.gender, u.avatar, c.country, l.language_code AS "language"
+    u.id, u.username, u.email, u.name, u.age, u.summary, u.gender, u.avatar, c.country,
+    l.id AS "languageId", l.language AS "language", l.language_code AS "languageCode"
     FROM users AS u
     JOIN countries AS c ON c.id=u.country_id
     LEFT JOIN users_languages AS ul ON ul.user_id=u.id
@@ -34,10 +36,7 @@ const getCountryByNameDB = async (name) => {
 
 const createUserDB = async (user) => {
   const data = await sql`
-    INSERT INTO users (email, username, name, gender, age, summary, country_id, avatar) VALUES 
-    (${user.email}, ${user.username}, ${user.name}, ${user.gender}, ${user.age}, ${user.summary}, 
-      ${user.countryId}, ${user.avatar})
-    RETURNING *;
+    INSERT INTO users ${sql(user)} RETURNING *;
   `;
   return data;
 };

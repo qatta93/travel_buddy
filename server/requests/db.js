@@ -16,16 +16,14 @@ const getRequestByIdDB = async (id) => {
 
 const createRequestDB = async (newTrip) => {
   const data = await sql`
-    INSERT INTO requests ${sql(newTrip)}
-    RETURNING *
+    INSERT INTO requests ${sql(newTrip)} RETURNING *
   `;
   return data;
 };
 
 const updateRequestByIdDB = async (id, updatedTrip) => {
   const data = await sql`
-    UPDATE requests SET ${sql(updatedTrip)} WHERE id = ${id}
-    RETURNING *
+    UPDATE requests SET ${sql(updatedTrip)} WHERE id = ${id} RETURNING *
   `;
   return data;
 };

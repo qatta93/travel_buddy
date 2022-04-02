@@ -14,7 +14,11 @@ const findIndexById = (array, id) => array.findIndex((ele) => ele.id === id);
 const addLanguages = (array, user) => {
   const languages = array
     .filter((u) => u.id === user.id)
-    .map((u) => u.language.toUpperCase());
+    .map((u) => ({
+      id: Number(u.languageId),
+      language: u.language,
+      languageCode: u.languageCode.toUpperCase(),
+    }));
   return {
     ...user,
     languages,
@@ -47,13 +51,13 @@ const createUser = async (newUser) => {
     name: newUser.name,
     gender: newUser.gender,
     age: newUser.age,
-    countryId,
+    country_id: countryId,
     summary: newUser.summary || '',
     avatar: newUser.avatar || '',
   };
   const [userDB] = await createUserDB(newUserData);
   const newLanguagesPromises = newUser.languages
-    .map((lang) => addLanguageToUserDB(userDB.id, lang));
+    .map(async (lang) => addLanguageToUserDB(userDB.id, lang));
   await Promise.all(newLanguagesPromises);
   return { id: userDB.id, username: userDB.username };
 };

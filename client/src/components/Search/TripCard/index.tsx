@@ -74,7 +74,9 @@ const TripCard = ({ trip }:TripCardProps) => {
             y.o.
           </p>
           <p className="trips__host-country">{user === null ? null : user.country}</p>
-          <p className="trips__host-language">{user === null ? null : user.languages.join(' | ')}</p>
+          <p className="trips__host-language">
+            {user === null ? null : user.languages.map((l) => l.languageCode).join(' | ')}
+          </p>
           {/* <p className="trips__host-reviews">4.8 ★</p> */}
         </div>
       </div>
