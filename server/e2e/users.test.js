@@ -29,7 +29,12 @@ describe('GET /api/users', () => {
         expect(user.gender).not.toBeUndefined();
         expect(user.country).not.toBeUndefined();
         expect(Array.isArray(user.languages)).toBe(true);
-        expect(user.languages.length > 0).toBe(true);
+
+        user.languages.forEach((language) => {
+          expect(language.id).not.toBeUndefined();
+          expect(language.language).not.toBeUndefined();
+          expect(language.languageCode).not.toBeUndefined();
+        });
       });
     }));
 });
@@ -50,8 +55,13 @@ describe('GET /api/users/:id', () => {
       expect(data.gender).toBe('female');
       expect(data.country).toBe('Poland');
       expect(data.age).toBe(28);
-      expect(data.languages).toEqual(expect.arrayContaining(['EN', 'PL', 'ES']));
       expect(data.avatar).toBe('https://avatars.githubusercontent.com/u/57223600?v=4');
+
+      data.languages.forEach((language) => {
+        expect([1, 27, 87]).toContain(language.id);
+        expect(['English', 'Spanish', 'Polish']).toContain(language.language);
+        expect(['EN', 'ES', 'PL']).toContain(language.languageCode);
+      });
     }));
 
   test('should return error message for wrong id', () => supertest(app)
@@ -100,7 +110,12 @@ describe('POST /api/users', () => {
       userId = data.id;
 
       const languages = await getLanguagesByUserId(data.id);
-      expect(languages).toEqual(expect.arrayContaining(['ET', 'EN']));
+
+      languages.forEach((language) => {
+        expect([1, 28]).toContain(language.id);
+        expect(['English', 'Estonian']).toContain(language.language);
+        expect(['EN', 'ET']).toContain(language.languageCode);
+      });
     }));
 });
 

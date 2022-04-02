@@ -39,7 +39,7 @@ interface FormProps {
 
 const countriesInitialValue = [
   {
-    id: 999, country: 'All', code: 'ALL', country_code: 'ALL',
+    id: 999, country: 'All', code: 'ALL', countryCode: 'ALL',
   },
 ];
 

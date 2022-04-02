@@ -13,7 +13,15 @@ const {
 const findIndexById = (array, id) => array.findIndex((ele) => ele.id === id);
 
 const removeDuplicated = (array) => array
-  .filter((val, index) => array.indexOf(val) === index && val !== null);
+  .filter((ele, index) => {
+    if (ele === null) {
+      return false;
+    }
+    if (typeof ele === 'object') {
+      return array.findIndex((obj) => obj.id === ele.id) === index;
+    }
+    return array.indexOf(ele) === index;
+  });
 
 const addData = (field, newField) => (array, trip) => {
   const allFieldValues = array
@@ -28,17 +36,45 @@ const addData = (field, newField) => (array, trip) => {
   };
 };
 
-const addCountries = addData('country', 'countries');
 const addPlaces = addData('place', 'places');
 const addActivities = addData('activity', 'activities');
 const addPassengers = addData('passenger', 'passengers');
+
+const addCountries = (array, trip) => {
+  const allFieldValues = array
+    .filter((t) => t.id === trip.id)
+    .map((t) => ({
+      id: t.countryId,
+      code: t.code,
+      country: t.country,
+      countryCode: t.countryCode,
+    }));
+
+  const fieldValues = removeDuplicated(allFieldValues);
+
+  return {
+    ...trip,
+    countries: fieldValues,
+  };
+};
+
+const addAuthor = (trip) => ({
+  ...trip,
+  author: {
+    id: trip.authorId,
+    username: trip.authorUsername,
+    age: trip.authorAge,
+    gender: trip.authorGender,
+  },
+});
 
 const parseTrips = (trips) => trips
   .filter((trip, index) => findIndexById(trips, trip.id) === index)
   .map((trip) => addCountries(trips, trip))
   .map((trip) => addActivities(trips, trip))
   .map((trip) => addPlaces(trips, trip))
-  .map((trip) => addPassengers(trips, trip));
+  .map((trip) => addPassengers(trips, trip))
+  .map(addAuthor);
 
 const getAllTrips = async () => {
   const trips = await getAllTripsDB();
@@ -61,45 +97,32 @@ const getPlaceIdOrCreate = async (place) => {
 };
 
 const createTrip = async (newTrip) => {
-  const {
-    authorId,
-    summary,
-    description,
-    from,
-    to,
-    budget,
-    activities,
-    countries,
-    places,
-    images,
-    maxPassengers,
-    genderRestrictions,
-  } = newTrip;
-
-  const createTripArgs = {
-    authorId,
-    description,
-    from,
-    to,
-    maxPassengers,
-    summary: summary || '',
-    budget: budget || 0,
-    images: images || '',
-    genderRestrictions: genderRestrictions || null,
+  const newTripData = {
+    author_id: newTrip.authorId,
+    description: newTrip.description,
+    from: newTrip.from,
+    to: newTrip.to,
+    max_passengers: newTrip.maxPassengers,
+    summary: newTrip.summary || '',
+    budget: newTrip.budget || 0,
+    images: newTrip.images || '',
+    gender_restrictions: newTrip.genderRestrictions || null,
   };
 
-  const [trip] = await createTripDB(createTripArgs);
+  const [trip] = await createTripDB(newTripData);
 
-  if (countries) {
-    await Promise.all(countries.map(async (country) => addCountryToTripDB(trip.id, country)));
+  if (newTrip.countries) {
+    await Promise.all(newTrip.countries
+      .map(async (country) => addCountryToTripDB(trip.id, country)));
   }
 
-  if (activities) {
-    await Promise.all(activities.map(async (activity) => addActivityToTripDB(trip.id, activity)));
+  if (newTrip.activities) {
+    await Promise.all(newTrip.activities
+      .map(async (activity) => addActivityToTripDB(trip.id, activity)));
   }
 
-  if (places) {
-    await Promise.all(places.map(async (place) => {
+  if (newTrip.places) {
+    await Promise.all(newTrip.places.map(async (place) => {
       const placeId = await getPlaceIdOrCreate(place);
       await addPlaceToTripDB(trip.id, placeId);
     }));

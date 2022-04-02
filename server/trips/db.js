@@ -3,9 +3,10 @@ const sql = require('../db');
 const getAllTripsDB = async () => {
   const data = await sql`
     SELECT 
-    t.id, t.author_id AS "authorId", u.username AS "authorUsername", u.age AS "authorAge", u.gender AS "authorGender", 
-    t.budget, t.summary, t.description, t.from, t.to, t.images, t.max_passengers AS "maxPassengers", c.country, 
-    a.activity, p.place, pa.id AS passenger, t.gender_restrictions AS "genderRestrictions"
+    t.id, t.budget, t.summary, t.description, t.from, t.to, t.images, t.max_passengers AS "maxPassengers",
+    t.gender_restrictions AS "genderRestrictions",
+    t.author_id AS "authorId", u.username AS "authorUsername", u.age AS "authorAge", u.gender AS "authorGender", 
+    c.country, c.id AS "countryId", c.country_code AS "countryCode", c.code AS "code", a.activity, p.place, pa.id AS passenger
     FROM trips AS t
     JOIN users AS u ON u.id=t.author_id
     JOIN trips_countries AS tc ON tc.trip_id=t.id
@@ -22,9 +23,10 @@ const getAllTripsDB = async () => {
 const getTripByIdDB = async (id) => {
   const data = await sql`
     SELECT 
-    t.id, t.author_id AS "authorId", u.username AS "authorUsername", u.age AS "authorAge", u.gender AS "authorGender", 
-    t.budget, t.summary, t.description, t.from, t.to, t.images, t.max_passengers AS "maxPassengers", c.country, 
-    a.activity, p.place, pa.id AS passenger, t.gender_restrictions AS "genderRestrictions"
+    t.id, t.budget, t.summary, t.description, t.from, t.to, t.images, t.max_passengers AS "maxPassengers",
+    t.gender_restrictions AS "genderRestrictions",
+    t.author_id AS "authorId", u.username AS "authorUsername", u.age AS "authorAge", u.gender AS "authorGender", 
+    c.country, c.id AS "countryId", c.country_code AS "countryCode", c.code AS "code", a.activity, p.place, pa.id AS passenger
     FROM trips AS t
     JOIN users AS u ON u.id=t.author_id
     LEFT JOIN trips_countries AS tc ON tc.trip_id=t.id
@@ -41,11 +43,7 @@ const getTripByIdDB = async (id) => {
 
 const createTripDB = async (trip) => {
   const data = await sql`
-  INSERT INTO 
-  trips (author_id, description, max_passengers, "from", "to", summary, budget, images, gender_restrictions) 
-  VALUES 
-  (${trip.authorId}, ${trip.description}, ${trip.maxPassengers}, ${trip.from}, ${trip.to}, 
-  ${trip.summary}, ${trip.budget}, ${trip.images}, ${trip.genderRestrictions})
+  INSERT INTO trips ${sql(trip)}
   RETURNING *, gender_restrictions AS "genderRestrictions";
   `;
 
