@@ -41,6 +41,7 @@ router.post('/', async (req, res, next) => {
 });
 
 router.put('/:id', async (req, res, next) => {
+  console.log(req.body);
   try {
     const updatedRequest = {
       trip_id: req.body.trip_id,

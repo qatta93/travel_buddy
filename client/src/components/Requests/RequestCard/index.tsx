@@ -13,23 +13,32 @@ interface RequestCardProps {
 
 const RequestCard = ({ request }:RequestCardProps) => {
   // const [status, setStatus] = useState<IStatus>();
-  const tripId = request.trip_id;
+  // const requestId = request.id;
 
   useEffect(() => {
+
+  }, []);
+
+  const acceptRequest = () => {
+    const requestId = request.id;
     const putStatusData = async () => {
+      const newRequest = {
+        ...request,
+        status: 'accepted',
+      };
       const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: 'React Hooks PUT Request Example' }),
+        body: JSON.stringify(newRequest),
       };
-      const data = await fetch(`/api/requests/${tripId}`, requestOptions);
+      const response = await fetch(`http://localhost:5500/api/requests/${requestId}`, requestOptions);
+      const data = await response.json();
       console.log(data);
+      console.log(requestId);
       // setStatus(data);
     };
     putStatusData();
-  }, []);
-
-  const acceptRequest = (status:any) => status;
+  };
 
   return (
     <article className="request-card">
@@ -39,7 +48,7 @@ const RequestCard = ({ request }:RequestCardProps) => {
       </header>
       <p className="request-card__text">{request.message}</p>
       <div className="request-card__buttons">
-        <button type="button" className="request-card__button request-card__button--accept" onClick={() => acceptRequest(request.status)}>accept</button>
+        <button type="button" className="request-card__button request-card__button--accept" onClick={() => acceptRequest()}>accept</button>
         <button type="button" className="request-card__button request-card__button--reject">reject</button>
       </div>
     </article>
