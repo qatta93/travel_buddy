@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainHeader from '../MainHeader';
 import { fetchApi } from '../../helpers/api';
 import RequestCard from './RequestCard';
@@ -6,12 +6,17 @@ import { IRequest } from '../../types';
 import './style.css';
 
 const Requests = () => {
-// const [requests, setRequests] = useState<IRequest[]>([]);
+  const [requests, setRequests] = useState<IRequest[]>([]);
 
   useEffect(() => {
     const getRequestsData = async () => {
       const data = await fetchApi<IRequest[]>('/api/requests');
-      console.log(data);
+      if (data.status === 'error') {
+        console.error(data.message);
+        return;
+      }
+      const request = await data.data;
+      setRequests(request);
     };
     getRequestsData();
   }, []);
@@ -25,7 +30,10 @@ const Requests = () => {
           { name: 'requests', href: '/requests' },
         ]}
       />
-      <RequestCard />
+      {requests.map((request:IRequest) => (
+        <RequestCard key={request.id} request={request} />
+      ))}
+      <img className="requests__img" src="/images/bg_desktop.png" alt="car" />
     </section>
   );
 };

@@ -59,8 +59,8 @@ export interface IActivity {
 
 export interface IRequest {
   id: number,
-  tripId: number,
-  userId: number,
+  trip_id: number,
+  user_id: number,
   status: string,
   message: string,
 }
