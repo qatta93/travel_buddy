@@ -43,7 +43,7 @@ const countriesInitialValue = [
   },
 ];
 
-const Form = ({ setFilters }: FormProps) => {
+const FormSearchTrip = ({ setFilters }: FormProps) => {
   const [searchInput, setSearchInput] = useState<SearchInput>(searchInputInitialValue);
   const [countries, setCountries] = useState<ICountry[]>(countriesInitialValue);
 
@@ -99,7 +99,7 @@ const Form = ({ setFilters }: FormProps) => {
   };
 
   return (
-    <section className="form-wrapper">
+    <section className="search-form-wrapper">
       <form onSubmit={handleSubmit} className="search-form">
         <label htmlFor="country" className="search-form__label">
           Country:
@@ -198,4 +198,4 @@ const Form = ({ setFilters }: FormProps) => {
   );
 };
 
-export default Form;
+export default FormSearchTrip;

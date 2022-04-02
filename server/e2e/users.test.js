@@ -105,7 +105,7 @@ describe('POST /api/users', () => {
 });
 
 describe('DELETE /api/users/:id', () => {
-  const u = {
+  const newUser = {
     name: 'test user 1',
     username: 'test_username',
     email: 'test@username.com',
@@ -118,11 +118,11 @@ describe('DELETE /api/users/:id', () => {
   let userId;
 
   beforeAll(async () => {
-    const { id } = await createUser(u);
+    const { id } = await createUser(newUser);
     userId = id;
   });
 
-  test('should create a new user', () => supertest(app)
+  test('should delete an user', () => supertest(app)
     .delete(`/api/users/${userId}`)
     .expect(200)
     .expect(async (res) => {

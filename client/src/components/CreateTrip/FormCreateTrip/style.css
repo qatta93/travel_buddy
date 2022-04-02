@@ -1,4 +1,4 @@
-.search-form {
+.create-form {
   padding: 1.5rem;
   max-width: 100vw;
   width: 30rem;
@@ -9,7 +9,7 @@
   background-color: rgba(255, 255, 255, 0.952);
 }
 
-.search-form__label {
+.create-form__label {
   display: grid;
   grid-template-columns: 4rem minmax(0, 1fr);
   grid-gap: 1rem;
@@ -18,19 +18,24 @@
   max-width: 100%;
 }
 
-.search-form__label--date {
+.create-form__label--date {
   grid-template-columns: 4rem minmax(0, 1fr);
 }
 
-.search-form__label--age {
+.create-form__label--age {
   grid-template-columns: 4rem minmax(0, 1fr) minmax(0, 1fr);
 }
 
-.search-form__label--checkbox {
+.create-form__label--checkbox {
   grid-template-columns: 4rem 1rem 1fr 1rem 1fr 1rem 2fr;
 }
 
-.search-form__input {
+.create-form__label--text-area {
+  grid-template-columns: 1fr;
+  text-align: center;
+}
+
+.create-form__input {
   padding: 0.8rem 1rem;
   border-radius: 0.3rem;
   border: none;
@@ -38,7 +43,7 @@
   color: var(--metal);
 }
 
-.search-form__select {
+.create-form__select {
   padding: 0.8rem 1rem;
   border-radius: 0.3rem;
   border: none;
@@ -46,7 +51,7 @@
   color: var(--metal);
 }
 
-.search-form__checkbox {
+.create-form__checkbox {
   border-radius: 0.3rem;
   border: none;
   box-shadow: inset 0px 2px 5px var(--shadow);
@@ -54,8 +59,21 @@
   margin-left: 0.2rem;
 }
 
-.search-form__btn {
-  margin: 1.5rem auto;
+.create-form__text-area {
+  padding: 0.8rem 1rem;
+  border-radius: 0.3rem;
+  border: none;
+  box-shadow: inset 0px 5px 8px var(--shadow);
+  color: var(--metal);
+  min-height: 5rem;
+}
+
+.create-form__text-area--long {
+  min-height: 10rem;
+}
+
+.create-form__btn {
+  margin: 1rem auto;
   width: 7rem;
   padding: 0.6rem 1rem;
   border: none;
@@ -65,15 +83,14 @@
   box-shadow: 0 5px 3px var(--shadow);
 }
 
+.create-form__btn-wrapper {
+  background-color: var(--light-gray);
+  margin: 0.5rem -1.5rem;
+  text-align: center;
+}
+
 @media screen and (min-width: 30rem) {
-  .search-form {
+  .create-form {
     padding: 2rem 5rem;
-  }
-  .form-wrapper {
-    opacity: 80%;
-    max-width: 100vw;
-    background-image: url('../../../../public/images/bg_desktop.png');
-    background-position: center;
-    background-size: cover;
   }
 }
