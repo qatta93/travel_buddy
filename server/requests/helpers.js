@@ -23,13 +23,25 @@ const getRequestById = async (id) => {
   return parsedData.length > 0 ? parsedData[0] : null;
 };
 
-const createRequest = async (newTrip) => {
-  const data = await createRequestDB(newTrip);
+const createRequest = async (newRequest) => {
+  const newRequestData = {
+    trip_id: newRequest.tripId,
+    user_id: newRequest.userId,
+    message: newRequest.message || '',
+  };
+  const data = await createRequestDB(newRequestData);
   return { id: data[0].id };
 };
 
-const updateRequestById = async (id, updatedTrip) => {
-  const data = await updateRequestByIdDB(id, updatedTrip);
+const updateRequestById = async (id, updatedRequest) => {
+  const updatedRequestData = {
+    trip_id: updatedRequest.tripId,
+    user_id: updatedRequest.userId,
+    message: updatedRequest.message || '',
+    status: updatedRequest.status,
+    sent_on: updatedRequest.sentOn,
+  };
+  const data = await updateRequestByIdDB(id, updatedRequestData);
   return data[0];
 };
 

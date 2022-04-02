@@ -77,8 +77,8 @@ export interface IRequestUser {
 export interface IRequest {
   id: number,
   user: IRequestUser,
-  tripId: string,
+  tripId: number,
   message: string,
   status: 'pending' | 'accepted' | 'rejected' | 'cancelled',
-  sent_on: string,
+  sentOn: string,
 }

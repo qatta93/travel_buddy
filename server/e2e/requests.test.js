@@ -20,7 +20,7 @@ describe('GET /api/requests', () => {
 
       data.forEach((request) => {
         expect(request.id).not.toBeUndefined();
-        expect(request.trip_id).not.toBeUndefined();
+        expect(request.tripId).not.toBeUndefined();
         expect(request.user).not.toBeUndefined();
         expect(request.user.id).not.toBeUndefined();
         expect(request.user.name).not.toBeUndefined();
@@ -43,7 +43,7 @@ describe('GET /api/requests/:id', () => {
       expect(status).toBe('success');
 
       expect(data.id).toBe(2);
-      expect(data.trip_id).toBe(138);
+      expect(data.tripId).toBe(138);
       expect(data.user.id).toBe(1);
       expect(data.user.name).toBe('Patrycja');
       expect(data.user.username).toBe('qatta');
@@ -56,8 +56,8 @@ describe('GET /api/requests/:id', () => {
 
 describe('POST /api/requests', () => {
   const newRequest = {
-    trip_id: 140,
-    user_id: 2,
+    tripId: 140,
+    userId: 2,
     message: 'test request',
   };
 
@@ -82,8 +82,8 @@ describe('POST /api/requests', () => {
       requestId = data.id;
 
       const request = await getRequestById(requestId);
-      expect(request.trip_id).toEqual(newRequest.trip_id);
-      expect(request.user.id).toEqual(newRequest.user_id);
+      expect(request.tripId).toEqual(newRequest.tripId);
+      expect(request.user.id).toEqual(newRequest.userId);
       expect(request.user.name).toEqual('Alejandro');
       expect(request.user.username).toEqual('aburto22');
       expect(request.user.email).toEqual('aburto22@gmail.com');
@@ -95,8 +95,8 @@ describe('POST /api/requests', () => {
 
 describe('PUT /api/requests/:id', () => {
   const newRequest = {
-    trip_id: 140,
-    user_id: 2,
+    tripId: 140,
+    userId: 2,
     message: 'test request',
   };
 
@@ -118,24 +118,27 @@ describe('PUT /api/requests/:id', () => {
       id: requestId,
       ...newRequest,
       status: 'accepted',
+      sentOn: '2022-04-02',
     })
     .expect(200)
     .expect('Content-Type', /application\/json/)
     .expect(async (res) => {
       const { status, data } = res.body;
+
       expect(status).toBe('success');
       expect(data.id).toBe(requestId);
-      expect(data.trip_id).toEqual(newRequest.trip_id);
-      expect(data.user_id).toEqual(newRequest.user_id);
+      expect(data.tripId).toEqual(newRequest.tripId);
+      expect(data.userId).toEqual(newRequest.userId);
       expect(data.status).toEqual('accepted');
       expect(data.message).toEqual(newRequest.message);
+      expect(new Date(data.sentOn).toDateString()).toEqual((new Date('2022-04-02')).toDateString());
     }));
 });
 
 describe('DELETE /api/users/:id', () => {
   const newRequest = {
-    trip_id: 140,
-    user_id: 2,
+    tripId: 140,
+    userId: 2,
     message: 'test request',
   };
 
