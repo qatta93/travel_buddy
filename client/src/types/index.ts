@@ -56,3 +56,11 @@ export interface IActivity {
   id: number,
   activity: string,
 }
+
+export interface IRequest {
+  id: number,
+  tripId: number,
+  userId: number,
+  status: string,
+  message: string,
+}
