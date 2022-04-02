@@ -66,3 +66,18 @@ export interface IActivity {
   id: number,
   activity: string,
 }
+
+export interface IRequestUser {
+  id: number,
+  name: string,
+  username: string,
+  email: string,
+}
+
+export interface IRequest {
+  id: number,
+  user: IRequestUser,
+  tripId: string,
+  message: string,
+  status: 'pending' | 'accepted' | 'rejected' | 'cancelled',
+}
