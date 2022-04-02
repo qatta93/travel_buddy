@@ -41,11 +41,7 @@ const getTripByIdDB = async (id) => {
 
 const createTripDB = async (trip) => {
   const data = await sql`
-  INSERT INTO 
-  trips (author_id, description, max_passengers, "from", "to", summary, budget, images, gender_restrictions) 
-  VALUES 
-  (${trip.authorId}, ${trip.description}, ${trip.maxPassengers}, ${trip.from}, ${trip.to}, 
-  ${trip.summary}, ${trip.budget}, ${trip.images}, ${trip.genderRestrictions})
+  INSERT INTO trips ${sql(trip)}
   RETURNING *, gender_restrictions AS "genderRestrictions";
   `;
 

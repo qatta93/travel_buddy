@@ -72,45 +72,32 @@ const getPlaceIdOrCreate = async (place) => {
 };
 
 const createTrip = async (newTrip) => {
-  const {
-    authorId,
-    summary,
-    description,
-    from,
-    to,
-    budget,
-    activities,
-    countries,
-    places,
-    images,
-    maxPassengers,
-    genderRestrictions,
-  } = newTrip;
-
-  const createTripArgs = {
-    authorId,
-    description,
-    from,
-    to,
-    maxPassengers,
-    summary: summary || '',
-    budget: budget || 0,
-    images: images || '',
-    genderRestrictions: genderRestrictions || null,
+  const newTripData = {
+    author_id: newTrip.authorId,
+    description: newTrip.description,
+    from: newTrip.from,
+    to: newTrip.to,
+    max_passengers: newTrip.maxPassengers,
+    summary: newTrip.summary || '',
+    budget: newTrip.budget || 0,
+    images: newTrip.images || '',
+    gender_restrictions: newTrip.genderRestrictions || null,
   };
 
-  const [trip] = await createTripDB(createTripArgs);
+  const [trip] = await createTripDB(newTripData);
 
-  if (countries) {
-    await Promise.all(countries.map(async (country) => addCountryToTripDB(trip.id, country)));
+  if (newTrip.countries) {
+    await Promise.all(newTrip.countries
+      .map(async (country) => addCountryToTripDB(trip.id, country)));
   }
 
-  if (activities) {
-    await Promise.all(activities.map(async (activity) => addActivityToTripDB(trip.id, activity)));
+  if (newTrip.activities) {
+    await Promise.all(newTrip.activities
+      .map(async (activity) => addActivityToTripDB(trip.id, activity)));
   }
 
-  if (places) {
-    await Promise.all(places.map(async (place) => {
+  if (newTrip.places) {
+    await Promise.all(newTrip.places.map(async (place) => {
       const placeId = await getPlaceIdOrCreate(place);
       await addPlaceToTripDB(trip.id, placeId);
     }));
