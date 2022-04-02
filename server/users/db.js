@@ -52,7 +52,8 @@ const addLanguageToUserDB = async (userId, language) => {
 
 const getLanguagesByUserIdDB = async (id) => {
   const data = await sql`
-    SELECT l.language_code AS "language" FROM users_languages AS ul
+    SELECT l.language_code AS "languageCode", l.language, l.id
+    FROM users_languages AS ul
     JOIN languages AS l ON ul.language_id=l.id
     WHERE user_id = ${id};
   `;

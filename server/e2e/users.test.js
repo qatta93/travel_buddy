@@ -111,7 +111,11 @@ describe('POST /api/users', () => {
 
       const languages = await getLanguagesByUserId(data.id);
 
-      expect(languages).toEqual(expect.arrayContaining(['ET', 'EN']));
+      languages.forEach((language) => {
+        expect([1, 28]).toContain(language.id);
+        expect(['English', 'Estonian']).toContain(language.language);
+        expect(['EN', 'ET']).toContain(language.languageCode);
+      });
     }));
 });
 

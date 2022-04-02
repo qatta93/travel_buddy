@@ -64,7 +64,10 @@ const createUser = async (newUser) => {
 
 const getLanguagesByUserId = async (id) => {
   const data = await getLanguagesByUserIdDB(id);
-  return data.map((obj) => obj.language.toUpperCase());
+  return data.map((language) => ({
+    ...language,
+    languageCode: language.languageCode.toUpperCase(),
+  }));
 };
 
 const deleteUserById = async (id) => deleteUserByIdDB(id);
