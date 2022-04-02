@@ -11,11 +11,11 @@ const filterTripByBudget = (trip: ITrip, budget: number | undefined): boolean =>
 );
 
 const filterTripByAgeFrom = (trip: ITrip, ageFrom: number | undefined): boolean => (
-  ageFrom ? trip.authorAge >= ageFrom : true
+  ageFrom ? trip.author.age >= ageFrom : true
 );
 
 const filterTripByAgeTo = (trip: ITrip, ageTo: number | undefined): boolean => (
-  ageTo ? trip.authorAge <= ageTo : true
+  ageTo ? trip.author.age <= ageTo : true
 );
 
 const filterTripByGender = (trip: ITrip, gender: Gender): boolean => {

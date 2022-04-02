@@ -4,12 +4,16 @@ export interface ILanguage {
   languageCode: string,
 }
 
+export interface ITripAuthor {
+  id: number,
+  username: string,
+  age: number,
+  gender: string,
+}
+
 export interface ITrip {
   id: number,
-  authorId: number,
-  authorUsername: string,
-  authorAge: number,
-  authorGender: string,
+  author: ITripAuthor
   budget: number,
   summary: string,
   description: string,

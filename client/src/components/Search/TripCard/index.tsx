@@ -11,7 +11,7 @@ interface TripCardProps {
 const TripCard = ({ trip }:TripCardProps) => {
   const [user, setUser] = useState<IUser | null>(null);
 
-  const userId = trip.authorId;
+  const userId = trip.author.id;
 
   useEffect(() => {
     const getUsersData = async () => {
@@ -67,9 +67,9 @@ const TripCard = ({ trip }:TripCardProps) => {
           </p>
         </div>
         <div className="trips__host">
-          <p className="trips__host-name">{trip.authorUsername}</p>
+          <p className="trips__host-name">{trip.author.username}</p>
           <p className="trips__host-age">
-            {trip.authorAge}
+            {trip.author.age}
             {' '}
             y.o.
           </p>

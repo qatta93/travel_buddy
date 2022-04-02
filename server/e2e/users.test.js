@@ -110,6 +110,7 @@ describe('POST /api/users', () => {
       userId = data.id;
 
       const languages = await getLanguagesByUserId(data.id);
+
       expect(languages).toEqual(expect.arrayContaining(['ET', 'EN']));
     }));
 });

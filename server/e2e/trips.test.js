@@ -18,10 +18,11 @@ describe('GET /api/trips', () => {
 
       data.forEach((trip) => {
         expect(trip.id).not.toBeUndefined();
-        expect(trip.authorId).not.toBeUndefined();
-        expect(trip.authorUsername).not.toBeUndefined();
-        expect(trip.authorGender).not.toBeUndefined();
-        expect(trip.authorAge).not.toBeUndefined();
+        expect(trip.author).not.toBeUndefined();
+        expect(trip.author.id).not.toBeUndefined();
+        expect(trip.author.username).not.toBeUndefined();
+        expect(trip.author.gender).not.toBeUndefined();
+        expect(trip.author.age).not.toBeUndefined();
         expect(trip.description).not.toBeUndefined();
         expect(trip.from).not.toBeUndefined();
         expect(trip.to).not.toBeUndefined();
@@ -49,10 +50,10 @@ describe('GET /api/trips/:id', () => {
       expect(status).toBe('success');
 
       expect(data.id).toBe(1);
-      expect(data.authorId).toBe(1);
-      expect(data.authorUsername).toBe('qatta');
-      expect(data.authorGender).toBe('female');
-      expect(data.authorAge).toBe(28);
+      expect(data.author.id).toBe(1);
+      expect(data.author.username).toBe('qatta');
+      expect(data.author.gender).toBe('female');
+      expect(data.author.age).toBe(28);
       expect(data.description).not.toBeUndefined();
       expect(data.from).toEqual((new Date('2022-03-30').toISOString()));
       expect(data.to).toEqual((new Date('2022-03-30').toISOString()));

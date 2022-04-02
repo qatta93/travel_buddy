@@ -33,12 +33,23 @@ const addPlaces = addData('place', 'places');
 const addActivities = addData('activity', 'activities');
 const addPassengers = addData('passenger', 'passengers');
 
+const addAuthor = (trip) => ({
+  ...trip,
+  author: {
+    id: trip.authorId,
+    username: trip.authorUsername,
+    age: trip.authorAge,
+    gender: trip.authorGender,
+  },
+});
+
 const parseTrips = (trips) => trips
   .filter((trip, index) => findIndexById(trips, trip.id) === index)
   .map((trip) => addCountries(trips, trip))
   .map((trip) => addActivities(trips, trip))
   .map((trip) => addPlaces(trips, trip))
-  .map((trip) => addPassengers(trips, trip));
+  .map((trip) => addPassengers(trips, trip))
+  .map(addAuthor);
 
 const getAllTrips = async () => {
   const trips = await getAllTripsDB();
