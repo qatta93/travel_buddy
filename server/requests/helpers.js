@@ -1,5 +1,5 @@
 const {
-  getAllRequestsDB, getRequestByIdDB, createRequestDB, deleteRequestByIdDB,
+  getAllRequestsDB, getRequestByIdDB, createRequestDB, deleteRequestByIdDB, updateRequestByIdDB,
 } = require('./db');
 
 const getAllRequests = async () => {
@@ -17,6 +17,11 @@ const createRequest = async (newTrip) => {
   return { id: data[0].id };
 };
 
+const updateRequestById = async (id, updatedTrip) => {
+  const data = await updateRequestByIdDB(id, updatedTrip);
+  return data[0];
+};
+
 const deleteRequestById = async (id) => deleteRequestByIdDB(id);
 
 module.exports = {
@@ -24,4 +29,5 @@ module.exports = {
   getRequestById,
   createRequest,
   deleteRequestById,
+  updateRequestById,
 };

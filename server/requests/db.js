@@ -22,6 +22,14 @@ const createRequestDB = async (newTrip) => {
   return data;
 };
 
+const updateRequestByIdDB = async (id, updatedTrip) => {
+  const data = await sql`
+    UPDATE requests SET ${sql(updatedTrip)} WHERE id = ${id}
+    RETURNING *
+  `;
+  return data;
+};
+
 const deleteRequestByIdDB = async (id) => {
   const data = await sql`
     DELETE FROM requests WHERE id = ${id}
@@ -34,4 +42,5 @@ module.exports = {
   getRequestByIdDB,
   createRequestDB,
   deleteRequestByIdDB,
+  updateRequestByIdDB,
 };

@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  getAllRequests, getRequestById, createRequest, deleteRequestById,
+  getAllRequests, getRequestById, createRequest, deleteRequestById, updateRequestById,
 } = require('./helpers');
 
 const router = express.Router();
@@ -25,16 +25,31 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newTrip = {
+    const newRequest = {
       trip_id: req.body.trip_id,
       user_id: req.body.user_id,
       message: req.body.message,
     };
-    const data = await createRequest(newTrip);
+    const data = await createRequest(newRequest);
     return res
       .status(201)
       .location(`/api/requests/${data.id}`)
       .json({ status: 'success', data });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const updatedRequest = {
+      trip_id: req.body.trip_id,
+      user_id: req.body.user_id,
+      message: req.body.message,
+      status: req.body.status,
+    };
+    const data = await updateRequestById(req.params.id, updatedRequest);
+    return res.status(200).json({ status: 'success', data });
   } catch (err) {
     return next(err);
   }

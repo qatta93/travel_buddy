@@ -80,6 +80,45 @@ describe('POST /api/requests', () => {
     }));
 });
 
+describe('PUT /api/requests/:id', () => {
+  const newRequest = {
+    trip_id: 140,
+    user_id: 2,
+    message: 'test request',
+  };
+
+  let requestId;
+
+  beforeAll(async () => {
+    const { id } = await createRequest(newRequest);
+    requestId = id;
+  });
+
+  afterAll(async () => {
+    await deleteRequestById(requestId);
+  });
+
+  test('should update an existing request', () => supertest(app)
+    .put(`/api/requests/${requestId}`)
+    .set('Accept', 'application/json')
+    .send({
+      id: requestId,
+      ...newRequest,
+      status: 'accepted',
+    })
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+    .expect(async (res) => {
+      const { status, data } = res.body;
+      expect(status).toBe('success');
+      expect(data.id).toBe(requestId);
+      expect(data.trip_id).toEqual(newRequest.trip_id);
+      expect(data.user_id).toEqual(newRequest.user_id);
+      expect(data.status).toEqual('accepted');
+      expect(data.message).toEqual(newRequest.message);
+    }));
+});
+
 describe('DELETE /api/users/:id', () => {
   const newRequest = {
     trip_id: 140,
