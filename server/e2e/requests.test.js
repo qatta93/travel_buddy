@@ -27,6 +27,7 @@ describe('GET /api/requests', () => {
         expect(request.user.username).not.toBeUndefined();
         expect(request.user.email).not.toBeUndefined();
         expect(request.status).toMatch(/^(pending|rejected|accepted|cancelled)$/);
+        expect(request.sentOn).not.toBeUndefined();
       });
     }));
 });
@@ -49,6 +50,7 @@ describe('GET /api/requests/:id', () => {
       expect(data.user.email).toBe('panasiuk.patrycja@gmail.com');
       expect(data.status).toMatch(/^(pending|rejected|accepted|cancelled)$/);
       expect(data.message).toBe('I would love to join you!');
+      expect(data.sentOn).toMatch(/2022-04-02/);
     }));
 });
 
@@ -87,6 +89,7 @@ describe('POST /api/requests', () => {
       expect(request.user.email).toEqual('aburto22@gmail.com');
       expect(request.status).toEqual('pending');
       expect(request.message).toEqual(newRequest.message);
+      expect(request.sentOn.toString()).toMatch((new Date()).toDateString());
     }));
 });
 

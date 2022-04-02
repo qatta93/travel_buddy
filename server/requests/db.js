@@ -2,7 +2,7 @@ const sql = require('../db');
 
 const getAllRequestsDB = async () => {
   const data = await sql`
-    SELECT r.*, u.id AS "userId", u.username, u.name, u.email FROM requests AS r
+    SELECT r.*, r.sent_on AS "sentOn", u.id AS "userId", u.username, u.name, u.email FROM requests AS r
     JOIN users AS u ON u.id = r.user_id
   `;
   return data;
@@ -10,7 +10,7 @@ const getAllRequestsDB = async () => {
 
 const getRequestByIdDB = async (id) => {
   const data = await sql`
-    SELECT r.*, u.id AS "userId", u.username, u.name, u.email FROM requests AS r
+    SELECT r.*, r.sent_on AS "sentOn", u.id AS "userId", u.username, u.name, u.email FROM requests AS r
     JOIN users AS u ON u.id = r.user_id
     WHERE r.id = ${id}
   `;
