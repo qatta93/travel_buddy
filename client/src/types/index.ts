@@ -80,4 +80,5 @@ export interface IRequest {
   tripId: string,
   message: string,
   status: 'pending' | 'accepted' | 'rejected' | 'cancelled',
+  sent_on: string,
 }
