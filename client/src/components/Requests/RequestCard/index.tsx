@@ -56,11 +56,20 @@ const RequestCard = ({ request }:RequestCardProps) => {
     putStatusData();
   };
 
+  const sentOnYear = request.sentOn.split(/T.+/g)[0].split('-')[0].split(/^.{2}/)[1];
+  const sentOnMonth = request.sentOn.split(/T.+/g)[0].split('-')[1];
+  const sentOnDay = request.sentOn.split(/T.+/g)[0].split('-')[2];
+  const sentOnDate = `${sentOnDay}-${sentOnMonth}-${sentOnYear}`;
+
   return (
     <article className={`request-card request-card--${status}`}>
       <header className={`request-card__header request-card__header--${status}`}>
-        <h1 className="request-card__title">Thomas, 22.03</h1>
-        <p className="request-card__email">fff@gmail.com</p>
+        <h1 className="request-card__title">
+          {request.user.name}
+          {', '}
+          {sentOnDate}
+        </h1>
+        <p className="request-card__email">{request.user.email}</p>
       </header>
       <p className="request-card__text">{request.message}</p>
       <div className="request-card__buttons">
