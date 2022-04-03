@@ -18,7 +18,7 @@ const InitialInput = {
 
 const Trip = () => {
   const [trip, setTrip] = useState<ITrip | null>(null);
-  const [createInput, setCreateInput] = useState<CreateInput>(InitialInput);
+  const [textInput, setTextInput] = useState<CreateInput>(InitialInput);
   const { id } = useParams();
 
   useEffect(() => {
@@ -34,7 +34,8 @@ const Trip = () => {
     fetchTrip();
   }, []);
 
-  const createNewRequest = async () => {
+  const createNewRequest = async (event: React.FormEvent) => {
+    event.preventDefault();
     const newRequest = {
       // uuid?
       id: 5,
@@ -42,7 +43,7 @@ const Trip = () => {
       // based on google auth
       user_id: 1,
       status: 'pending',
-      message: 'i am a test i am a test',
+      message: textInput.description,
       sent_on: '2022-08-52T00:00:00.000Z',
       sentOn: '2022-08-52T00:00:00.000Z',
       tripId: 138,
@@ -82,7 +83,7 @@ const Trip = () => {
   // console.log(popup);
 
   const handleChangeTextArea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCreateInput((currentState) => ({
+    setTextInput((currentState) => ({
       ...currentState,
       [event.target.name]: event.target.value,
     }));
@@ -93,7 +94,7 @@ const Trip = () => {
       {/* <section className={popup === 'true' ? 'trip__popup' : 'trip__popup--hide'}> */}
       <section className="trip__popup">
         <div className="trip__popup-wrapper">
-          <form className="create-form" onSubmit={() => createNewRequest()}>
+          <form className="create-form" onSubmit={createNewRequest}>
             <button type="button" className="trip__popup__close">
               <CloseIcon />
             </button>
@@ -102,7 +103,7 @@ const Trip = () => {
               <textarea
                 name="description"
                 placeholder="Tell me more..."
-                value={createInput.description}
+                value={textInput.description}
                 onChange={handleChangeTextArea}
                 className="trip__popup__text"
               />
