@@ -98,14 +98,14 @@ const getPlaceIdOrCreate = async (place) => {
 
 const createTrip = async (newTrip) => {
   const newTripData = {
-    author_id: newTrip.authorId,
-    description: newTrip.description,
-    from: newTrip.from,
-    to: newTrip.to,
-    max_passengers: newTrip.maxPassengers,
+    author_id: newTrip.authorId || 1,
+    description: newTrip.description || '',
+    from: newTrip.from || new Date(),
+    to: newTrip.to || new Date(),
+    max_passengers: newTrip.maxPassengers || 10,
     summary: newTrip.summary || '',
     budget: newTrip.budget || 0,
-    images: newTrip.images || '',
+    images: newTrip.images || '/images/trip-default.jpg',
     gender_restrictions: newTrip.genderRestrictions || null,
   };
 

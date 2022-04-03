@@ -10,10 +10,14 @@ interface ErrorMessage {
   message: string;
 }
 
+interface Options {
+  [key: string] : any
+}
+
 type FetchReturn<T> = Success<T> | ErrorMessage;
 
-export const fetchApi = async <T>(path: string): Promise<FetchReturn<T>> => {
-  const res = await fetch(`${host}${path}`);
+export const fetchApi = async <T>(path: string, options: Options = {}): Promise<FetchReturn<T>> => {
+  const res = await fetch(`${host}${path}`, options);
   const json = await res.json();
   return json;
 };
