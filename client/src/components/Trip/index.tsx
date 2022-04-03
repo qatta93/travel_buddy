@@ -75,14 +75,11 @@ const Trip = () => {
   //   if (pop === 'true') {
   //     pop = 'false';
   //     console.log(pop);
-  //     return pop;
+  //     return;
   //   }
   //   pop = 'true';
   //   console.log(pop);
-  //   return pop;
   // };
-
-  // console.log(popup);
 
   const handleChangeTextArea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextInput((currentState) => ({
