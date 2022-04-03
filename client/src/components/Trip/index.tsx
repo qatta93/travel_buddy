@@ -36,6 +36,7 @@ const Trip = () => {
 
   const createNewRequest = async (event: React.FormEvent) => {
     event.preventDefault();
+    setTextInput(InitialInput);
     const newRequest = {
       // uuid?
       id: 5,
@@ -46,7 +47,7 @@ const Trip = () => {
       message: textInput.description,
       sent_on: '2022-08-52T00:00:00.000Z',
       sentOn: '2022-08-52T00:00:00.000Z',
-      tripId: 138,
+      tripId: id,
       userId: 1,
       username: 'qatta',
       name: 'Patrycja',
@@ -58,12 +59,13 @@ const Trip = () => {
         email: 'panasiuk.patrycja@gmail.com',
       },
     };
+
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newRequest),
     };
-    console.log(newRequest);
+
     await fetch('http://localhost:5500/api/requests', requestOptions);
   };
 
@@ -109,6 +111,7 @@ const Trip = () => {
               />
             </label>
             <button type="submit" className="trip__popup__btn">SEND</button>
+            <p className="trip__popup__send-text">You request was send!</p>
           </form>
         </div>
       </section>

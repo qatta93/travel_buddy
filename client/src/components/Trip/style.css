@@ -73,6 +73,12 @@
   background-color: var(--yellow);
 }
 
+.trip__popup__send-text {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 400;
+  color: var(--green);
+}
 
 .trip__main-header {
   grid-area: header;
