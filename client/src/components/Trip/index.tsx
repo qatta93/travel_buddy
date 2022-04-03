@@ -8,9 +8,17 @@ import CloseIcon from '../Header/CloseIcon';
 import { parseGenderRestrictions } from '../../helpers/misc';
 import './style.css';
 
+interface CreateInput {
+  description: string,
+}
+
+const InitialInput = {
+  description: '',
+};
+
 const Trip = () => {
   const [trip, setTrip] = useState<ITrip | null>(null);
-  const [createInput, setCreateInput] = useState<string>('');
+  const [createInput, setCreateInput] = useState<CreateInput>(InitialInput);
   const { id } = useParams();
 
   useEffect(() => {
@@ -94,7 +102,7 @@ const Trip = () => {
               <textarea
                 name="description"
                 placeholder="Tell me more..."
-                value={createInput}
+                value={createInput.description}
                 onChange={handleChangeTextArea}
                 className="trip__popup__text"
               />
