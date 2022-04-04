@@ -12,6 +12,7 @@ import About from './components/About';
 import Requests from './components/Requests';
 import Trip from './components/Trip';
 import CreateTrip from './components/CreateTrip';
+import EditUser from './components/EditUser';
 import RestrictedRoute from './components/RestrictedRoute';
 import { addUser } from './slices/user';
 import { LoggedInUser } from './types';
@@ -44,8 +45,9 @@ const App = () => {
           <Route path=":id" element={<Trip />} />
         </Route>
         <Route path="login" element={<Login />} />
-        <Route path="requests" element={<Requests />} />
+        <Route path="requests" element={<RestrictedRoute><Requests /></RestrictedRoute>} />
         <Route path="profile" element={<RestrictedRoute><Profile /></RestrictedRoute>} />
+        <Route path="edit-user" element={<RestrictedRoute><EditUser /></RestrictedRoute>} />
       </Routes>
       <Footer />
     </div>

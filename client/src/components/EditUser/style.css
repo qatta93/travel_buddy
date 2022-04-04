@@ -1,0 +1,10 @@
+@media screen and (min-width: 30rem) {
+  .edit-user__form {
+    opacity: 80%;
+    max-width: 100vw;
+    background-image: url('/public/images/bg_mobile.png');
+    background-position: bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}
