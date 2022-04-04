@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { fetchApi } from './helpers/api';
+import { useAppDispatch } from './hooks';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './components/Login';
@@ -12,15 +14,20 @@ import Trip from './components/Trip';
 import CreateTrip from './components/CreateTrip';
 import RestrictedRoute from './components/RestrictedRoute';
 import './App.css';
+import { addUser, UserInfo } from './slices/user';
 
 const App = () => {
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     const getLoggedUser = async () => {
       try {
-        const response = await fetch('http://localhost:5500/api/auth/user', {
-          credentials: 'include',
-        });
-        const data = await response.json();
+        const data = await fetchApi<UserInfo | null>('/api/auth/user');
+        if (data.status === 'error') {
+          console.error(data.message);
+          return;
+        }
+        dispatch(addUser(data.data));
         console.log(data);
       } catch (err) {
         console.log(err);
