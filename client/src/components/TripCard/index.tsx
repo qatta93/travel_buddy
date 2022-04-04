@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { parseGenderRestrictions } from '../../../helpers/misc';
-import { fetchApi } from '../../../helpers/api';
-import { ITrip, IUser } from '../../../types';
+import { parseGenderRestrictions } from '../../helpers/misc';
+import { fetchApi } from '../../helpers/api';
+import { ITrip, IUser } from '../../types';
 import './style.css';
 
 interface TripCardProps {

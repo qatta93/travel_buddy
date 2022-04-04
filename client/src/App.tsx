@@ -16,6 +16,7 @@ import RestrictedRoute from './components/RestrictedRoute';
 import { addUser } from './slices/user';
 import { LoggedInUser } from './types';
 import './App.css';
+import MyTrips from './components/MyTrips';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -46,6 +47,7 @@ const App = () => {
         <Route path="login" element={<Login />} />
         <Route path="requests" element={<Requests />} />
         <Route path="profile" element={<RestrictedRoute><Profile /></RestrictedRoute>} />
+        <Route path="profile/my-trips" element={<RestrictedRoute><MyTrips /></RestrictedRoute>} />
       </Routes>
       <Footer />
     </div>

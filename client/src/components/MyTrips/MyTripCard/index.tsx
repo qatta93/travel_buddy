@@ -7,7 +7,7 @@ interface RequestCardProps {
   request: IRequest;
 }
 
-const RequestCard = ({ request }:RequestCardProps) => {
+const MyTripCard = ({ request }:RequestCardProps) => {
   const [status, setStatus] = useState<string>(request.status);
 
   const acceptRequest = () => {
@@ -92,4 +92,4 @@ const RequestCard = ({ request }:RequestCardProps) => {
   );
 };
 
-export default RequestCard;
+export default MyTripCard;

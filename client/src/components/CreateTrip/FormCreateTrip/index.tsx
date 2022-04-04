@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ICountry, IActivity } from '../../../types';
 import { fetchApi } from '../../../helpers/api';
 import './style.css';
+import { useAppSelector } from '../../../hooks';
 
 interface Gender {
   male: boolean,
@@ -67,6 +68,9 @@ const CreateTripForm = () => {
   const [createInput, setCreateInput] = useState<CreateInput>(createInputInitialValue);
   const navigate = useNavigate();
 
+  const user = useAppSelector((state) => state.user.user);
+  const userId = user?.id;
+
   useEffect(() => {
     const fetchCountriesAndActivities = async () => {
       const [countriesData, activitiesData] = await Promise.all([
@@ -89,7 +93,7 @@ const CreateTripForm = () => {
 
     const newTrip = {
       ...createInput,
-      authorId: 1,
+      authorId: userId,
       from: createInput.dateFrom,
       to: createInput.dateTo,
       maxPassengers: Number(createInput.buddies),
