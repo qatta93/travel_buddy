@@ -63,8 +63,8 @@
 }
 
 .request-card__button--accepted {
-  background-color: var(--green);
-  box-shadow: 1px 3px 3px var(--shadow);
+  background-color: white;
+  border: 2px solid var(--green);
 }
 
 .request-card__button--reject {
@@ -73,8 +73,8 @@
 }
 
 .request-card__button--rejected {
-  background-color: var(--red);
-  box-shadow: 1px 3px 3px var(--shadow);
+  background-color: white;
+  border: 2px solid var(--red);
 }
 
 .request-card__button--change {
