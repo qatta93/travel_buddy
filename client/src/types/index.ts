@@ -1,9 +1,26 @@
+export interface ILanguage {
+  id: number,
+  language: string,
+  languageCode: string,
+}
+
+export interface ITripAuthor {
+  id: number,
+  username: string,
+  age: number,
+  gender: string,
+}
+
+export interface ICountry {
+  id: number,
+  country: string,
+  code: string,
+  countryCode: string,
+}
+
 export interface ITrip {
   id: number,
-  authorId: number,
-  authorUsername: string,
-  authorAge: number,
-  authorGender: string,
+  author: ITripAuthor
   budget: number,
   summary: string,
   description: string,
@@ -11,7 +28,7 @@ export interface ITrip {
   to: string,
   images: string,
   maxPassengers: number,
-  countries: string[],
+  countries: ICountry[],
   ativities: string[],
   places: string[],
   passengers: number[],
@@ -27,7 +44,7 @@ export interface IUser {
   summary: string,
   gender: string,
   country: string,
-  languages: string[],
+  languages: ILanguage[],
   avatar: string | null,
 }
 
@@ -45,14 +62,23 @@ export interface SearchFilters {
   },
 }
 
-export interface ICountry {
-  id: number,
-  code: string,
-  country: string,
-  country_code: string,
-}
-
 export interface IActivity {
   id: number,
   activity: string,
+}
+
+export interface IRequestUser {
+  id: number,
+  name: string,
+  username: string,
+  email: string,
+}
+
+export interface IRequest {
+  id: number,
+  user: IRequestUser,
+  tripId: number,
+  message: string,
+  status: 'pending' | 'accepted' | 'rejected' | 'cancelled',
+  sentOn: string,
 }

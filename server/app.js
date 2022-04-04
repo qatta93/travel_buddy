@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const session = require('express-session');
-// const SQLiteStore = require('connect-sqlite3')(session);
 const passport = require('passport');
 const usersRouter = require('./users');
 const tripsRouter = require('./trips');
@@ -22,21 +21,17 @@ app.use(cors({
 }));
 
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  saveUninitialized: true,
 }));
+
 app.use(passport.authenticate('session'));
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
-
-app.use((req, res, next) => {
-  res.set('Access-Control-Allow-Credentials', true);
-  next();
-});
 
 app.use('/api/users', usersRouter);
 app.use('/api/trips', tripsRouter);

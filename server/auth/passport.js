@@ -6,7 +6,7 @@ passport.use(new GoogleStrategy(
   {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/api/auth/redirect/google',
+    callbackURL: '/api/auth/oauth2/redirect/google',
     scope: ['profile', 'email'],
   },
   async (issuer, profile, cb) => {
@@ -24,12 +24,8 @@ passport.use(new GoogleStrategy(
   },
 ));
 
-passport.serializeUser((user, cb) => {
-  cb(null, { id: user.id, username: user.username });
-});
+passport.serializeUser((user, cb) => cb(null, { id: user.id, username: user.username }));
 
-passport.deserializeUser((user, cb) => {
-  cb(null, user);
-});
+passport.deserializeUser((user, cb) => cb(null, user));
 
 module.exports = passport;

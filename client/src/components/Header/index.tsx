@@ -24,6 +24,7 @@ const Header = () => {
     });
     const data = await res.json();
     console.log(data);
+    navigate('/');
   };
 
   return (

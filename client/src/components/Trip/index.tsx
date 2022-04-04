@@ -30,7 +30,7 @@ const Trip = () => {
         <>
           <section className="trip__main-header">
             <MainHeader
-              title={`trip with ${trip.authorUsername} to ${trip.countries.join(', ')}`}
+              title={`trip with ${trip.author.username} to ${trip.countries.map((c) => c.country).join(', ')}`}
               links={[
                 { href: '/', name: 'Home' },
                 { href: '/trips', name: 'Trips' },
@@ -64,7 +64,7 @@ const Trip = () => {
             <img src={trip.images || '/images/rockies.jpeg'} alt="trip" className="trip__img" />
           </section>
           <section className="trip__user-card">
-            <UserCard id={trip.authorId} />
+            <UserCard id={trip.author.id} />
           </section>
           <section className="trip__button-container">
             <button

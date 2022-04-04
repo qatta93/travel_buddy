@@ -5,6 +5,11 @@ const {
 
 const router = express.Router();
 
+router.use((req, res, next) => {
+  res.set('Access-Control-Allow-Credentials', true);
+  next();
+});
+
 router.get('/', async (req, res, next) => {
   try {
     const data = await getAllRequests();
@@ -25,11 +30,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newRequest = {
-      trip_id: req.body.trip_id,
-      user_id: req.body.user_id,
-      message: req.body.message,
-    };
+    const newRequest = req.body;
     const data = await createRequest(newRequest);
     return res
       .status(201)
@@ -42,12 +43,7 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const updatedRequest = {
-      trip_id: req.body.trip_id,
-      user_id: req.body.user_id,
-      message: req.body.message,
-      status: req.body.status,
-    };
+    const updatedRequest = req.body;
     const data = await updateRequestById(req.params.id, updatedRequest);
     return res.status(200).json({ status: 'success', data });
   } catch (err) {
