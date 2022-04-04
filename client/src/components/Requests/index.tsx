@@ -31,11 +31,15 @@ const Requests = () => {
         ]}
       />
       <div className="request__list">
+        <h1 className="requests__title">Pending requests:</h1>
         {requests.map((request:IRequest) => (
           <RequestCard key={request.id} request={request} />
         ))}
-        <img className="requests__img" src="/images/bg_desktop.png" alt="car" />
+        {'\n'}
+        <h1 className="requests__title">Accepted / rejected requests:</h1>
       </div>
+      <img className="requests__img" src="/images/bg_desktop.png" alt="car" />
+
     </section>
   );
 };

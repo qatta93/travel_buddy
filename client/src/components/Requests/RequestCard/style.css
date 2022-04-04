@@ -2,8 +2,10 @@
   margin: 1rem auto;
   border: 2px solid var(--yellow);
   border-radius: 0.4rem;
+  background-color: white;
   box-shadow: 2px 5px 3px var(--shadow);
   width: 80%;
+  max-width: 20rem;
 }
 
 .request-card--accepted {
@@ -58,7 +60,8 @@
 }
 
 .request-card__button--accepted {
-  border: 1px solid var(--green);
+  background-color: var(--green);
+  box-shadow: 1px 3px 3px var(--shadow);
 }
 
 .request-card__button--reject {
@@ -67,5 +70,16 @@
 }
 
 .request-card__button--rejected {
-  border: 1px solid var(--red);
+  background-color: var(--red);
+  box-shadow: 1px 3px 3px var(--shadow);
+}
+
+.request-card__button--change {
+  box-shadow: 1px 3px 3px var(--shadow);
+}
+
+@media screen and (min-width: 30rem) {
+  .request-card {
+    min-width: 10rem;
+  }
 }

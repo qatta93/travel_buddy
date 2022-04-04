@@ -62,15 +62,13 @@ const Trip = () => {
       },
     };
 
-    console.log(newRequest);
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newRequest),
+    };
 
-    // const requestOptions = {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(newRequest),
-    // };
-
-    // await fetch('http://localhost:5500/api/requests', requestOptions);
+    await fetch('http://localhost:5500/api/requests', requestOptions);
   };
 
   const popUp = () => {

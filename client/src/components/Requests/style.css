@@ -7,3 +7,52 @@
   display: flex;
   flex-direction: column;
 }
+
+.requests__title {
+  width: 100%;
+  background-color: var(--dark-blue);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 2rem 0;
+}
+
+@media screen and (min-width: 30rem) {
+  .request__list {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .requests__title {
+    width: 90%;
+    display: inline-block;
+    margin: 2rem auto;
+  }
+}
+
+
+@media screen and (min-width: 60rem) {
+  .requests {
+    opacity: 80%;
+    max-width: 100vw;
+    background-image: url('../../../public/images/bg_desktop.png');
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+  }
+  .requests__img {
+    display: none;
+  }
+  .requests__title {
+    width: 100%;
+    display: block;
+    font-size: 1.5rem;
+  }
+  .request__list {
+    background-color: white;
+    width: 70%;
+    padding: 4rem;
+  }
+}

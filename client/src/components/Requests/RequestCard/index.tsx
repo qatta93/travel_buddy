@@ -72,12 +72,18 @@ const RequestCard = ({ request }:RequestCardProps) => {
           : ''}
         {status === 'accepted'
           ? (
-            <button type="button" className="request-card__button request-card__button--accepted">accepted</button>
+            <>
+              <button type="button" className="request-card__button request-card__button--accepted">accepted</button>
+              <button type="button" className="request-card__button request-card__button--change">reject</button>
+            </>
           )
           : ''}
         {status === 'rejected'
           ? (
-            <button type="button" className="request-card__button request-card__button--rejected">rejected</button>
+            <>
+              <button type="button" className="request-card__button request-card__button--rejected">rejected</button>
+              <button type="button" className="request-card__button request-card__button--change">accept</button>
+            </>
           )
           : ''}
       </div>
