@@ -36,7 +36,7 @@ const RequestCard = ({ request }:RequestCardProps) => {
   }, []);
 
   const tripCountries = trip?.countries.map((countriesArr) => countriesArr.country).join(' | ');
-  const tripDate = `${dateFrom}-${dateTo}`;
+  const tripDate = `  ${dateFrom} - ${dateTo}`;
   const tripHostName = trip?.author.username;
 
   const acceptRequest = () => {
