@@ -165,6 +165,12 @@
   text-align: center;
 }
 
+@media screen and (min-width: 30rem ){
+  .trip__popup-wrapper {
+    height: 33rem;
+  }
+}
+
 @media screen and (min-width: 45rem) {
   .trip {
     grid-template-areas:
