@@ -15,12 +15,12 @@ const RequestCard = ({ request }:RequestCardProps) => {
 
   const dateFromMonth = trip?.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[0];
   const dateFromDay = trip?.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[1];
-  const dateFrom = `${dateFromDay}-${dateFromMonth}`;
+  const dateFrom = `${dateFromDay}.${dateFromMonth}`;
 
   const dateToYear = trip?.to.split(/T.+/g)[0].split('-')[0].split(/^.{2}/)[1];
   const dateToMonth = trip?.to.split(/T.+/g)[0].split('-')[1];
   const dateToDay = trip?.to.split(/T.+/g)[0].split('-')[2];
-  const dateTo = `${dateToDay}-${dateToMonth}-${dateToYear}`;
+  const dateTo = `${dateToDay}.${dateToMonth}.${dateToYear}`;
 
   useEffect(() => {
     const fetchTrip = async () => {
