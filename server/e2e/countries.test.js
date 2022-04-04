@@ -20,6 +20,8 @@ describe('GET /api/countries', () => {
       data.forEach((country) => {
         expect(country.id).not.toBeUndefined();
         expect(country.country).not.toBeUndefined();
+        expect(country.code).not.toBeUndefined();
+        expect(country.countryCode).not.toBeUndefined();
       });
     }));
 });
@@ -36,5 +38,7 @@ describe('GET /api/countries/:id', () => {
 
       expect(data.id).toBe(50);
       expect(data.country).toBe('Colombia');
+      expect(data.code).toBe('CO');
+      expect(data.countryCode).toBe('COL');
     }));
 });

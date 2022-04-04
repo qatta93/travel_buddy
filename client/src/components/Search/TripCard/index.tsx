@@ -11,7 +11,7 @@ interface TripCardProps {
 const TripCard = ({ trip }:TripCardProps) => {
   const [user, setUser] = useState<IUser | null>(null);
 
-  const userId = trip.authorId;
+  const userId = trip.author.id;
 
   useEffect(() => {
     const getUsersData = async () => {
@@ -35,7 +35,7 @@ const TripCard = ({ trip }:TripCardProps) => {
   const dateToDay = trip.to.split(/T.+/g)[0].split('-')[2];
   const dateTo = `${dateToDay}-${dateToMonth}-${dateToYear}`;
 
-  const countries = trip.countries.join(' | ');
+  const countries = trip.countries.map((c) => c.country).join(' | ');
 
   return (
     <article className="trips__offer">
@@ -67,14 +67,16 @@ const TripCard = ({ trip }:TripCardProps) => {
           </p>
         </div>
         <div className="trips__host">
-          <p className="trips__host-name">{trip.authorUsername}</p>
+          <p className="trips__host-name">{trip.author.username}</p>
           <p className="trips__host-age">
-            {trip.authorAge}
+            {trip.author.age}
             {' '}
             y.o.
           </p>
           <p className="trips__host-country">{user === null ? null : user.country}</p>
-          <p className="trips__host-language">{user === null ? null : user.languages.join(' | ')}</p>
+          <p className="trips__host-language">
+            {user === null ? null : user.languages.map((l) => l.languageCode).join(' | ')}
+          </p>
           {/* <p className="trips__host-reviews">4.8 ★</p> */}
         </div>
       </div>

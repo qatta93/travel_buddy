@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ICountry, IActivity } from '../../../types';
 import { fetchApi } from '../../../helpers/api';
 import './style.css';
@@ -23,6 +24,10 @@ interface CreateInput {
   activities: string[],
 }
 
+interface INewTrip {
+  id: number,
+}
+
 const createInputInitialValue = {
   countries: ['All'],
   dateFrom: '',
@@ -41,10 +46,26 @@ const createInputInitialValue = {
   activities: [],
 };
 
+const parseGender = (gender: Gender): string | null => {
+  if (gender.male) {
+    return 'male';
+  }
+  if (gender.female) {
+    return 'female';
+  }
+  if (gender.other) {
+    return 'other';
+  }
+  return null;
+};
+
+const parsePlaces = (places: string): string[] => places.split(',').map((p) => p.trim());
+
 const CreateTripForm = () => {
   const [countries, setCountries] = useState<ICountry[]>([]);
   const [activities, setActivities] = useState<IActivity[]>([]);
   const [createInput, setCreateInput] = useState<CreateInput>(createInputInitialValue);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCountriesAndActivities = async () => {
@@ -63,8 +84,33 @@ const CreateTripForm = () => {
     fetchCountriesAndActivities();
   }, []);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    const newTrip = {
+      ...createInput,
+      authorId: 1,
+      from: createInput.dateFrom,
+      to: createInput.dateTo,
+      maxPassengers: Number(createInput.buddies),
+      genderRestrictions: parseGender(createInput.gender),
+      places: parsePlaces(createInput.places),
+    };
+
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTrip),
+    };
+
+    const data = await fetchApi<INewTrip>('/api/trips', fetchOptions);
+
+    if (data.status === 'success') {
+      setCreateInput(createInputInitialValue);
+      navigate(`/trips/${data.data.id}`);
+    }
   };
 
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -108,6 +154,7 @@ const CreateTripForm = () => {
           onChange={handleChangeSelect}
           className="create-form__select"
           multiple
+          required
         >
           {countries.map((country) => (
             <option key={country.id} value={country.country}>{country.country}</option>
@@ -123,6 +170,7 @@ const CreateTripForm = () => {
           value={createInput.dateFrom}
           onChange={handleChangeInput}
           className="create-form__input"
+          required
         />
         <span />
         <input
@@ -132,6 +180,7 @@ const CreateTripForm = () => {
           value={createInput.dateTo}
           onChange={handleChangeInput}
           className="create-form__input"
+          required
         />
       </label>
       <label htmlFor="budget" className="create-form__label">
@@ -143,6 +192,7 @@ const CreateTripForm = () => {
           value={createInput.budget}
           onChange={handleChangeInput}
           className="create-form__input"
+          required
         />
       </label>
       <label htmlFor="gender" className="create-form__label create-form__label--checkbox">
@@ -197,11 +247,12 @@ const CreateTripForm = () => {
       <label htmlFor="summary" className="create-form__label create-form__label--text-area">
         Summary:
         <textarea
-          name="description"
+          name="summary"
           placeholder="Tell me a little about your trip"
           value={createInput.summary}
           onChange={handleChangeTextArea}
           className="create-form__text-area"
+          required
         />
       </label>
       <label htmlFor="description" className="create-form__label create-form__label--text-area">
@@ -212,6 +263,7 @@ const CreateTripForm = () => {
           value={createInput.description}
           onChange={handleChangeTextArea}
           className="create-form__text-area create-form__text-area--long"
+          required
         />
       </label>
       <label htmlFor="places" className="create-form__label create-form__label--text-area">
@@ -222,6 +274,7 @@ const CreateTripForm = () => {
           value={createInput.places}
           onChange={handleChangeTextArea}
           className="create-form__text-area"
+          required
         />
       </label>
       <label htmlFor="activities" className="create-form__label">
