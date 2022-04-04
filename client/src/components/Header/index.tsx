@@ -36,7 +36,7 @@ const Header = () => {
             {user ? (
               <>
                 <button type="button" className="header__link" onClick={() => handleLink('/create-trip')}>Create Trip</button>
-                <button type="button" className="header__link" onClick={() => handleLink('/profile')}>Profile</button>
+                <button type="button" className="header__link header__link--yellow" onClick={() => handleLink('/profile')}>Profile</button>
               </>
             ) : (
               <button type="button" className="header__link header__link--yellow" onClick={() => handleLink('/login')}>Login</button>

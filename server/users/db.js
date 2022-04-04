@@ -60,6 +60,13 @@ const getLanguagesByUserIdDB = async (id) => {
   return data;
 };
 
+const deleteAllUserLanguagesDB = async (id) => {
+  const data = await sql`
+    DELETE FROM users_languages WHERE user_id = ${id};
+  `;
+  return data;
+};
+
 const deleteUserByIdDB = async (id) => {
   await sql`
     DELETE FROM users WHERE id = ${id};
@@ -72,6 +79,14 @@ const deleteAllTestUsersDB = async () => {
   `;
 };
 
+const updateUserDB = async (id, updatedUser) => {
+  const data = await sql`
+    UPDATE users SET ${sql(updatedUser)} WHERE id = ${id}
+    RETURNING *;
+  `;
+  return data;
+};
+
 module.exports = {
   getAllUsersDB,
   getUserByIdDB,
@@ -80,5 +95,7 @@ module.exports = {
   getLanguagesByUserIdDB,
   deleteUserByIdDB,
   addLanguageToUserDB,
+  deleteAllUserLanguagesDB,
   deleteAllTestUsersDB,
+  updateUserDB,
 };

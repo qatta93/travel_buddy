@@ -37,6 +37,8 @@ const TripCard = ({ trip }:TripCardProps) => {
 
   const countries = trip.countries.map((c) => c.country).join(' | ');
 
+  const seatsLeft = Math.max(trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length, 0);
+
   return (
     <article className="trips__offer">
       <div className="trips__info">
@@ -55,7 +57,7 @@ const TripCard = ({ trip }:TripCardProps) => {
         </p>
         <div className="trips__details">
           <p className="trips__seats">
-            {trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length}
+            {seatsLeft}
             {' '}
             seats
           </p>

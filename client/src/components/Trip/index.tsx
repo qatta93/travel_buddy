@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchApi } from '../../helpers/api';
 import { ITrip } from '../../types';
+import { useAppSelector } from '../../hooks';
 import MainHeader from '../MainHeader';
 import UserCard from './UserCard';
 import CloseIcon from '../Header/CloseIcon';
 import { parseGenderRestrictions } from '../../helpers/misc';
 import './style.css';
-import { useAppSelector } from '../../hooks';
 
 interface CreateInput {
   description: string,
@@ -21,9 +21,9 @@ const Trip = () => {
   const [trip, setTrip] = useState<ITrip | null>(null);
   const [textInput, setTextInput] = useState<CreateInput>(InitialInput);
   const [popup, setPopup] = useState<string>('false');
+  const user = useAppSelector((state) => state.user.user);
   const { id } = useParams();
 
-  const user = useAppSelector((state) => state.user.user);
   const userId = user?.id;
 
   useEffect(() => {
@@ -74,6 +74,10 @@ const Trip = () => {
     }));
   };
 
+  const seatsLeft = trip && Math.max(trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length, 0);
+
+  const requestButtonActive = user && trip && trip.author.id !== user.id;
+
   return (
     <main className="trip">
       <section className={popup === 'true' ? 'trip__popup' : 'trip__popup--hide'}>
@@ -119,7 +123,7 @@ const Trip = () => {
             </section>
             <section className="trip__other">
               <p>
-                {trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length}
+                {seatsLeft}
                 {' '}
                 seats left
               </p>
@@ -137,15 +141,19 @@ const Trip = () => {
             <section className="trip__user-card">
               <UserCard id={trip.author.id} />
             </section>
-            <section className="trip__button-container">
-              <button
-                className="trip__request-button"
-                type="button"
-                onClick={() => popUp()}
-              >
-                Send request!
-              </button>
-            </section>
+            {requestButtonActive && (
+              <section className="trip__button-container">
+                {seatsLeft ? (
+                  <button
+                    className="trip__request-button"
+                    type="button"
+                    onClick={() => popUp()}
+                  >
+                    Send request!
+                  </button>
+                ) : <p className="trip__request-button--disabled">Sorry, this trip is full</p>}
+              </section>
+            )}
           </>
         ) : <p>Loading...</p>}
       </section>

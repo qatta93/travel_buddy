@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { fetchApi } from './helpers/api';
 import { useAppDispatch } from './hooks';
 import Header from './components/Header';
@@ -12,6 +12,7 @@ import About from './components/About';
 import Requests from './components/Requests';
 import Trip from './components/Trip';
 import CreateTrip from './components/CreateTrip';
+import EditUser from './components/EditUser';
 import RestrictedRoute from './components/RestrictedRoute';
 import { addUser } from './slices/user';
 import { LoggedInUser } from './types';
@@ -21,6 +22,7 @@ import MyTripRequests from './components/MyTrips/MyTripsRequests';
 
 const App = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getLoggedUser = async () => {
@@ -30,6 +32,9 @@ const App = () => {
         return;
       }
       dispatch(addUser(data.data));
+      if (data.data && data.data.username === 'pending') {
+        navigate('/edit-user');
+      }
     };
     getLoggedUser();
   }, []);
@@ -46,12 +51,13 @@ const App = () => {
           <Route path=":id" element={<Trip />} />
         </Route>
         <Route path="login" element={<Login />} />
-        <Route path="requests" element={<Requests />} />
+        <Route path="requests" element={<RestrictedRoute><Requests /></RestrictedRoute>} />
         <Route path="profile" element={<RestrictedRoute><Profile /></RestrictedRoute>} />
         <Route path="profile/my-trips">
           <Route index element={<RestrictedRoute><MyTrips /></RestrictedRoute>} />
           <Route path=":id" element={<MyTripRequests />} />
         </Route>
+        <Route path="edit-user" element={<RestrictedRoute><EditUser /></RestrictedRoute>} />
       </Routes>
       <Footer />
     </div>

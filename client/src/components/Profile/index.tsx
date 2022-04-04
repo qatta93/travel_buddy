@@ -30,9 +30,9 @@ const Profile = () => {
       <MainHeader title={`Nice to see you, ${user.username}!`} links={[{ name: 'home', href: '/' }, { name: 'profile', href: '/profile' }]} />
       <div className="profile__bcg">
         <section className="profile__buttons">
-          <button type="submit" className="profile__btn">My profile account</button>
-          <button type="submit" className="profile__btn">Requests</button>
           <Link to="/profile/my-trips" className="profile__btn">My trips</Link>
+          <Link to="/edit-user" className="profile__btn">My profile account</Link>
+          <Link to="/requests" className="profile__btn">Requests</Link>
           <button type="submit" className="profile__btn profile__btn--logout" onClick={handleLogout}>LOGOUT</button>
         </section>
       </div>

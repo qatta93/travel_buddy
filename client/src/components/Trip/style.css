@@ -129,7 +129,7 @@
 
 .trip__img {
   max-width: 100%;
-  margin: auto;
+  margin: 0 auto 1rem;
 }
 
 .trip__user-card {
@@ -154,6 +154,15 @@
   text-transform: uppercase;
   font-size: 1.2rem;
   padding: 1.2rem;
+}
+
+.trip__request-button--disabled {
+  width: 100%;
+  background-color: var(--light-gray);
+  color: var(--metal);
+  font-size: 1.2rem;
+  padding: 1.2rem;
+  text-align: center;
 }
 
 @media screen and (min-width: 45rem) {

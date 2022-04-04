@@ -5,11 +5,6 @@ const {
 
 const router = express.Router();
 
-router.use((req, res, next) => {
-  res.set('Access-Control-Allow-Credentials', true);
-  next();
-});
-
 router.get('/', async (req, res, next) => {
   try {
     const data = await getAllRequests();
@@ -42,7 +37,6 @@ router.post('/', async (req, res, next) => {
 });
 
 router.put('/:id', async (req, res, next) => {
-  console.log(req.body);
   try {
     const updatedRequest = req.body;
     const data = await updateRequestById(req.params.id, updatedRequest);

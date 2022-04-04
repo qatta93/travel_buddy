@@ -147,3 +147,65 @@ describe('DELETE /api/users/:id', () => {
       expect(user).toBeNull();
     }));
 });
+
+describe('PUT /api/users/:id', () => {
+  const newUser = {
+    name: 'test user 1',
+    username: 'test_username',
+    email: 'test@username.com',
+    age: 20,
+    country: 'Chile',
+    gender: 'female',
+    languages: ['English'],
+  };
+
+  const updatedUser = {
+    name: 'test user 2',
+    username: 'test_username_2',
+    email: 'test2@username.com',
+    age: 25,
+    country: 'Spain',
+    gender: 'male',
+    languages: ['English', 'Spanish'],
+  };
+
+  let userId;
+
+  beforeAll(async () => {
+    const { id } = await createUser(newUser);
+    userId = id;
+  });
+
+  afterAll(async () => {
+    await deleteUserById(userId);
+  });
+
+  test('should update an user', () => supertest(app)
+    .put(`/api/users/${userId}`)
+    .set('Accept', 'application/json')
+    .send(updatedUser)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+    .expect(async (res) => {
+      const { status, data } = res.body;
+      expect(status).toBe('success');
+
+      expect(data.id).toBe(userId);
+
+      const user = await getUserById(userId);
+
+      expect(user.id).toBe(userId);
+      expect(user.username).toBe(user.username);
+      expect(user.email).toBe(user.email);
+      expect(user.name).toBe(user.name);
+      expect(user.gender).toBe(user.gender);
+      expect(user.country).toBe(user.country);
+      expect(user.age).toBe(user.age);
+
+      user.languages.forEach((language) => {
+        expect([1, 27]).toContain(language.id);
+        expect(['English', 'Spanish']).toContain(language.language);
+        expect(['EN', 'ES']).toContain(language.languageCode);
+      });
+    }));
+});
