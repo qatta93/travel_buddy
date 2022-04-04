@@ -81,7 +81,7 @@
   box-shadow: 1px 3px 3px var(--shadow);
 }
 
-.request__pending {
+.request__status{
   text-align: center;
 }
 
@@ -89,7 +89,7 @@
   .request-card {
     min-width: 10rem;
   }
-  .request__pending {
+  .request__status {
     width: 100%;
     text-align: center;
   }

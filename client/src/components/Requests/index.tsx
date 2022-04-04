@@ -11,6 +11,7 @@ const Requests = () => {
   const userId = 2;
   const filterRequestsByUserId = requests.filter((req) => req.user.id === userId);
   const isPendingStatus = filterRequestsByUserId.some((req) => req.status === 'pending');
+  const isAcceptedRejected = filterRequestsByUserId.some((req) => req.status === 'accepted' || 'rejected');
 
   useEffect(() => {
     const getRequestsData = async () => {
@@ -36,12 +37,14 @@ const Requests = () => {
       />
       <div className="request__list">
         <h1 className="requests__title">Pending requests:</h1>
-        {isPendingStatus === false ? <p className="request__pending">No pending requests</p> : null}
+        {isPendingStatus === false ? <p className="request__status">No pending requests</p> : null}
         {filterRequestsByUserId.map((request:IRequest) => (
           <RequestCard key={request.id} request={request} />
         ))}
         {'\n'}
         <h1 className="requests__title">Accepted / rejected requests:</h1>
+        {isAcceptedRejected === false ? <p className="request__status">No requests</p> : null}
+
       </div>
       <img className="requests__img" src="/images/bg_desktop.png" alt="car" />
 
