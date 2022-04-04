@@ -29,7 +29,7 @@
 }
 
 .trip__popup-wrapper {
-  margin: 40% 0;
+  margin: 35% 0;
   background-color: white;
   height: 25rem;
 }
@@ -76,8 +76,8 @@
 .trip__popup__send-text {
   margin-top: 1rem;
   text-align: center;
-  font-weight: 400;
-  color: var(--green);
+  font-weight: 600;
+  color: green;
 }
 
 .trip__main-header {
