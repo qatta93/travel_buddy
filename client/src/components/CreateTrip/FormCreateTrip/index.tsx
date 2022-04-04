@@ -227,10 +227,12 @@ const CreateTripForm = () => {
         <input
           name="buddies"
           type="number"
+          min="1"
           placeholder="How many people can join?"
           value={createInput.buddies}
           onChange={handleChangeInput}
           className="create-form__input"
+          required
         />
       </label>
       <label htmlFor="images" className="create-form__label">

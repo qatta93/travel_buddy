@@ -84,6 +84,8 @@ const Trip = () => {
     }));
   };
 
+  const seatsLeft = trip && Math.max(trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length, 0);
+
   return (
     <main className="trip">
       <section className={popup === 'true' ? 'trip__popup' : 'trip__popup--hide'}>
@@ -129,7 +131,7 @@ const Trip = () => {
             </section>
             <section className="trip__other">
               <p>
-                {trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length}
+                {seatsLeft}
                 {' '}
                 seats left
               </p>
@@ -148,13 +150,15 @@ const Trip = () => {
               <UserCard id={trip.author.id} />
             </section>
             <section className="trip__button-container">
-              <button
-                className="trip__request-button"
-                type="button"
-                onClick={() => popUp()}
-              >
-                Send request!
-              </button>
+              {seatsLeft && seatsLeft > 0 ? (
+                <button
+                  className="trip__request-button"
+                  type="button"
+                  onClick={() => popUp()}
+                >
+                  Send request!
+                </button>
+              ) : <p className="trip__request-button--full">Sorry, this trip is full</p>}
             </section>
           </>
         ) : <p>Loading...</p>}
