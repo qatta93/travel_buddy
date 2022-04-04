@@ -34,6 +34,7 @@ const Requests = () => {
         title="Requests"
         links={[
           { name: 'home', href: '/' },
+          { name: 'profile', href: '/profile' },
           { name: 'requests', href: '/requests' },
         ]}
       />

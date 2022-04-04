@@ -33,6 +33,8 @@ const App = () => {
     getLoggedUser();
   }, []);
 
+  console.log('rendering app');
+
   return (
     <div className="App">
       <Header />

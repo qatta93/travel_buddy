@@ -1,301 +1,215 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ICountry, IActivity } from '../../../types';
+import { ICountry, ILanguage, IUser } from '../../../types';
 import { fetchApi } from '../../../helpers/api';
 import './style.css';
 
-interface Gender {
-  male: boolean,
-  female: boolean,
-  other: boolean,
-}
-
-interface CreateInput {
-  countries: string[],
-  dateFrom: string,
-  dateTo: string,
-  budget: string,
-  gender: Gender,
-  buddies: string,
-  description: string,
+interface EditUserInput {
+  name: string,
+  username: string,
+  age: string,
+  country: string,
+  gender: string,
   summary: string,
-  images: string,
-  places: string,
-  activities: string[],
+  avatar: string,
+  languages: string[],
 }
 
-interface INewTrip {
-  id: number,
+interface EditUserFormProps {
+  user: IUser,
 }
 
-const createInputInitialValue = {
-  countries: ['All'],
-  dateFrom: '',
-  dateTo: '',
-  budget: '',
-  gender: {
-    male: false,
-    female: false,
-    other: false,
-  },
-  buddies: '',
-  description: '',
-  summary: '',
-  images: '',
-  places: '',
-  activities: [],
-};
+const EditUserForm = ({ user }: EditUserFormProps) => {
+  const userInitialValues = {
+    ...user,
+    age: user.age.toString(),
+    avatar: user.avatar || ',',
+    languages: user.languages.map((l) => l.language),
+  };
 
-const parseGender = (gender: Gender): string | null => {
-  if (gender.male) {
-    return 'male';
-  }
-  if (gender.female) {
-    return 'female';
-  }
-  if (gender.other) {
-    return 'other';
-  }
-  return null;
-};
-
-const parsePlaces = (places: string): string[] => places.split(',').map((p) => p.trim());
-
-const CreateTripForm = () => {
   const [countries, setCountries] = useState<ICountry[]>([]);
-  const [activities, setActivities] = useState<IActivity[]>([]);
-  const [createInput, setCreateInput] = useState<CreateInput>(createInputInitialValue);
+  const [languages, setLanguages] = useState<ILanguage[]>([]);
+  const [editUserInput, setEditUserInput] = useState<EditUserInput>(userInitialValues);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchCountriesAndActivities = async () => {
-      const [countriesData, activitiesData] = await Promise.all([
+    const fetchCountriesAndLanguages = async () => {
+      const [countriesData, languageData] = await Promise.all([
         fetchApi<ICountry[]>('/api/countries'),
-        fetchApi<IActivity[]>('/api/activities'),
+        fetchApi<ILanguage[]>('/api/languages'),
       ]);
       if (countriesData.status === 'success') {
         setCountries(countriesData.data);
       }
-      if (activitiesData.status === 'success') {
-        setActivities(activitiesData.data);
+      if (languageData.status === 'success') {
+        setLanguages(languageData.data);
       }
     };
 
-    fetchCountriesAndActivities();
+    fetchCountriesAndLanguages();
   }, []);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
-    const newTrip = {
-      ...createInput,
-      authorId: 1,
-      from: createInput.dateFrom,
-      to: createInput.dateTo,
-      maxPassengers: Number(createInput.buddies),
-      genderRestrictions: parseGender(createInput.gender),
-      places: parsePlaces(createInput.places),
+    const updatedUser = {
+      email: user.email,
+      username: editUserInput.username,
+      name: editUserInput.name,
+      gender: editUserInput.gender,
+      age: editUserInput.age,
+      country: editUserInput.country,
+      summary: editUserInput.summary,
+      avatar: editUserInput.avatar,
+      languages: editUserInput.languages,
     };
 
-    const fetchOptions = {
-      method: 'POST',
+    const data = await fetchApi(`/api/users/${user.id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newTrip),
-    };
+      body: JSON.stringify(updatedUser),
+    });
 
-    const data = await fetchApi<INewTrip>('/api/trips', fetchOptions);
-
-    if (data.status === 'success') {
-      setCreateInput(createInputInitialValue);
-      navigate(`/trips/${data.data.id}`);
+    if (data.status === 'error') {
+      console.error(data.message);
+      return;
     }
+
+    setEditUserInput(userInitialValues);
+    navigate('/profile');
   };
 
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setCreateInput((currentState) => ({
+    setEditUserInput((currentState) => ({
       ...currentState,
       [event.target.name]: Array.from(event.target.selectedOptions, (option) => option.value),
     }));
   };
 
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCreateInput((currentState) => ({
+  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setEditUserInput((currentState) => ({
       ...currentState,
       [event.target.name]: event.target.value,
     }));
   };
 
-  const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCreateInput((currentState) => ({
-      ...currentState,
-      gender: {
-        ...currentState.gender,
-        [event.target.name]: event.target.checked,
-      },
-    }));
-  };
-
   const handleChangeTextArea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCreateInput((currentState) => ({
+    setEditUserInput((currentState) => ({
       ...currentState,
       [event.target.name]: event.target.value,
     }));
   };
 
   return (
-    <form className="edit-user-form" onSubmit={handleSubmit}>
+    <form className="edit-user-form" onSubmit={handleSubmit} autoComplete="off">
+      <label htmlFor="name" className="edit-user-form__label">
+        Name:
+        <input
+          name="name"
+          type="text"
+          placeholder="My name is..."
+          value={editUserInput.name}
+          onChange={handleChangeInput}
+          className="edit-user-form__input"
+          required
+        />
+      </label>
+      <label htmlFor="username" className="edit-user-form__label">
+        Username:
+        <input
+          name="name"
+          type="username"
+          placeholder="My username is..."
+          value={editUserInput.username}
+          onChange={handleChangeInput}
+          className="edit-user-form__input"
+          required
+        />
+      </label>
+      <label htmlFor="age" className="edit-user-form__label">
+        Age:
+        <input
+          name="age"
+          type="number"
+          min="15"
+          max="100"
+          placeholder="My age is..."
+          value={editUserInput.age}
+          onChange={handleChangeInput}
+          className="edit-user-form__input"
+          required
+        />
+      </label>
       <label htmlFor="country" className="edit-user-form__label">
         Country:
         <select
-          name="countries"
-          value={createInput.countries}
+          name="country"
+          placeholder="country"
+          value={editUserInput.country}
+          onChange={handleChangeInput}
+          className="edit-user-form__input"
+          required
+        >
+          {countries.map((c) => <option key={c.id} value={c.country}>{c.country}</option>)}
+        </select>
+      </label>
+      <label htmlFor="gender" className="edit-user-form__label">
+        Gender:
+        <select
+          name="gender"
+          className="edit-user-form__input"
+          value={editUserInput.gender}
+          onChange={handleChangeInput}
+          required
+        >
+          <option value="male">male</option>
+          <option value="female">female</option>
+          <option value="other">other</option>
+        </select>
+      </label>
+      <label htmlFor="languages" className="edit-user-form__label">
+        Languages:
+        <select
+          name="languages"
+          value={editUserInput.languages}
           onChange={handleChangeSelect}
           className="edit-user-form__select"
           multiple
           required
         >
-          {countries.map((country) => (
-            <option key={country.id} value={country.country}>{country.country}</option>
+          {languages.map((language) => (
+            <option key={language.id} value={language.language}>{language.language}</option>
           ))}
         </select>
       </label>
-      <label htmlFor="date" className="edit-user-form__label edit-user-form__label--date">
-        Date:
+      <label htmlFor="avatar" className="edit-user-form__label">
+        Avatar:
         <input
-          name="dateFrom"
-          type="date"
-          placeholder="From.."
-          value={createInput.dateFrom}
-          onChange={handleChangeInput}
-          className="edit-user-form__input"
-          required
-        />
-        <span />
-        <input
-          name="dateTo"
-          type="date"
-          placeholder="To.."
-          value={createInput.dateTo}
-          onChange={handleChangeInput}
-          className="edit-user-form__input"
-          required
-        />
-      </label>
-      <label htmlFor="budget" className="edit-user-form__label">
-        Budget:
-        <input
-          name="budget"
-          type="number"
-          placeholder="My max. budget is.. [USD]"
-          value={createInput.budget}
-          onChange={handleChangeInput}
-          className="edit-user-form__input"
-          required
-        />
-      </label>
-      <label htmlFor="gender" className="edit-user-form__label edit-user-form__label--checkbox">
-        Gender:
-        <input
-          name="female"
-          type="checkbox"
-          className="edit-user-form__checkbox"
-          checked={createInput.gender.female}
-          onChange={handleChangeCheckbox}
-        />
-        F
-        <input
-          name="male"
-          type="checkbox"
-          className="edit-user-form__checkbox"
-          checked={createInput.gender.male}
-          onChange={handleChangeCheckbox}
-        />
-        M
-        <input
-          name="other"
-          type="checkbox"
-          className="edit-user-form__checkbox"
-          checked={createInput.gender.other}
-          onChange={handleChangeCheckbox}
-        />
-        Other
-      </label>
-      <label htmlFor="buddies" className="edit-user-form__label">
-        Buddies:
-        <input
-          name="buddies"
-          type="number"
-          placeholder="How many people can join?"
-          value={createInput.buddies}
-          onChange={handleChangeInput}
-          className="edit-user-form__input"
-        />
-      </label>
-      <label htmlFor="images" className="edit-user-form__label">
-        Images:
-        <input
-          name="images"
+          name="avatar"
           type="text"
-          placeholder="Put the link of an amazing picture!"
-          value={createInput.images}
+          placeholder="Put the link of an amazing selfie!"
+          value={editUserInput.avatar}
           onChange={handleChangeInput}
           className="edit-user-form__input"
         />
       </label>
       <label htmlFor="summary" className="edit-user-form__label edit-user-form__label--text-area">
-        Summary:
+        About me:
         <textarea
           name="summary"
-          placeholder="Tell me a little about your trip"
-          value={createInput.summary}
+          placeholder="Tell the others about you!"
+          value={editUserInput.summary}
           onChange={handleChangeTextArea}
           className="edit-user-form__text-area"
           required
         />
-      </label>
-      <label htmlFor="description" className="edit-user-form__label edit-user-form__label--text-area">
-        Description:
-        <textarea
-          name="description"
-          placeholder="Tell me more!"
-          value={createInput.description}
-          onChange={handleChangeTextArea}
-          className="edit-user-form__text-area edit-user-form__text-area--long"
-          required
-        />
-      </label>
-      <label htmlFor="places" className="edit-user-form__label edit-user-form__label--text-area">
-        Places:
-        <textarea
-          name="places"
-          placeholder="Which landmarks will you be visiting? Separate them with a coma (',')."
-          value={createInput.places}
-          onChange={handleChangeTextArea}
-          className="edit-user-form__text-area"
-          required
-        />
-      </label>
-      <label htmlFor="activities" className="edit-user-form__label">
-        Activities:
-        <select
-          name="activities"
-          value={createInput.activities}
-          onChange={handleChangeSelect}
-          className="edit-user-form__select"
-          multiple
-        >
-          {activities.map((activity) => (
-            <option key={activity.id} value={activity.activity}>{activity.activity}</option>
-          ))}
-        </select>
       </label>
       <div className="edit-user-form__btn-wrapper">
-        <button type="submit" className="edit-user-form__btn">Create trip</button>
+        <button type="submit" className="edit-user-form__btn">Save changes</button>
       </div>
     </form>
   );
 };
 
-export default CreateTripForm;
+export default EditUserForm;
