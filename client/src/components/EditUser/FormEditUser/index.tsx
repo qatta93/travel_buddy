@@ -25,7 +25,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
   const userInitialValues = {
     ...user,
     username: user.username === 'pending' ? '' : user.username,
-    age: user.age.toString(),
+    age: user.age ? user.age.toString() : '',
     avatar: user.avatar || '',
     languages: user.languages.map((l) => l.language),
     gender: user.gender === 'pending' ? '' : user.gender,
@@ -179,6 +179,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
           onChange={handleChangeInput}
           required
         >
+          <option hidden disabled value="">Select an option:</option>
           <option value="male">male</option>
           <option value="female">female</option>
           <option value="other">other</option>
