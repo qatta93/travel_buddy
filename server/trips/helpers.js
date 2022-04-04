@@ -38,7 +38,6 @@ const addData = (field, newField) => (array, trip) => {
 
 const addPlaces = addData('place', 'places');
 const addActivities = addData('activity', 'activities');
-const addPassengers = addData('passenger', 'passengers');
 
 const addCountries = (array, trip) => {
   const allFieldValues = array
@@ -58,6 +57,24 @@ const addCountries = (array, trip) => {
   };
 };
 
+const addRequests = (array, trip) => {
+  const allFieldValues = array
+    .filter((t) => t.id === trip.id)
+    .filter((t) => t.requestId)
+    .map((t) => ({
+      id: t.requestId,
+      userId: t.requestUserId,
+      status: t.requestStatus,
+    }));
+
+  const fieldValues = removeDuplicated(allFieldValues);
+
+  return {
+    ...trip,
+    requests: fieldValues,
+  };
+};
+
 const addAuthor = (trip) => ({
   ...trip,
   author: {
@@ -73,7 +90,7 @@ const parseTrips = (trips) => trips
   .map((trip) => addCountries(trips, trip))
   .map((trip) => addActivities(trips, trip))
   .map((trip) => addPlaces(trips, trip))
-  .map((trip) => addPassengers(trips, trip))
+  .map((trip) => addRequests(trips, trip))
   .map(addAuthor);
 
 const getAllTrips = async () => {
