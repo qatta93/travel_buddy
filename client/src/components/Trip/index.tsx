@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchApi } from '../../helpers/api';
 import { ITrip } from '../../types';
+import { useAppSelector } from '../../hooks';
 import MainHeader from '../MainHeader';
 import UserCard from './UserCard';
 import CloseIcon from '../Header/CloseIcon';
@@ -20,6 +21,7 @@ const Trip = () => {
   const [trip, setTrip] = useState<ITrip | null>(null);
   const [textInput, setTextInput] = useState<CreateInput>(InitialInput);
   const [popup, setPopup] = useState<string>('false');
+  const user = useAppSelector((state) => state.user.user);
   const { id } = useParams();
 
   useEffect(() => {
@@ -86,6 +88,8 @@ const Trip = () => {
 
   const seatsLeft = trip && Math.max(trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length, 0);
 
+  const requestButtonActive = user && trip && trip.author.id !== user.id;
+
   return (
     <main className="trip">
       <section className={popup === 'true' ? 'trip__popup' : 'trip__popup--hide'}>
@@ -149,17 +153,19 @@ const Trip = () => {
             <section className="trip__user-card">
               <UserCard id={trip.author.id} />
             </section>
-            <section className="trip__button-container">
-              {seatsLeft && seatsLeft > 0 ? (
-                <button
-                  className="trip__request-button"
-                  type="button"
-                  onClick={() => popUp()}
-                >
-                  Send request!
-                </button>
-              ) : <p className="trip__request-button--full">Sorry, this trip is full</p>}
-            </section>
+            {requestButtonActive && (
+              <section className="trip__button-container">
+                {seatsLeft ? (
+                  <button
+                    className="trip__request-button"
+                    type="button"
+                    onClick={() => popUp()}
+                  >
+                    Send request!
+                  </button>
+                ) : <p className="trip__request-button--disabled">Sorry, this trip is full</p>}
+              </section>
+            )}
           </>
         ) : <p>Loading...</p>}
       </section>
