@@ -16,18 +16,27 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credential: true,
+}));
+
 app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  // store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
 }));
 app.use(passport.authenticate('session'));
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+app.use((req, res, next) => {
+  res.set('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 app.use('/api/users', usersRouter);
 app.use('/api/trips', tripsRouter);
@@ -38,7 +47,6 @@ app.use('/api/activities', activitiesRouter);
 app.use('/api/requests', requestsRouter);
 
 app.use('/api', (req, res) => res.status(404).end());
-
 
 app.use((req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
