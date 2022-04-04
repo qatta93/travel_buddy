@@ -88,6 +88,7 @@ const updateUser = async (id, updatedUser) => {
     summary: updatedUser.summary || '',
     avatar: updatedUser.avatar || '',
   };
+
   const [userDB] = await updateUserDB(id, updatedUserData);
   await deleteAllUserLanguagesDB(id);
   const newLanguagesPromises = updatedUser.languages

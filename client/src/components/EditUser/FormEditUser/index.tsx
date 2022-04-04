@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ICountry, ILanguage, IUser } from '../../../types';
 import { fetchApi } from '../../../helpers/api';
+import { useAppDispatch } from '../../../hooks';
+import { addUser } from '../../../slices/user';
 import './style.css';
 
 interface EditUserInput {
@@ -22,6 +24,7 @@ interface EditUserFormProps {
 const EditUserForm = ({ user }: EditUserFormProps) => {
   const userInitialValues = {
     ...user,
+    username: user.username === 'pending' ? '' : user.username,
     age: user.age.toString(),
     avatar: user.avatar || ',',
     languages: user.languages.map((l) => l.language),
@@ -31,6 +34,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
   const [languages, setLanguages] = useState<ILanguage[]>([]);
   const [editUserInput, setEditUserInput] = useState<EditUserInput>(userInitialValues);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchCountriesAndLanguages = async () => {
@@ -77,6 +81,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
     }
 
     setEditUserInput(userInitialValues);
+    dispatch(addUser({ id: user.id, username: updatedUser.username }));
     navigate('/profile');
   };
 
@@ -101,6 +106,16 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
     }));
   };
 
+  const languagesSorted = [...languages].sort((a, b) => {
+    if (a.language < b.language) {
+      return -1;
+    }
+    if (a.language < b.language) {
+      return 1;
+    }
+    return 0;
+  });
+
   return (
     <form className="edit-user-form" onSubmit={handleSubmit} autoComplete="off">
       <label htmlFor="name" className="edit-user-form__label">
@@ -118,8 +133,8 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
       <label htmlFor="username" className="edit-user-form__label">
         Username:
         <input
-          name="name"
-          type="username"
+          name="username"
+          type="text"
           placeholder="My username is..."
           value={editUserInput.username}
           onChange={handleChangeInput}
@@ -178,7 +193,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
           multiple
           required
         >
-          {languages.map((language) => (
+          {languagesSorted.map((language) => (
             <option key={language.id} value={language.language}>{language.language}</option>
           ))}
         </select>

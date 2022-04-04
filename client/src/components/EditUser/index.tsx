@@ -31,7 +31,7 @@ const EditUser = () => {
   return (
     <main className="edit-user">
       <MainHeader
-        title="Edit your profile account"
+        title={(user && user.username === 'pending') ? 'Finalise creating your account!' : 'Edit your profile'}
         links={[
           { name: 'home', href: '/' },
           { name: 'profile', href: '/profile' },

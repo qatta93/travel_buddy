@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { fetchApi } from './helpers/api';
 import { useAppDispatch } from './hooks';
 import Header from './components/Header';
@@ -20,6 +20,7 @@ import './App.css';
 
 const App = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getLoggedUser = async () => {
@@ -29,11 +30,12 @@ const App = () => {
         return;
       }
       dispatch(addUser(data.data));
+      if (data.data && data.data.username === 'pending') {
+        navigate('/edit-user');
+      }
     };
     getLoggedUser();
   }, []);
-
-  console.log('rendering app');
 
   return (
     <div className="App">
