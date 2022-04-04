@@ -5,11 +5,6 @@ const {
 
 const router = express.Router();
 
-router.use((req, res, next) => {
-  res.set('Access-Control-Allow-Credentials', true);
-  next();
-});
-
 router.get('/', async (req, res, next) => {
   try {
     const data = await getAllTrips();
