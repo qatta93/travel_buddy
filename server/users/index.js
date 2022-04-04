@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  getAllUsers, getUserById, createUser, deleteUserById,
+  getAllUsers, getUserById, createUser, deleteUserById, updateUser,
 } = require('./helpers');
 
 const router = express.Router();
@@ -55,6 +55,16 @@ router.delete('/:id', async (req, res, next) => {
   try {
     await deleteUserById(req.params.id);
     return res.json({ status: 'success' });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const updatedUser = req.body;
+    const data = await updateUser(req.params.id, updatedUser);
+    return res.json({ status: 'success', data });
   } catch (err) {
     return next(err);
   }

@@ -6,7 +6,9 @@ const {
   getLanguagesByUserIdDB,
   deleteUserByIdDB,
   addLanguageToUserDB,
+  deleteAllUserLanguagesDB,
   deleteAllTestUsersDB,
+  updateUserDB,
 } = require('./db');
 
 const findIndexById = (array, id) => array.findIndex((ele) => ele.id === id);
@@ -74,6 +76,26 @@ const deleteUserById = async (id) => deleteUserByIdDB(id);
 
 const deleteAllTestUsers = async () => deleteAllTestUsersDB();
 
+const updateUser = async (id, updatedUser) => {
+  const [{ id: countryId }] = await getCountryByNameDB(updatedUser.country);
+  const updatedUserData = {
+    email: updatedUser.email,
+    username: updatedUser.username,
+    name: updatedUser.name,
+    gender: updatedUser.gender,
+    age: updatedUser.age,
+    country_id: countryId,
+    summary: updatedUser.summary || '',
+    avatar: updatedUser.avatar || '',
+  };
+  const [userDB] = await updateUserDB(id, updatedUserData);
+  await deleteAllUserLanguagesDB(id);
+  const newLanguagesPromises = updatedUser.languages
+    .map(async (lang) => addLanguageToUserDB(userDB.id, lang));
+  await Promise.all(newLanguagesPromises);
+  return { id: userDB.id, username: userDB.username };
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -81,4 +103,5 @@ module.exports = {
   getLanguagesByUserId,
   deleteUserById,
   deleteAllTestUsers,
+  updateUser,
 };
