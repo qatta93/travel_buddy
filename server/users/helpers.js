@@ -90,6 +90,7 @@ const updateUser = async (id, updatedUser) => {
   };
 
   const [userDB] = await updateUserDB(id, updatedUserData);
+
   await deleteAllUserLanguagesDB(id);
   const newLanguagesPromises = updatedUser.languages
     .map(async (lang) => addLanguageToUserDB(userDB.id, lang));

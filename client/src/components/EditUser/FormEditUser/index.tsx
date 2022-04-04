@@ -26,8 +26,9 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
     ...user,
     username: user.username === 'pending' ? '' : user.username,
     age: user.age.toString(),
-    avatar: user.avatar || ',',
+    avatar: user.avatar || '',
     languages: user.languages.map((l) => l.language),
+    gender: user.gender === 'pending' ? '' : user.gender,
   };
 
   const [countries, setCountries] = useState<ICountry[]>([]);
