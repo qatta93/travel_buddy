@@ -41,7 +41,8 @@
 }
 
 .home__bg-video {
-  width: 100vw;
+  width: 100vw  !important;
+  object-fit: cover;
 }
 
 @media screen and (orientation: landscape) {
