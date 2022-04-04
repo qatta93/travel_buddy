@@ -2,3 +2,8 @@
   width: 100vw;
   opacity: 40%;
 }
+
+.request__list {
+  display: flex;
+  flex-direction: column;
+}

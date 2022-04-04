@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { IRequest } from '../../../types';
 import './style.css';
 
@@ -7,18 +7,7 @@ interface RequestCardProps {
 }
 
 const RequestCard = ({ request }:RequestCardProps) => {
-  const [status, setStatus] = useState<string>('pending');
-
-  // not saving in local storage - getItem
-  // array of status in higher folder?
-  useEffect(() => {
-    localStorage.setItem('status', JSON.stringify(status));
-  }, [status]);
-
-  useEffect(() => {
-    const newStatus = JSON.parse(localStorage.getItem('status') || '');
-    setStatus(newStatus);
-  }, [status]);
+  const [status, setStatus] = useState<string>(request.status);
 
   const acceptRequest = () => {
     const requestId = request.id;

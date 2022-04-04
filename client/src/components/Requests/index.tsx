@@ -30,10 +30,12 @@ const Requests = () => {
           { name: 'requests', href: '/requests' },
         ]}
       />
-      {requests.map((request:IRequest) => (
-        <RequestCard key={request.id} request={request} />
-      ))}
-      <img className="requests__img" src="/images/bg_desktop.png" alt="car" />
+      <div className="request__list">
+        {requests.map((request:IRequest) => (
+          <RequestCard key={request.id} request={request} />
+        ))}
+        <img className="requests__img" src="/images/bg_desktop.png" alt="car" />
+      </div>
     </section>
   );
 };

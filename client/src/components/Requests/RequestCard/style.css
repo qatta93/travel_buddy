@@ -6,9 +6,14 @@
   width: 80%;
 }
 
-.request-card--accepted,
+.request-card--accepted {
+  border: 2px solid var(--light-gray);
+  order: 1;
+}
+
 .request-card--rejected {
   border: 2px solid var(--light-gray);
+  order: 2;
 }
 
 .request-card__header {
