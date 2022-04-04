@@ -20,7 +20,6 @@ const Trip = () => {
   const [trip, setTrip] = useState<ITrip | null>(null);
   const [textInput, setTextInput] = useState<CreateInput>(InitialInput);
   const [popup, setPopup] = useState<string>('false');
-  const [successMessage, setSuccessMessage] = useState<string>('false');
   const { id } = useParams();
 
   useEffect(() => {
@@ -78,13 +77,6 @@ const Trip = () => {
     return setPopup('true');
   };
 
-  const displaySuccessMessage = () => {
-    if (successMessage === 'true') {
-      return setSuccessMessage('false');
-    }
-    return setSuccessMessage('true');
-  };
-
   const handleChangeTextArea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextInput((currentState) => ({
       ...currentState,
@@ -110,8 +102,7 @@ const Trip = () => {
                 className="trip__popup__text"
               />
             </label>
-            <button type="submit" className="trip__popup__btn" onClick={() => displaySuccessMessage()}>SEND</button>
-            {successMessage === 'true' ? <p className="trip__popup__send-text">You request was send!</p> : null}
+            <button type="submit" className="trip__popup__btn" onClick={() => popUp()}>SEND</button>
           </form>
         </div>
       </section>

@@ -74,7 +74,7 @@ const RequestCard = ({ request }:RequestCardProps) => {
           ? (
             <>
               <button type="button" className="request-card__button request-card__button--accepted">accepted</button>
-              <button type="button" className="request-card__button request-card__button--change">reject</button>
+              <button type="button" className="request-card__button request-card__button--change" onClick={() => rejectRequest()}>reject</button>
             </>
           )
           : ''}
@@ -82,7 +82,7 @@ const RequestCard = ({ request }:RequestCardProps) => {
           ? (
             <>
               <button type="button" className="request-card__button request-card__button--rejected">rejected</button>
-              <button type="button" className="request-card__button request-card__button--change">accept</button>
+              <button type="button" className="request-card__button request-card__button--change" onClick={() => acceptRequest()}>accept</button>
             </>
           )
           : ''}
