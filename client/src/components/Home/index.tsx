@@ -14,7 +14,7 @@ const Home = () => (
     <section className="home__bg">
       <picture className="home__bg-picture">
         <video autoPlay muted loop className="home__bg-video">
-          <source src="/videos/mobile.mp4" type="video/mp4" />
+          <source src={window.screen.orientation.type === 'landscape-primary' ? '/videos/carDesktop.mp4' : '/videos/carMobile.mp4'} type="video/mp4" />
           <track src="captions_en.vtt" kind="captions" srcLang="en" label="english_captions" />
         </video>
       </picture>
