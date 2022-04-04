@@ -201,6 +201,19 @@
   .trip__button-container {
     padding-top: 3rem;
   }
+  .trip__popup-wrapper {
+    margin: 30% 0;
+    background-color: white;
+    height: 32rem;
+  }
+  .trip__popup__title {
+    font-size: 1.5rem;
+  }
+  
+  .trip__popup__text {
+    font-size: 1rem;
+    min-height: 11rem;
+  }  
 }
 
 @media screen and (min-width: 85rem) {
@@ -240,5 +253,8 @@
 
   .trip__other {
     margin: 2rem 0 0;
+  }
+  .trip__popup-wrapper {
+    margin: 10% 0;
   }
 }
