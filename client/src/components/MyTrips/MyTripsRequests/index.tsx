@@ -10,68 +10,71 @@ import './style.css';
 
 const MyTripRequests = () => {
   const [requests, setRequests] = useState<IRequest[]>([]);
+  const [status, setStatus] = useState<string>('pending');
 
-  console.log('I am here');
+  const tripId = Number(window.location.pathname.match(/[0-9]*$/g)![0]);
 
   useEffect(() => {
     const getRequestsData = async () => {
-      console.log('fetching reqs');
-      const data = await fetchApi<IRequest[]>('/api/requests');
+      const data = await fetchApi<IRequest[]>('/api/requests/');
       if (data.status === 'error') {
         console.error(data.message);
         return;
       }
       console.log(data);
       setRequests(data.data);
+      setStatus('pending');
     };
 
     getRequestsData();
   }, []);
 
-  const request = requests[0];
+  const request = requests.filter((req) => req.tripId === tripId);
+
+  console.log(request[0]);
+
+  // const request = 'gg';
 
   const acceptRequest = () => {
-    const requestId = request.id;
-    const putStatusData = async () => {
-      const newRequest = {
-        ...request,
-        status: 'accepted',
-      };
-      const requestOptions = {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newRequest),
-      };
-      await fetchApi(`/api/requests/${requestId}`, requestOptions);
-      // setStatus('accepted');
-    };
-    putStatusData();
+    // const requestId = request.id;
+    // const putStatusData = async () => {
+    //   const newRequest = {
+    //     ...request,
+    //     status: 'accepted',
+    //   };
+    //   const requestOptions = {
+    //     method: 'PUT',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(newRequest),
+    //   };
+    //   await fetchApi(`/api/requests/${requestId}`, requestOptions);
+    //   setStatus('accepted');
+    // };
+    // putStatusData();
   };
 
   const rejectRequest = () => {
-    const requestId = request.id;
-    const putStatusData = async () => {
-      const newRequest = {
-        ...request,
-        status: 'rejected',
-      };
-      const requestOptions = {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newRequest),
-      };
-      await fetchApi(`/api/requests/${requestId}`, requestOptions);
-      // setStatus('rejected');
-    };
-    putStatusData();
+    // const requestId = request.id;
+    // const putStatusData = async () => {
+    //   const newRequest = {
+    //     ...request,
+    //     status: 'rejected',
+    //   };
+    //   const requestOptions = {
+    //     method: 'PUT',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(newRequest),
+    //   };
+    //   await fetchApi(`/api/requests/${requestId}`, requestOptions);
+    //   setStatus('rejected');
+    // };
+    // putStatusData();
   };
 
-  const sentOnYear = request?.sentOn.split(/T.+/g)[0].split('-')[0].split(/^.{2}/)[1];
-  const sentOnMonth = request?.sentOn.split(/T.+/g)[0].split('-')[1];
-  const sentOnDay = request?.sentOn.split(/T.+/g)[0].split('-')[2];
-  const sentOnDate = `${sentOnDay}-${sentOnMonth}-${sentOnYear}`;
-
-  const status = 'pending';
+  // const sentOnYear = request?.sentOn.split(/T.+/g)[0].split('-')[0].split(/^.{2}/)[1];
+  // const sentOnMonth = request?.sentOn.split(/T.+/g)[0].split('-')[1];
+  // const sentOnDay = request?.sentOn.split(/T.+/g)[0].split('-')[2];
+  // const sentOnDate = `${sentOnDay}-${sentOnMonth}-${sentOnYear}`;
 
   return request ? (
     <section className="my-trips">
@@ -88,13 +91,13 @@ const MyTripRequests = () => {
       <article className={`request-card request-card--${status}`}>
         <header className={`request-card__header request-card__header--${status}`}>
           <h1 className="request-card__title">
-            {request.user.name}
+            {/* {request.user.name} */}
             {', '}
-            {sentOnDate}
+            {/* {sentOnDate} */}
           </h1>
-          <p className="request-card__email">{request.user.email}</p>
+          {/* <p className="request-card__email">{request.user.email}</p> */}
         </header>
-        <p className="request-card__text">{request.message}</p>
+        {/* <p className="request-card__text">{request.message}</p> */}
         <div className="request-card__buttons">
           {status === 'pending'
             ? (
@@ -104,7 +107,7 @@ const MyTripRequests = () => {
               </>
             )
             : ''}
-          {status === 'pending'
+          {status === 'accepted'
             ? (
               <>
                 <button type="button" className="request-card__button request-card__button--accepted">accepted</button>
@@ -112,7 +115,7 @@ const MyTripRequests = () => {
               </>
             )
             : ''}
-          {status === 'pending'
+          {status === 'rejected'
             ? (
               <>
                 <button type="button" className="request-card__button request-card__button--rejected">rejected</button>
