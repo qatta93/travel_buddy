@@ -7,6 +7,7 @@ import UserCard from './UserCard';
 import CloseIcon from '../Header/CloseIcon';
 import { parseGenderRestrictions } from '../../helpers/misc';
 import './style.css';
+import { useAppSelector } from '../../hooks';
 
 interface CreateInput {
   description: string,
@@ -21,6 +22,9 @@ const Trip = () => {
   const [textInput, setTextInput] = useState<CreateInput>(InitialInput);
   const [popup, setPopup] = useState<string>('false');
   const { id } = useParams();
+
+  const user = useAppSelector((state) => state.user.user);
+  const userId = user?.id;
 
   useEffect(() => {
     const fetchTrip = async () => {
@@ -39,27 +43,13 @@ const Trip = () => {
     event.preventDefault();
     setTextInput(InitialInput);
     const newRequest = {
-      // uuid?
-      id: 5,
-      trip_id: id,
-      // based on google auth
-      user_id: 1,
-      status: 'pending',
-      message: textInput.description,
-      sent_on: '2022-08-52T00:00:00.000Z',
-      sentOn: '2022-08-52T00:00:00.000Z',
       tripId: id,
-      userId: 1,
-      username: 'qatta',
-      name: 'Patrycja',
-      email: 'panasiuk.patrycja@gmail.com',
-      user: {
-        id: 1,
-        name: 'Patrycja',
-        username: 'qatta',
-        email: 'panasiuk.patrycja@gmail.com',
-      },
+      // based on google auth
+      userId,
+      message: textInput.description,
     };
+
+    console.log(newRequest);
 
     const requestOptions = {
       method: 'POST',
@@ -67,7 +57,7 @@ const Trip = () => {
       body: JSON.stringify(newRequest),
     };
 
-    await fetchApi('http://localhost:5500/api/requests', requestOptions);
+    await fetchApi('/api/requests', requestOptions);
   };
 
   const popUp = () => {

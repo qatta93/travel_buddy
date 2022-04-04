@@ -77,6 +77,11 @@
   border: 2px solid var(--red);
 }
 
+.request-card__button--pending {
+  background-color: white;
+  border: 2px solid var(--yellow);
+}
+
 .request-card__button--change {
   box-shadow: 1px 3px 3px var(--shadow);
 }

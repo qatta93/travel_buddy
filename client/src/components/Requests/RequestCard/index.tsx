@@ -9,9 +9,9 @@ interface RequestCardProps {
 
 const RequestCard = ({ request }:RequestCardProps) => {
   const [trip, setTrip] = useState<ITrip | null>(null);
-  const [status, setStatus] = useState<string>(request.status);
 
   const { tripId } = request;
+  const status = trip?.requests[0].status;
 
   const dateFromMonth = trip?.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[0];
   const dateFromDay = trip?.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[1];
@@ -39,42 +39,6 @@ const RequestCard = ({ request }:RequestCardProps) => {
   const tripDate = `  ${dateFrom} - ${dateTo}`;
   const tripHostName = trip?.author.username;
 
-  const acceptRequest = () => {
-    const requestId = request.id;
-    const putStatusData = async () => {
-      const newRequest = {
-        ...request,
-        status: 'accepted',
-      };
-      const requestOptions = {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newRequest),
-      };
-      await fetchApi(`/api/requests/${requestId}`, requestOptions);
-      setStatus('accepted');
-    };
-    putStatusData();
-  };
-
-  const rejectRequest = () => {
-    const requestId = request.id;
-    const putStatusData = async () => {
-      const newRequest = {
-        ...request,
-        status: 'rejected',
-      };
-      const requestOptions = {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newRequest),
-      };
-      await fetchApi(`/api/requests/${requestId}`, requestOptions);
-      setStatus('rejected');
-    };
-    putStatusData();
-  };
-
   return (
     <article className={`request-card request-card--${status}`}>
       <header className={`request-card__header request-card__header--${status}`}>
@@ -87,27 +51,16 @@ const RequestCard = ({ request }:RequestCardProps) => {
       </header>
       <div className="request-card__buttons">
         {status === 'pending'
-          ? (
-            <>
-              <button type="button" className="request-card__button request-card__button--accept" onClick={() => acceptRequest()}>accept</button>
-              <button type="button" className="request-card__button request-card__button--reject" onClick={() => rejectRequest()}>reject</button>
-            </>
-          )
+          ? <button type="button" className="request-card__button request-card__button--pending">pending</button>
           : ''}
         {status === 'accepted'
           ? (
-            <>
-              <button type="button" className="request-card__button request-card__button--accepted">accepted</button>
-              <button type="button" className="request-card__button request-card__button--change" onClick={() => rejectRequest()}>reject</button>
-            </>
+            <button type="button" className="request-card__button request-card__button--accepted">accepted</button>
           )
           : ''}
         {status === 'rejected'
           ? (
-            <>
-              <button type="button" className="request-card__button request-card__button--rejected">rejected</button>
-              <button type="button" className="request-card__button request-card__button--change" onClick={() => acceptRequest()}>accept</button>
-            </>
+            <button type="button" className="request-card__button request-card__button--rejected">rejected</button>
           )
           : ''}
       </div>
