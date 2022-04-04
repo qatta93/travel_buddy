@@ -88,3 +88,10 @@ export interface IRequest {
   status: 'pending' | 'accepted' | 'rejected' | 'cancelled',
   sentOn: string,
 }
+
+interface LoggedInUserInfo {
+  id: number,
+  username: string,
+}
+
+export type LoggedInUser = LoggedInUserInfo | null;

@@ -13,25 +13,21 @@ import Requests from './components/Requests';
 import Trip from './components/Trip';
 import CreateTrip from './components/CreateTrip';
 import RestrictedRoute from './components/RestrictedRoute';
+import { addUser } from './slices/user';
+import { LoggedInUser } from './types';
 import './App.css';
-import { addUser, UserInfo } from './slices/user';
 
 const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const getLoggedUser = async () => {
-      try {
-        const data = await fetchApi<UserInfo | null>('/api/auth/user');
-        if (data.status === 'error') {
-          console.error(data.message);
-          return;
-        }
-        dispatch(addUser(data.data));
-        console.log(data);
-      } catch (err) {
-        console.log(err);
+      const data = await fetchApi<LoggedInUser>('/api/auth/user');
+      if (data.status === 'error') {
+        console.error(data.message);
+        return;
       }
+      dispatch(addUser(data.data));
     };
     getLoggedUser();
   }, []);
