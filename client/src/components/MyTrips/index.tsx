@@ -32,7 +32,7 @@ const MyTrips = () => {
   return (
     <section className="my-trips">
       <MainHeader
-        title="My trips"
+        title="My trip"
         links={[
           { name: 'home', href: '/' },
           { name: 'profile', href: '/profile' },
@@ -41,7 +41,7 @@ const MyTrips = () => {
       />
       <div className="my-trips__list">
         {filterTripsByUserId.map((trip:ITrip) => (
-          <Link key={trip.id} to={`/my-trips/${trip.id}`} className="my-trips__item">
+          <Link key={trip.id} to={`/profile/my-trips/${trip.id}`} className="my-trips__item">
             <TripCard trip={trip} />
           </Link>
         ))}

@@ -17,7 +17,7 @@ import { addUser } from './slices/user';
 import { LoggedInUser } from './types';
 import './App.css';
 import MyTrips from './components/MyTrips';
-// import MyTripRequests from './components/MyTrips/MyTripsRequests';
+import MyTripRequests from './components/MyTrips/MyTripsRequests';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -48,9 +48,9 @@ const App = () => {
         <Route path="login" element={<Login />} />
         <Route path="requests" element={<Requests />} />
         <Route path="profile" element={<RestrictedRoute><Profile /></RestrictedRoute>} />
-        <Route path="my-trips">
+        <Route path="profile/my-trips">
           <Route index element={<RestrictedRoute><MyTrips /></RestrictedRoute>} />
-          {/* <Route path=":id" element={<MyTripRequests />} /> */}
+          <Route path=":id" element={<MyTripRequests />} />
         </Route>
       </Routes>
       <Footer />
