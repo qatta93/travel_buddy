@@ -10,6 +10,7 @@ const Requests = () => {
   // replace with google auth;
   const userId = 2;
   const filterRequestsByUserId = requests.filter((req) => req.user.id === userId);
+  const isPendingStatus = filterRequestsByUserId.some((req) => req.status === 'pending');
 
   useEffect(() => {
     const getRequestsData = async () => {
@@ -35,6 +36,7 @@ const Requests = () => {
       />
       <div className="request__list">
         <h1 className="requests__title">Pending requests:</h1>
+        {isPendingStatus === false ? <p className="request__pending">No pending requests</p> : null}
         {filterRequestsByUserId.map((request:IRequest) => (
           <RequestCard key={request.id} request={request} />
         ))}

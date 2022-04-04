@@ -81,8 +81,16 @@
   box-shadow: 1px 3px 3px var(--shadow);
 }
 
+.request__pending {
+  text-align: center;
+}
+
 @media screen and (min-width: 30rem) {
   .request-card {
     min-width: 10rem;
+  }
+  .request__pending {
+    width: 100%;
+    text-align: center;
   }
 }
