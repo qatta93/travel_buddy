@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import HamburgerIcon from './HamburgerIcon';
 import CloseIcon from './CloseIcon';
+import { useAppSelector } from '../../hooks';
 import './style.css';
 
 const Header = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const navigate = useNavigate();
+  const user = useAppSelector((state) => state.user.user);
 
   const toggleNav = () => {
     setIsNavExpanded((currentState) => !currentState);
@@ -15,16 +17,6 @@ const Header = () => {
   const handleLink = (href: string) => {
     setIsNavExpanded(false);
     navigate(href);
-  };
-
-  const logoutFunc = async () => {
-    const res = await fetch('http://localhost:5500/api/auth/logout', {
-      method: 'POST',
-      credentials: 'include',
-    });
-    const data = await res.json();
-    console.log(data);
-    navigate('/');
   };
 
   return (
@@ -41,9 +33,14 @@ const Header = () => {
           <ul className={`header__links-container ${isNavExpanded ? 'header__links-container--visible' : ''}`}>
             <button type="button" className="header__link" onClick={() => handleLink('/')}>Home Page</button>
             <button type="button" className="header__link" onClick={() => handleLink('/trips')}>Trips</button>
-            <button type="button" className="header__link" onClick={() => handleLink('/create-trip')}>Create Trip</button>
-            <button type="button" className="header__link header__link--yellow" onClick={() => handleLink('/login')}>Login</button>
-            <button type="button" className="header__link header__link--yellow" onClick={() => logoutFunc()}>Logout</button>
+            {user ? (
+              <>
+                <button type="button" className="header__link" onClick={() => handleLink('/create-trip')}>Create Trip</button>
+                <button type="button" className="header__link" onClick={() => handleLink('/profile')}>Profile</button>
+              </>
+            ) : (
+              <button type="button" className="header__link header__link--yellow" onClick={() => handleLink('/login')}>Login</button>
+            )}
             <button type="button" className="header__link header__link--blue" onClick={() => handleLink('/about-us')}>About Us</button>
           </ul>
         </div>
