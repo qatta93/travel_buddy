@@ -22,6 +22,11 @@
   height: 95vh;
 }
 
+.home__bg-image {
+  width: 100vw;
+  opacity: 40%;
+}
+
 .about__team-image {
   max-width: 100%;
   padding: 1rem 0;
@@ -33,6 +38,13 @@
   font-weight: bold;
   background-color: var(--light-blue);
   padding-bottom: 1rem;
+}
+
+@media screen and (min-width: 30rem) {
+  
+  .about__paragraph {
+    padding: 3rem 8rem;
+  }
 }
 
 @media screen and (min-width: 60rem) {
@@ -55,6 +67,7 @@
   }
   
   .about__paragraph {
+    font-size: 1.5rem;
     max-width: 40rem;
     margin: auto;
   }

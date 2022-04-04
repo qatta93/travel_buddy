@@ -9,6 +9,7 @@ import Home from './components/Home';
 import Profile from './components/Profile';
 import Search from './components/Search';
 import About from './components/About';
+import Requests from './components/Requests';
 import Trip from './components/Trip';
 import CreateTrip from './components/CreateTrip';
 import RestrictedRoute from './components/RestrictedRoute';
@@ -47,6 +48,7 @@ const App = () => {
           <Route path=":id" element={<Trip />} />
         </Route>
         <Route path="login" element={<Login />} />
+        <Route path="requests" element={<Requests />} />
         <Route path="profile" element={<RestrictedRoute><Profile /></RestrictedRoute>} />
       </Routes>
       <Footer />
