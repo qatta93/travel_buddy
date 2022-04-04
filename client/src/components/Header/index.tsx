@@ -17,6 +17,15 @@ const Header = () => {
     navigate(href);
   };
 
+  const logoutFunc = async () => {
+    const res = await fetch('http://localhost:5500/api/auth/logout', {
+      method: 'POST',
+      credentials: 'include',
+    });
+    const data = await res.json();
+    console.log(data);
+  };
+
   return (
     <header className="header">
       <nav className="header__nav">
@@ -33,6 +42,7 @@ const Header = () => {
             <button type="button" className="header__link" onClick={() => handleLink('/trips')}>Trips</button>
             <button type="button" className="header__link" onClick={() => handleLink('/create-trip')}>Create Trip</button>
             <button type="button" className="header__link header__link--yellow" onClick={() => handleLink('/login')}>Login</button>
+            <button type="button" className="header__link header__link--yellow" onClick={() => logoutFunc()}>Logout</button>
             <button type="button" className="header__link header__link--blue" onClick={() => handleLink('/about-us')}>About Us</button>
           </ul>
         </div>
