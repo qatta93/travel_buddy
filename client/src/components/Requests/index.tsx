@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useAppSelector } from '../../hooks';
 import MainHeader from '../MainHeader';
 import { fetchApi } from '../../helpers/api';
 import RequestCard from './RequestCard';
@@ -7,8 +8,9 @@ import './style.css';
 
 const Requests = () => {
   const [requests, setRequests] = useState<IRequest[]>([]);
-  // replace with google auth;
-  const userId = 2;
+
+  const user = useAppSelector((state) => state.user.user);
+  const userId = user?.id;
   const filterRequestsByUserId = requests.filter((req) => req.user.id === userId);
   const isPendingStatus = filterRequestsByUserId.some((req) => req.status === 'pending');
   const isAcceptedRejected = filterRequestsByUserId.some((req) => req.status === 'accepted' || 'rejected');
