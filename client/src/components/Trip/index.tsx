@@ -49,8 +49,6 @@ const Trip = () => {
       message: textInput.description,
     };
 
-    console.log(newRequest);
-
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
