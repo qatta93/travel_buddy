@@ -6,6 +6,7 @@ const passport = require('passport');
 const usersRouter = require('./users');
 const tripsRouter = require('./trips');
 const countriesRouter = require('./countries');
+const languagesRouter = require('./languages');
 const authRouter = require('./auth');
 const activitiesRouter = require('./activities');
 const requestsRouter = require('./requests');
@@ -38,6 +39,7 @@ app.use('/api/trips', tripsRouter);
 app.use('/api/countries', countriesRouter);
 app.use('/api/activities', activitiesRouter);
 app.use('/api/requests', requestsRouter);
+app.use('/api/languages', languagesRouter);
 
 app.use('/api', (req, res) => res.status(404).end());
 
