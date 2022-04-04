@@ -1,6 +1,7 @@
 import React from 'react';
 import MainHeader from '../MainHeader';
 import FormCreateTrip from './FormCreateTrip';
+import './style.css';
 
 const CreateTrip = () => (
   <main className="create-trip">

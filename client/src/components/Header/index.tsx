@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import HamburgerIcon from './HamburgerIcon';
 import CloseIcon from './CloseIcon';
 import './style.css';
@@ -17,12 +17,22 @@ const Header = () => {
     navigate(href);
   };
 
+  const logoutFunc = async () => {
+    const res = await fetch('http://localhost:5500/api/auth/logout', {
+      method: 'POST',
+      credentials: 'include',
+    });
+    const data = await res.json();
+    console.log(data);
+    navigate('/');
+  };
+
   return (
     <header className="header">
       <nav className="header__nav">
         <div className="header__logo-container">
-          <img className="header__logo" src="/images/logo.png" alt="van logo" />
-          <h2 className="header__title">Travel Buddy</h2>
+          <Link to="/"><img className="header__logo" src="/images/logo.png" alt="van logo" /></Link>
+          <Link to="/"><h2 className="header__title">Travel Buddy</h2></Link>
         </div>
         <div className="header__menu-container">
           <button type="button" className="header__button" onClick={toggleNav} aria-label="toggle-nav">
@@ -32,6 +42,8 @@ const Header = () => {
             <button type="button" className="header__link" onClick={() => handleLink('/')}>Home Page</button>
             <button type="button" className="header__link" onClick={() => handleLink('/trips')}>Trips</button>
             <button type="button" className="header__link" onClick={() => handleLink('/create-trip')}>Create Trip</button>
+            <button type="button" className="header__link header__link--yellow" onClick={() => handleLink('/login')}>Login</button>
+            <button type="button" className="header__link header__link--yellow" onClick={() => logoutFunc()}>Logout</button>
             <button type="button" className="header__link header__link--blue" onClick={() => handleLink('/about-us')}>About Us</button>
           </ul>
         </div>

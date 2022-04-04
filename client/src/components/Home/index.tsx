@@ -13,8 +13,10 @@ const Home = () => (
     </section>
     <section className="home__bg">
       <picture className="home__bg-picture">
-        <source media="(orientation: landscape)" srcSet="/images/bg_desktop.png" />
-        <img className="home__bg-image" src="/images/bg_mobile.png" alt="van background" />
+        <video autoPlay muted loop className="home__bg-video">
+          <source src="/videos/mobile.mp4" type="video/mp4" />
+          <track src="captions_en.vtt" kind="captions" srcLang="en" label="english_captions" />
+        </video>
       </picture>
     </section>
   </main>

@@ -20,6 +20,7 @@
 .header__title {
   margin-top: 0.9rem;
   margin-left: 0.5rem;
+  color: var(--metal);
 }
 
 .header__logo {
@@ -70,6 +71,10 @@
 .header__link--blue {
   background-color: var(--dark-blue);
   color: white;
+}
+
+.header__link--yellow {
+  background-color: var(--yellow);
 }
 
 @media screen and (min-width: 50rem) {

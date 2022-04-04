@@ -1,23 +1,43 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const session = require('express-session');
+const passport = require('passport');
 const usersRouter = require('./users');
 const tripsRouter = require('./trips');
 const countriesRouter = require('./countries');
+const indexRouter = require('./auth');
+const authRouter = require('./auth');
 const activitiesRouter = require('./activities');
 const requestsRouter = require('./requests');
 
+require('dotenv').config();
+
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credential: true,
+}));
+
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+}));
+
+app.use(passport.authenticate('session'));
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.use('/api/users', usersRouter);
 app.use('/api/trips', tripsRouter);
 app.use('/api/countries', countriesRouter);
+app.use('/api/auth', indexRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/activities', activitiesRouter);
 app.use('/api/requests', requestsRouter);
 

@@ -1,12 +1,16 @@
 import React from 'react';
+import MainHeader from '../MainHeader';
 import './style.css';
 
 const About = () => (
   <section className="about">
-    <h1 className="about__title">About Us</h1>
-    <p className="about__team-text">
-      Coding Nomads team
-    </p>
+    <MainHeader
+      title="Coding Nomads Team"
+      links={[
+        { name: 'home', href: '/' },
+        { name: 'about-us', href: '/about-us' },
+      ]}
+    />
     <p className="about__team-text">
       Alejandro Patrycja Thomas
     </p>
