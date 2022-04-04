@@ -55,7 +55,7 @@ const TripCard = ({ trip }:TripCardProps) => {
         </p>
         <div className="trips__details">
           <p className="trips__seats">
-            {trip.maxPassengers}
+            {trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length}
             {' '}
             seats
           </p>

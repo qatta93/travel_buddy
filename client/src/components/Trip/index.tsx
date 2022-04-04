@@ -48,7 +48,7 @@ const Trip = () => {
           </section>
           <section className="trip__other">
             <p>
-              {trip.maxPassengers - trip.passengers.length}
+              {trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length}
               {' '}
               seats left
             </p>
