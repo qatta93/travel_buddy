@@ -67,7 +67,7 @@ const Trip = () => {
       body: JSON.stringify(newRequest),
     };
 
-    await fetch('http://localhost:5500/api/requests', requestOptions);
+    await fetchApi('http://localhost:5500/api/requests', requestOptions);
   };
 
   const popUp = () => {

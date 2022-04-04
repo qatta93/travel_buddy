@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { fetchApi } from '../../../helpers/api';
 import { IRequest } from '../../../types';
 import './style.css';
 
@@ -21,7 +22,7 @@ const RequestCard = ({ request }:RequestCardProps) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newRequest),
       };
-      await fetch(`http://localhost:5500/api/requests/${requestId}`, requestOptions);
+      await fetchApi(`http://localhost:5500/api/requests/${requestId}`, requestOptions);
       setStatus('accepted');
     };
     putStatusData();
@@ -39,7 +40,7 @@ const RequestCard = ({ request }:RequestCardProps) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newRequest),
       };
-      await fetch(`http://localhost:5500/api/requests/${requestId}`, requestOptions);
+      await fetchApi(`http://localhost:5500/api/requests/${requestId}`, requestOptions);
       setStatus('rejected');
     };
     putStatusData();

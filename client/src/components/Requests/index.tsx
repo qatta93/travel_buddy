@@ -7,6 +7,9 @@ import './style.css';
 
 const Requests = () => {
   const [requests, setRequests] = useState<IRequest[]>([]);
+  // replace with google auth;
+  const userId = 2;
+  const filterRequestsByUserId = requests.filter((req) => req.user.id === userId);
 
   useEffect(() => {
     const getRequestsData = async () => {
@@ -32,7 +35,7 @@ const Requests = () => {
       />
       <div className="request__list">
         <h1 className="requests__title">Pending requests:</h1>
-        {requests.map((request:IRequest) => (
+        {filterRequestsByUserId.map((request:IRequest) => (
           <RequestCard key={request.id} request={request} />
         ))}
         {'\n'}
