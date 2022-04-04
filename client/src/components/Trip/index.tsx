@@ -19,6 +19,7 @@ const InitialInput = {
 const Trip = () => {
   const [trip, setTrip] = useState<ITrip | null>(null);
   const [textInput, setTextInput] = useState<CreateInput>(InitialInput);
+  const [popup, setPopup] = useState<string>('false');
   const { id } = useParams();
 
   useEffect(() => {
@@ -60,26 +61,23 @@ const Trip = () => {
       },
     };
 
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newRequest),
-    };
+    console.log(newRequest);
 
-    await fetch('http://localhost:5500/api/requests', requestOptions);
+    // const requestOptions = {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(newRequest),
+    // };
+
+    // await fetch('http://localhost:5500/api/requests', requestOptions);
   };
 
-  // let popup = 'false';
-
-  // const openPopUp = (pop:string) => {
-  //   if (pop === 'true') {
-  //     pop = 'false';
-  //     console.log(pop);
-  //     return;
-  //   }
-  //   pop = 'true';
-  //   console.log(pop);
-  // };
+  const popUp = () => {
+    if (popup === 'true') {
+      return setPopup('false');
+    }
+    return setPopup('true');
+  };
 
   const handleChangeTextArea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextInput((currentState) => ({
@@ -90,11 +88,10 @@ const Trip = () => {
 
   return (
     <main className="trip">
-      {/* <section className={popup === 'true' ? 'trip__popup' : 'trip__popup--hide'}> */}
-      <section className="trip__popup">
+      <section className={popup === 'true' ? 'trip__popup' : 'trip__popup--hide'}>
         <div className="trip__popup-wrapper">
           <form className="create-form" onSubmit={createNewRequest}>
-            <button type="button" className="trip__popup__close">
+            <button type="button" className="trip__popup__close" onClick={() => popUp()}>
               <CloseIcon />
             </button>
             <h1 className="trip__popup__title">Why do you wanna join?</h1>
@@ -157,7 +154,7 @@ const Trip = () => {
               <button
                 className="trip__request-button"
                 type="button"
-                // onClick={() => openPopUp(popup)}
+                onClick={() => popUp()}
               >
                 Send request!
               </button>
