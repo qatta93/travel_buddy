@@ -9,4 +9,5 @@ const getUserByEmailDB = async (email) => {
   `;
   return data;
 };
+
 module.exports = { getUserByEmailDB };

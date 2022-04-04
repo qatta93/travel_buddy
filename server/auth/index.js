@@ -1,9 +1,10 @@
 const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oidc');
-const { getUserByEmail } = require('./helpers');
+const { getUserByEmail, createNewUser } = require('./helpers');
 
 const router = express.Router();
+const host = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000';
 
 passport.use(new GoogleStrategy(
   {
@@ -12,9 +13,18 @@ passport.use(new GoogleStrategy(
     callbackURL: '/api/auth/oauth2/redirect/google',
     scope: ['profile', 'email'],
   },
-  (issuer, profile) => {
+  async (issuer, profile, cb) => {
     const userEmail = profile.emails[0].value;
-    getUserByEmail(userEmail);
+    const userData = await getUserByEmail(userEmail);
+    console.log('user from db ==>', userData);
+
+    if (!userData) {
+    // create a user automatically at db with name and email
+      const newUser = await createNewUser(profile);
+      console.log(newUser);
+      return cb(null, newUser);
+    }
+    return cb(null, userData);
 
     // db.get('SELECT * FROM federated_credentials WHERE provider = ? AND subject = ?', [
     //   issuer,
@@ -52,30 +62,26 @@ passport.use(new GoogleStrategy(
   },
 ));
 
-// passport.serializeUser(function(user, cb) {
-//   process.nextTick(function() {
-//     cb(null, { id: user.id, username: user.username, name: user.name });
-//   });
-// });
+passport.serializeUser((user, cb) => {
+  process.nextTick(() => {
+    cb(null, { id: user.id, username: user.username, name: user.name });
+  });
+});
 
-// passport.deserializeUser(function(user, cb) {
-//   process.nextTick(function() {
-//     return cb(null, user);
-//   });
-// });
+passport.deserializeUser((user, cb) => {
+  process.nextTick(() => {
+    cb(null, user);
+  });
+});
 
 router.get('/login/federated/google', passport.authenticate('google'));
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
-  successRedirect: '/profile',
-  failureRedirect: '/login',
+  successRedirect: `${host}/`,
+  failureRedirect: `${host}/login`,
 }));
 // router.post('/logout', function(req, res, next) {
 //   req.logout();
 //   res.redirect('/');
 // });
-
-router.get('/login', (req, res) => {
-  res.render('login');
-});
 
 module.exports = router;

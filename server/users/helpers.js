@@ -40,13 +40,14 @@ const getUserById = async (id) => {
 };
 
 const createUser = async (newUser) => {
-  const [{ id: countryId }] = await getCountryByNameDB(newUser.country);
+  console.log(newUser);
+  const [{ id: countryId }] = await getCountryByNameDB(newUser.country || 'Greece');
   const newUserData = {
     email: newUser.email,
-    username: newUser.username,
+    username: newUser.username || 'pending',
     name: newUser.name,
-    gender: newUser.gender,
-    age: newUser.age,
+    gender: newUser.gender || 'pending',
+    age: newUser.age || 0,
     countryId,
     summary: newUser.summary || '',
     avatar: newUser.avatar || '',
