@@ -17,10 +17,17 @@ interface Options {
 type FetchReturn<T> = Success<T> | ErrorMessage;
 
 export const fetchApi = async <T>(path: string, options: Options = {}): Promise<FetchReturn<T>> => {
-  const res = await fetch(`${host}${path}`, {
-    credentials: 'include',
-    ...options,
-  });
-  const json = await res.json();
-  return json;
+  try {
+    const res = await fetch(`${host}${path}`, {
+      credentials: 'include',
+      ...options,
+    });
+    const json = await res.json();
+    return json;
+  } catch (err) {
+    if (err instanceof Error) {
+      return { status: 'error', message: err.message };
+    }
+    return { status: 'error', message: 'There was an error with your request' };
+  }
 };

@@ -18,6 +18,12 @@ export interface ICountry {
   countryCode: string,
 }
 
+export interface ITripRequests {
+  id: number,
+  userId: string,
+  status: string,
+}
+
 export interface ITrip {
   id: number,
   author: ITripAuthor
@@ -31,7 +37,7 @@ export interface ITrip {
   countries: ICountry[],
   ativities: string[],
   places: string[],
-  passengers: number[],
+  requests: ITripRequests[],
   genderRestrictions: string | null,
 }
 
@@ -82,3 +88,10 @@ export interface IRequest {
   status: 'pending' | 'accepted' | 'rejected' | 'cancelled',
   sentOn: string,
 }
+
+interface LoggedInUserInfo {
+  id: number,
+  username: string,
+}
+
+export type LoggedInUser = LoggedInUserInfo | null;

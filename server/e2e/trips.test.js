@@ -31,8 +31,8 @@ describe('GET /api/trips', () => {
         expect(trip.activities.length > 0).toBe(true);
         expect(Array.isArray(trip.places)).toBe(true);
         expect(trip.places.length > 0).toBe(true);
-        expect(Array.isArray(trip.passengers)).toBe(true);
-        expect(trip.passengers.length >= 0).toBe(true);
+        expect(Array.isArray(trip.requests)).toBe(true);
+        expect(trip.requests.length >= 0).toBe(true);
         expect(Array.isArray(trip.countries)).toBe(true);
 
         trip.countries.forEach((country) => {
@@ -66,8 +66,12 @@ describe('GET /api/trips/:id', () => {
       expect(data.maxPassengers).toBe(5);
       expect(data.activities).toEqual(expect.arrayContaining(['Beach']));
       expect(data.places).toEqual(expect.arrayContaining(['The Rockies']));
-      expect(data.passengers).toEqual(expect.arrayContaining([1, 2]));
       expect(data.genderRestrictions).toBeNull();
+
+      data.requests.forEach((request) => {
+        expect([2, 3]).toContain(request.userId);
+        expect(['accepted', 'rejected']).toContain(request.status);
+      });
 
       data.countries.forEach((country) => {
         expect([41, 46]).toContain(country.id);
@@ -126,7 +130,7 @@ describe('POST /api/trips', () => {
       expect(trip.activities).toEqual(expect.arrayContaining(newTrip.activities));
       expect(trip.places).toEqual(expect.arrayContaining(newTrip.places));
       expect(trip.genderRestrictions).toEqual('female');
-      expect(trip.passengers).toEqual([]);
+      expect(trip.requests).toEqual([]);
 
       trip.countries.forEach((country) => {
         expect([70, 177]).toContain(country.id);

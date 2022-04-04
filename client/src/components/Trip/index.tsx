@@ -67,7 +67,7 @@ const Trip = () => {
       body: JSON.stringify(newRequest),
     };
 
-    await fetch('http://localhost:5500/api/requests', requestOptions);
+    await fetchApi('http://localhost:5500/api/requests', requestOptions);
   };
 
   const popUp = () => {
@@ -129,7 +129,7 @@ const Trip = () => {
             </section>
             <section className="trip__other">
               <p>
-                {trip.maxPassengers - trip.passengers.length}
+                {trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length}
                 {' '}
                 seats left
               </p>

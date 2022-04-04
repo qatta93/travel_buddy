@@ -51,7 +51,7 @@ const createUser = async (newUser) => {
     name: newUser.name,
     gender: newUser.gender || '',
     age: newUser.age || 0,
-    countryId,
+    country_id: countryId,
     summary: newUser.summary || '',
     avatar: newUser.avatar || '',
   };

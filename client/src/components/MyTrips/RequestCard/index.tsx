@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { fetchApi } from '../../../helpers/api';
-import { IRequest, ITrip } from '../../../types';
+import { IRequest } from '../../../types';
 import './style.css';
 
 interface RequestCardProps {
@@ -8,36 +8,7 @@ interface RequestCardProps {
 }
 
 const RequestCard = ({ request }:RequestCardProps) => {
-  const [trip, setTrip] = useState<ITrip | null>(null);
   const [status, setStatus] = useState<string>(request.status);
-
-  const { tripId } = request;
-
-  const dateFromMonth = trip?.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[0];
-  const dateFromDay = trip?.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[1];
-  const dateFrom = `${dateFromDay}.${dateFromMonth}`;
-
-  const dateToYear = trip?.to.split(/T.+/g)[0].split('-')[0].split(/^.{2}/)[1];
-  const dateToMonth = trip?.to.split(/T.+/g)[0].split('-')[1];
-  const dateToDay = trip?.to.split(/T.+/g)[0].split('-')[2];
-  const dateTo = `${dateToDay}.${dateToMonth}.${dateToYear}`;
-
-  useEffect(() => {
-    const fetchTrip = async () => {
-      const data = await fetchApi<ITrip>(`/api/trips/${tripId}`);
-      if (data.status === 'error') {
-        console.error(data.message);
-        return;
-      }
-      setTrip(data.data);
-    };
-
-    fetchTrip();
-  }, []);
-
-  const tripCountries = trip?.countries.map((countriesArr) => countriesArr.country).join(' | ');
-  const tripDate = `  ${dateFrom} - ${dateTo}`;
-  const tripHostName = trip?.author.username;
 
   const acceptRequest = () => {
     const requestId = request.id;
@@ -51,7 +22,7 @@ const RequestCard = ({ request }:RequestCardProps) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newRequest),
       };
-      await fetchApi(`/api/requests/${requestId}`, requestOptions);
+      await fetchApi(`http://localhost:5500/api/requests/${requestId}`, requestOptions);
       setStatus('accepted');
     };
     putStatusData();
@@ -69,22 +40,28 @@ const RequestCard = ({ request }:RequestCardProps) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newRequest),
       };
-      await fetchApi(`/api/requests/${requestId}`, requestOptions);
+      await fetchApi(`http://localhost:5500/api/requests/${requestId}`, requestOptions);
       setStatus('rejected');
     };
     putStatusData();
   };
 
+  const sentOnYear = request.sentOn.split(/T.+/g)[0].split('-')[0].split(/^.{2}/)[1];
+  const sentOnMonth = request.sentOn.split(/T.+/g)[0].split('-')[1];
+  const sentOnDay = request.sentOn.split(/T.+/g)[0].split('-')[2];
+  const sentOnDate = `${sentOnDay}-${sentOnMonth}-${sentOnYear}`;
+
   return (
     <article className={`request-card request-card--${status}`}>
       <header className={`request-card__header request-card__header--${status}`}>
         <h1 className="request-card__title">
-          {tripCountries}
+          {request.user.name}
           {', '}
-          {tripDate}
+          {sentOnDate}
         </h1>
-        <p className="request-card__name">{tripHostName}</p>
+        <p className="request-card__email">{request.user.email}</p>
       </header>
+      <p className="request-card__text">{request.message}</p>
       <div className="request-card__buttons">
         {status === 'pending'
           ? (
