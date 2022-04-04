@@ -29,12 +29,10 @@
 }
 
 .request-card__title {
-  font-size: 1rem;
-  font-weight: regular;
   padding: 0.5rem 0;
 }
 
-.request-card__name {
+.request-card__email {
   font-size: 0.8rem;
 }
 
@@ -50,7 +48,6 @@
 }
 
 .request-card__button {
-  margin: 0.7rem 0 0.2rem 0;
   padding: 0.3rem 2.5rem;
   border: none;
   border-radius: 0.2rem;
