@@ -6,22 +6,13 @@ import { ITrip } from '../../types';
 import { useAppSelector } from '../../hooks';
 import MainHeader from '../MainHeader';
 import UserCard from './UserCard';
-import CloseIcon from '../Header/CloseIcon';
 import { parseGenderRestrictions, formatDatesTrip } from '../../helpers/misc';
+import TripPopup from './TripPopup';
 import './style.css';
-
-interface CreateInput {
-  description: string,
-}
-
-const InitialInput = {
-  description: '',
-};
 
 const Trip = () => {
   const [trip, setTrip] = useState<ITrip | null>(null);
-  const [textInput, setTextInput] = useState<CreateInput>(InitialInput);
-  const [popup, setPopup] = useState<string>('false');
+  const [popup, setPopup] = useState<boolean>(false);
   const user = useAppSelector((state) => state.user.user);
   const { id } = useParams();
 
@@ -38,42 +29,7 @@ const Trip = () => {
     fetchTrip();
   }, []);
 
-  const createNewRequest = async (event: React.FormEvent) => {
-    event.preventDefault();
-
-    if (!user) {
-      return;
-    }
-
-    setTextInput(InitialInput);
-    const newRequest = {
-      tripId: id,
-      userId: user.id,
-      message: textInput.description,
-    };
-
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newRequest),
-    };
-
-    await fetchApi('/api/requests', requestOptions);
-  };
-
-  const togglePopUp = () => {
-    if (popup === 'true') {
-      return setPopup('false');
-    }
-    return setPopup('true');
-  };
-
-  const handleChangeTextArea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTextInput((currentState) => ({
-      ...currentState,
-      [event.target.name]: event.target.value,
-    }));
-  };
+  const togglePopup = () => setPopup((currentState) => !currentState);
 
   const seatsLeft = trip && Math.max(trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length, 0);
 
@@ -93,28 +49,11 @@ const Trip = () => {
 
   return (
     <main className="trip">
-      <section className={popup === 'true' ? 'trip__popup' : 'trip__popup--hide'}>
-        <div className="trip__popup-wrapper">
-          <form className="create-form" onSubmit={createNewRequest}>
-            <button type="button" className="trip__popup__close" onClick={() => togglePopUp()}>
-              <CloseIcon />
-            </button>
-            <h1 className="trip__popup__title">Why do you wanna join?</h1>
-            <label htmlFor="summary">
-              <textarea
-                name="description"
-                placeholder="Tell me more..."
-                value={textInput.description}
-                onChange={handleChangeTextArea}
-                className="trip__popup__text"
-              />
-            </label>
-            <button type="submit" className="trip__popup__btn" onClick={() => togglePopUp()}>SEND</button>
-          </form>
-        </div>
+      <section className={`trip__popup ${!popup ? 'trip__popup--hide' : ''}`}>
+        <TripPopup togglePopup={togglePopup} tripId={id} user={user} />
       </section>
       <section className="trip__container">
-        {trip ? (
+        {trip && (
           <>
             <section className="trip__main-header">
               <MainHeader
@@ -163,14 +102,14 @@ const Trip = () => {
                 <button
                   className="trip__request-button"
                   type="button"
-                  onClick={() => togglePopUp()}
+                  onClick={togglePopup}
                 >
                   Send request!
                 </button>
               ) : <p className="trip__request-button--disabled">{requestButtonMessage()}</p>}
             </section>
           </>
-        ) : <p>Loading...</p>}
+        )}
       </section>
     </main>
   );
