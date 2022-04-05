@@ -1,0 +1,63 @@
+* {
+  font-size: 1.1rem;
+}
+.display-user__container {
+  display:flex;
+  flex-direction: column;
+  margin: 0.9rem;
+  padding-top: 1.5rem;
+}
+
+.display-user__avatar {
+  height: 15rem;
+  align-self: center;
+  margin-bottom: 2rem;
+}
+
+.display-user__info {
+  display:flex;
+  padding: 0.7rem;
+  justify-content:space-between;
+
+}
+
+.display-user__info-key {
+  color: var(--dark-blue);
+  
+}
+
+.display-user__info-value {
+  align-self: center;
+  text-align: left;
+  color: var(--metal);
+  margin-right: 1rem;
+}
+
+.display-user__summary {
+  display:flex;  
+  flex-direction: column;
+  align-items: center;
+  margin: 0.9rem;
+}
+
+.display-user__summary-title {
+  color: var(--dark-blue);
+  padding-bottom: 0.7rem;
+}
+
+.display-user__summary-text {
+
+}
+
+.display-user__car-bcg {
+  margin-top: 4rem;
+  opacity: 40%;
+  height: 10rem;
+  background-image: url('/public/images/bg_desktop.png');
+  background-position: top;
+  background-size: cover;
+}
+
+@media screen and (min-width: 40rem) {
+  
+}
