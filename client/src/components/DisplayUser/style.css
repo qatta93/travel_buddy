@@ -1,0 +1,15 @@
+.display-user__img {
+  width: 100vw;
+  opacity: 40%;
+}
+
+@media screen and (min-width: 30rem) {
+  .display-user {
+    background-image: url('/public/images/bg_desktop.png');
+    background-position: bottom;
+    background-size: cover;
+  }
+  .display-user__img {
+    display: none;
+  }
+}

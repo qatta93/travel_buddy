@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ChevronIcon from '../ChevronIcon';
 import UserCard from '../UserCard';
 import './style.css';
@@ -21,7 +22,11 @@ const Passengers = ({ passengers }: PassengersProps) => {
         </button>
       </div>
       <div className={`passengers__container ${isExpanded ? 'passengers__container--visible' : ''}`}>
-        {passengers.map((p) => <UserCard key={p} id={Number(p)} />)}
+        {passengers.map((p) => (
+          <Link to={`/users/${p}`} key={p}>
+            <UserCard id={Number(p)} />
+          </Link>
+        ))}
       </div>
     </article>
   );
