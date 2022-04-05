@@ -30,11 +30,11 @@ const Header = () => {
           </button>
           <ul className={`header__links-container ${isNavExpanded ? 'header__links-container--visible' : ''}`}>
             <NavLink className="header__link" to="/" onClick={handleLink}>Home Page</NavLink>
-            <NavLink className="header__link" to="/trips" onClick={handleLink}>Trips</NavLink>
+            <NavLink className="header__link" to="/trips" onClick={handleLink} end>Trips</NavLink>
             {user ? (
               <>
                 <NavLink className="header__link" to="/create-trip" onClick={handleLink}>Create Trip</NavLink>
-                <NavLink className="header__link header__link--yellow" to="/profile" onClick={handleLink}>Profile</NavLink>
+                <NavLink className="header__link header__link--yellow" to="/profile" onClick={handleLink} end>Profile</NavLink>
               </>
             ) : (
               <NavLink className="header__link header__link--yellow" to="/login" onClick={handleLink}>Login</NavLink>
