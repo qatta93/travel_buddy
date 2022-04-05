@@ -29,8 +29,6 @@ const MyTrips = () => {
     getTripsData();
   }, []);
 
-  console.log(filterTripsByUserId.length === 0);
-
   return (
     <section className="my-trips">
       <MainHeader

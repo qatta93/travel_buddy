@@ -1,85 +1,29 @@
-.request-card {
-  margin: 1rem auto;
-  border: 2px solid var(--yellow);
-  border-radius: 0.4rem;
-  background-color: white;
-  box-shadow: 2px 5px 3px var(--shadow);
-  width: 80%;
-  max-width: 20rem;
+.my-trips-requests__wrapper {
+  margin: -1rem auto;
+  height: 100%;
+  width: 70%;
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
-.request-card--accepted {
-  border: 2px solid var(--light-gray);
-  order: 1;
-}
-
-.request-card--rejected {
-  border: 2px solid var(--light-gray);
-  order: 2;
-}
-
-.request-card__header {
-  padding: 0.5rem;
-  background-color: var(--yellow);
-}
-
-.request-card__header--accepted,
-.request-card__header--rejected {
-  background-color: var(--light-gray);
-}
-
-.request-card__title {
-  padding: 0.5rem 0;
-}
-
-.request-card__email {
-  font-size: 0.8rem;
-}
-
-.request-card__text {
-  padding: 1rem 0.5rem;
-  font-size: 0.8rem;
-}
-
-.request-card__buttons {
-  padding: 0 0.5rem 0.5rem;
-  display: flex;
-  justify-content: space-around;
-}
-
-.request-card__button {
-  padding: 0.3rem 2.5rem;
-  border: none;
-  border-radius: 0.2rem;
-  cursor: pointer;
-}
-
-.request-card__button--accept {
-  background-color: var(--green);
-  box-shadow: 1px 3px 3px var(--shadow);
-}
-
-.request-card__button--accepted {
-  background-color: var(--green);
-  box-shadow: 1px 3px 3px var(--shadow);
-}
-
-.request-card__button--reject {
-  background-color: var(--red);
-  box-shadow: 1px 3px 3px var(--shadow);
-}
-
-.request-card__button--rejected {
-  background-color: var(--red);
-  box-shadow: 1px 3px 3px var(--shadow);
-}
-
-.request-card__button--change {
-  box-shadow: 1px 3px 3px var(--shadow);
+.my-trips-requests__wrapper p:first-child {
+  padding-top: 10rem;
 }
 
 @media screen and (min-width: 30rem) {
-  .request-card {
-    min-width: 10rem;
+  .my-trips-requests {
+      max-width: 100vw;
+      background-image: url(../../../../public/images/bg_desktop.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100%;
+  }
+  .my-trips__no-requests {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (min-width: 60rem) {
+  .my-trips__no-requests {
+    font-size: 1.5rem;
   }
 }

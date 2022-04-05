@@ -25,7 +25,7 @@ const MyTripRequests = () => {
   const tripRequests = requests.filter((req) => req.tripId === tripId);
 
   return tripRequests ? (
-    <section className="my-trips">
+    <section className="my-trips-requests">
       <MainHeader
         title="My trip requests"
         links={[
@@ -35,9 +35,19 @@ const MyTripRequests = () => {
           { name: 'requests', href: `/profile/my-trips/${tripId}` },
         ]}
       />
-      {/* {trip === false ? <p className="request__status">No pending requests</p> : null} */}
+
+      {tripRequests.length === 0
+        ? (
+          <div className="my-trips-requests__wrapper">
+            <p className="my-trips__no-requests">No requests yet. Do not worry!</p>
+            <p className="my-trips__no-requests">They will come soon ☺</p>
+          </div>
+        )
+        : null}
       {tripRequests.map((request:IRequest) => (
-        <MyTripRequestsCard request={request} setRequests={setRequests} />
+        <div className="my-trips-requests__wrapper">
+          <MyTripRequestsCard request={request} setRequests={setRequests} />
+        </div>
       ))}
     </section>
   ) : null;
