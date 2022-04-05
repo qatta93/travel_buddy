@@ -84,7 +84,7 @@ describe('POST /api/requests', () => {
       const request = await getRequestById(requestId);
       expect(request.tripId).toEqual(newRequest.tripId);
       expect(request.user.id).toEqual(newRequest.userId);
-      expect(request.user.name).toEqual('Alejandro');
+      expect(request.user.name).toEqual('Alejandro Aburto');
       expect(request.user.username).toEqual('aburto22');
       expect(request.user.email).toEqual('aburto22@gmail.com');
       expect(request.status).toEqual('pending');
