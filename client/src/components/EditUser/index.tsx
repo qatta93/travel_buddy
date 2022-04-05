@@ -43,6 +43,7 @@ const EditUser = () => {
           <FormEditUser user={userDetails} />
         </section>
       )}
+      <img className="edit-user__img" src="/images/bg_desktop.png" alt="car" />
     </main>
   );
 };
