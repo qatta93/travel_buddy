@@ -4,9 +4,18 @@ import MainHeader from '../../MainHeader';
 import { IRequest } from '../../../types';
 import './style.css';
 
-// interface RequestCardProps {
-//   request: IRequest;
-// }
+type Status = 'pending' | 'accepted' | 'rejected' | 'cancelled';
+
+const updateRequestStatus = (reqs:IRequest[], id:number, status:Status):IRequest[] => reqs
+  .map((req) => {
+    if (req.id !== id) {
+      return req;
+    }
+    return {
+      ...req,
+      status,
+    };
+  });
 
 const MyTripRequests = () => {
   const [requests, setRequests] = useState<IRequest[]>([]);
@@ -28,11 +37,6 @@ const MyTripRequests = () => {
 
   const request = requests.filter((req) => req.tripId === tripId)[0];
 
-  // const initialStatus = request.status;
-
-  // const [status, setStatus] = useState<string>(initialStatus);
-  const [status, setStatus] = useState<string>('pending');
-
   const acceptRequest = () => {
     const requestId = request.id;
     const putStatusData = async () => {
@@ -46,7 +50,8 @@ const MyTripRequests = () => {
         body: JSON.stringify(newRequest),
       };
       await fetchApi(`/api/requests/${requestId}`, requestOptions);
-      setStatus('accepted');
+      const newRequests = updateRequestStatus(requests, requestId, 'accepted');
+      setRequests(newRequests);
     };
     putStatusData();
   };
@@ -64,7 +69,8 @@ const MyTripRequests = () => {
         body: JSON.stringify(newRequest),
       };
       await fetchApi(`/api/requests/${requestId}`, requestOptions);
-      setStatus('rejected');
+      const newRequests = updateRequestStatus(requests, requestId, 'rejected');
+      setRequests(newRequests);
     };
     putStatusData();
   };
@@ -85,8 +91,8 @@ const MyTripRequests = () => {
           { name: 'requests', href: `profile/my-trips/${tripId}` },
         ]}
       />
-      <article className={`request-card request-card--${status}`}>
-        <header className={`request-card__header request-card__header--${status}`}>
+      <article className={`request-card request-card--${request.status}`}>
+        <header className={`request-card__header request-card__header--${request.status}`}>
           <h1 className="request-card__title">
             {request.user.name}
             {', '}
@@ -96,7 +102,7 @@ const MyTripRequests = () => {
         </header>
         <p className="request-card__text">{request.message}</p>
         <div className="request-card__buttons">
-          {status === 'pending'
+          {request.status === 'pending'
             ? (
               <>
                 <button type="button" className="request-card__button request-card__button--accept" onClick={() => acceptRequest()}>accept</button>
@@ -104,7 +110,7 @@ const MyTripRequests = () => {
               </>
             )
             : ''}
-          {status === 'accepted'
+          {request.status === 'accepted'
             ? (
               <>
                 <button type="button" className="request-card__button request-card__button--accepted">accepted</button>
@@ -112,7 +118,7 @@ const MyTripRequests = () => {
               </>
             )
             : ''}
-          {status === 'rejected'
+          {request.status === 'rejected'
             ? (
               <>
                 <button type="button" className="request-card__button request-card__button--rejected">rejected</button>
