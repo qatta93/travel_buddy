@@ -36,7 +36,7 @@ const MyTrips = () => {
         links={[
           { name: 'home', href: '/' },
           { name: 'profile', href: '/profile' },
-          { name: 'my-trips', href: 'profile/my-trips' },
+          { name: 'my-trips', href: '/profile/my-trips' },
         ]}
       />
       <div className="my-trips__list">

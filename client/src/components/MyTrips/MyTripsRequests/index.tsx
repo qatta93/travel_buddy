@@ -87,8 +87,8 @@ const MyTripRequests = () => {
         links={[
           { name: 'home', href: '/' },
           { name: 'profile', href: '/profile' },
-          { name: 'my-trips', href: 'profile/my-trips' },
-          { name: 'requests', href: `profile/my-trips/${tripId}` },
+          { name: 'my-trips', href: '/profile/my-trips' },
+          { name: 'requests', href: `/profile/my-trips/${tripId}` },
         ]}
       />
       <article className={`request-card request-card--${request.status}`}>
