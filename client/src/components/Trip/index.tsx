@@ -112,7 +112,7 @@ const Trip = () => {
           </form>
         </div>
       </section>
-      <section className="trip-container">
+      <section className="trip__container">
         {trip ? (
           <>
             <section className="trip__main-header">
@@ -124,6 +124,9 @@ const Trip = () => {
                   { href: `/trips/${id}`, name: 'Details' },
                 ]}
               />
+            </section>
+            <section className="trip__summary">
+              <p className="trip__summary-text">{trip.summary}</p>
             </section>
             <section className="trip__info">
               <p className="trip__dates">{tripDates}</p>

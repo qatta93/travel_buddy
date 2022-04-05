@@ -2,12 +2,13 @@
   position: relative;
 }
 
-.trip-container {
+.trip__container {
   background-color: var(--light-gray);
   margin-top: 0.3rem;
   display: grid;
   grid-template-areas:
     "header"
+    "summary"
     "info"
     "other"
     "images"
@@ -81,6 +82,16 @@
   margin-bottom: 1rem;
 }
 
+.trip__summary {
+  grid-area: summary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 4rem 0.5rem;
+  text-align: center;
+  font-style: italic;
+}
+
 .trip__info {
   grid-area: info;
   padding: 1.5rem 1rem;
@@ -107,6 +118,7 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem 1rem;
+  text-align: justify;
 }
 
 .trip__other {
@@ -175,9 +187,10 @@
 }
 
 @media screen and (min-width: 45rem) {
-  .trip {
+  .trip__container {
     grid-template-areas:
       "header header"
+      "summary summary"
       "info images"
       "other other"
       "user user"
@@ -186,6 +199,10 @@
   }
 
   .trip__main-header {
+    margin-bottom: 2rem;
+  }
+
+  .trip__summary {
     margin-bottom: 2rem;
   }
 
@@ -226,9 +243,10 @@
 }
 
 @media screen and (min-width: 85rem) {
-  .trip {
+  .trip__container {
     grid-template-areas:
       "header header header"
+      "summary summary summary"
       "info images user"
       "info images button"
       "other other other";
