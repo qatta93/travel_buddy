@@ -22,6 +22,7 @@ interface CreateInput {
   summary: string,
   images: string,
   places: string,
+  video: string,
   activities: string[],
 }
 
@@ -43,6 +44,7 @@ const createInputInitialValue = {
   description: '',
   summary: '',
   images: '',
+  video: '',
   places: '',
   activities: [],
 };
@@ -200,7 +202,7 @@ const CreateTripForm = () => {
         />
       </label>
       <label htmlFor="gender" className="create-form__label create-form__label--checkbox">
-        Gender:
+        Gender
         <input
           name="female"
           type="checkbox"
@@ -240,12 +242,23 @@ const CreateTripForm = () => {
         />
       </label>
       <label htmlFor="images" className="create-form__label">
-        Images:
+        Images
         <input
           name="images"
           type="text"
           placeholder="Put the link of an amazing picture!"
           value={createInput.images}
+          onChange={handleChangeInput}
+          className="create-form__input"
+        />
+      </label>
+      <label htmlFor="video" className="create-form__label">
+        Video
+        <input
+          name="video"
+          type="text"
+          placeholder="Put the link to your best youtube video"
+          value={createInput.video}
           onChange={handleChangeInput}
           className="create-form__input"
         />
@@ -284,7 +297,7 @@ const CreateTripForm = () => {
         />
       </label>
       <label htmlFor="activities" className="create-form__label">
-        Activities:
+        Activities
         <select
           name="activities"
           value={createInput.activities}

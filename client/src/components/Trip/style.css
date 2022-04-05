@@ -12,6 +12,7 @@
     "info"
     "other"
     "images"
+    "video"
     "user"
     "button";
   margin-bottom: auto;
@@ -137,7 +138,7 @@
   display: flex;
   flex-wrap: wrap;
   padding: 0 2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   align-items: center;
 }
 
@@ -185,6 +186,22 @@
   text-align: center;
 }
 
+.trip__video-container {
+  grid-area: video;
+  margin-bottom: 2rem;
+}
+
+.trip__video {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  height: 50vw;
+  width: 50rem;
+  padding: 0 2rem;
+  max-height: 25rem;
+}
+
 @media screen and (min-width: 30rem ){
   .trip__popup-wrapper {
     height: 33rem;
@@ -198,6 +215,7 @@
       "summary summary"
       "info images"
       "other other"
+      "video video"
       "user user"
       "button button";
     grid-template-columns: 1fr 1fr;
@@ -232,6 +250,7 @@
   .trip__button-container {
     padding-top: 3rem;
   }
+
   .trip__popup-wrapper {
     margin: 30% 0;
     background-color: white;
@@ -254,8 +273,9 @@
       "summary summary summary"
       "info images user"
       "info images button"
-      "other other other";
-    grid-template-columns: 2fr 2fr 3fr;
+      "other other other"
+      "video video video";
+    grid-template-columns: 3fr 3fr 3fr;
   }
 
   .trip__info {
@@ -289,10 +309,21 @@
     max-width: 20rem;
   }
 
+  .trip__request-button--disabled {
+    border-radius: 0.3rem;
+    max-width: 20rem;
+  }
+
   .trip__other {
     margin: 2rem 0 0;
   }
+
   .trip__popup-wrapper {
     margin: 10% 0;
+  }
+
+
+  .trip__video {
+    margin-top: 2rem;
   }
 }

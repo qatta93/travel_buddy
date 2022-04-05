@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import YouTube from 'react-youtube';
 import { useParams } from 'react-router-dom';
 import { fetchApi } from '../../helpers/api';
 import { ITrip } from '../../types';
@@ -146,6 +147,11 @@ const Trip = () => {
                 </p>
               )}
             </section>
+            {trip.video && (
+              <section className="trip__video-container">
+                <YouTube videoId={trip.video} className="trip__video" />
+              </section>
+            )}
             <section className="trip__img-container">
               <img src={trip.images || '/images/rockies.jpeg'} alt="trip" className="trip__img" />
             </section>
