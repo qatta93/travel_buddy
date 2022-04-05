@@ -4,7 +4,7 @@
   background-color: var(--light-blue);
   border-radius: 0.4rem;
   box-shadow: 0 3px 3px 1px var(--shadow);
-  max-width: 50rem;
+  max-width: 35rem;
 }
 
 .user-card__info {
@@ -45,6 +45,10 @@
 }
 
 @media screen and (min-width: 45rem) {
+  .user-card {
+    max-width: 50rem;
+  }
+
   .user-card__info {
     padding: 1.2rem;
   }
@@ -68,6 +72,10 @@
 }
 
 @media screen and (min-width: 85rem) {
+  .user-card {
+    max-width: 30rem;
+  }
+
   .user-card__info {
     padding: 0.8rem;
   }

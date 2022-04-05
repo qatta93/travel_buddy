@@ -8,6 +8,7 @@ import MainHeader from '../MainHeader';
 import UserCard from './UserCard';
 import { parseGenderRestrictions, formatDatesTrip } from '../../helpers/misc';
 import TripPopup from './TripPopup';
+import Passengers from './Passengers';
 import './style.css';
 
 const Trip = () => {
@@ -47,70 +48,75 @@ const Trip = () => {
     return 'This trip is full';
   };
 
+  const passengers = trip ? trip.requests.filter((r) => r.status === 'accepted').map((r) => r.userId) : [];
+
   return (
     <main className="trip">
-      <section className={`trip__popup ${!popup ? 'trip__popup--hide' : ''}`}>
+      <div className={`trip__popup ${!popup ? 'trip__popup--hide' : ''}`}>
         <TripPopup togglePopup={togglePopup} tripId={id} user={user} />
-      </section>
-      <section className="trip__container">
-        {trip && (
-          <>
-            <section className="trip__main-header">
-              <MainHeader
-                title={`trip with ${trip.author.username} to ${trip.countries.map((c) => c.country).join(', ')}`}
-                links={[
-                  { href: '/', name: 'Home' },
-                  { href: '/trips', name: 'Trips' },
-                  { href: `/trips/${id}`, name: 'Details' },
-                ]}
-              />
-            </section>
-            <section className="trip__summary">
-              <p className="trip__summary-text">{trip.summary}</p>
-            </section>
-            <section className="trip__info">
-              <p className="trip__dates">{tripDates}</p>
-              <p className="trip__description">{trip.description}</p>
-            </section>
-            <section className="trip__other">
+      </div>
+      {trip && (
+        <div className="trip__container">
+          <section className="trip__main-header">
+            <MainHeader
+              title={`trip with ${trip.author.username} to ${trip.countries.map((c) => c.country).join(', ')}`}
+              links={[
+                { href: '/', name: 'Home' },
+                { href: '/trips', name: 'Trips' },
+                { href: `/trips/${id}`, name: 'Details' },
+              ]}
+            />
+          </section>
+          <section className="trip__summary">
+            <p className="trip__summary-text">{trip.summary}</p>
+          </section>
+          <section className="trip__info">
+            <p className="trip__dates">{tripDates}</p>
+            <p className="trip__description">{trip.description}</p>
+          </section>
+          <section className="trip__other">
+            <p>
+              {seatsLeft}
+              {' '}
+              seats left
+            </p>
+            <p>{parseGenderRestrictions(trip.genderRestrictions)}</p>
+            {trip.budget && (
               <p>
-                {seatsLeft}
-                {' '}
-                seats left
+                USD$
+                {trip.budget}
               </p>
-              <p>{parseGenderRestrictions(trip.genderRestrictions)}</p>
-              {trip.budget && (
-                <p>
-                  USD$
-                  {trip.budget}
-                </p>
-              )}
-            </section>
-            {trip.video && (
-              <section className="trip__video-container">
-                <YouTube videoId={trip.video} className="trip__video" />
-              </section>
             )}
-            <section className="trip__img-container">
-              <img src={trip.images || '/images/rockies.jpeg'} alt="trip" className="trip__img" />
+          </section>
+          {trip.video && (
+            <section className="trip__video-container">
+              <YouTube videoId={trip.video} className="trip__video" />
             </section>
-            <section className="trip__user-card">
-              <UserCard id={trip.author.id} />
+          )}
+          <section className="trip__img-container">
+            <img src={trip.images || '/images/rockies.jpeg'} alt="trip" className="trip__img" />
+          </section>
+          <section className="trip__user-card">
+            <UserCard id={trip.author.id} />
+          </section>
+          {passengers.length > 0 && (
+            <section className="trip__passengers">
+              <Passengers passengers={passengers} />
             </section>
-            <section className="trip__button-container">
-              {requestButtonActive ? (
-                <button
-                  className="trip__request-button"
-                  type="button"
-                  onClick={togglePopup}
-                >
-                  Send request!
-                </button>
-              ) : <p className="trip__request-button--disabled">{requestButtonMessage()}</p>}
-            </section>
-          </>
-        )}
-      </section>
+          )}
+          <section className="trip__button-container">
+            {requestButtonActive ? (
+              <button
+                className="trip__request-button"
+                type="button"
+                onClick={togglePopup}
+              >
+                Send request!
+              </button>
+            ) : <p className="trip__request-button--disabled">{requestButtonMessage()}</p>}
+          </section>
+        </div>
+      )}
     </main>
   );
 };

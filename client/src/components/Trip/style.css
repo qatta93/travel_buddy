@@ -14,7 +14,8 @@
     "images"
     "user"
     "video"
-    "button";
+    "button"
+    "passengers";
   margin-bottom: auto;
 }
 
@@ -155,6 +156,14 @@
   max-height: 25rem;
 }
 
+.trip__passengers {
+  grid-area: passengers;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
 @media screen and (min-width: 45rem) {
   .trip__container {
     grid-template-areas:
@@ -164,7 +173,8 @@
       "other other"
       "user user"
       "video video"
-      "button button";
+      "button button"
+      "passengers passengers";
     grid-template-columns: 1fr 1fr;
   }
 
@@ -221,7 +231,8 @@
       "info images user"
       "info images button"
       "other other other"
-      "video video video";
+      "video video video"
+      "passengers passengers passengers";
     grid-template-columns: 3fr 3fr 3fr;
   }
 
@@ -269,8 +280,11 @@
     margin: 10% 0;
   }
 
-
   .trip__video {
     margin-top: 2rem;
+  }
+
+  .trip__passengers {
+    padding-top: 2rem;
   }
 }
