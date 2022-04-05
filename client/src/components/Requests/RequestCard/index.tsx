@@ -12,7 +12,7 @@ const RequestCard = ({ request }:RequestCardProps) => {
   const [cancelled, setCancelled] = useState(false);
 
   const { tripId } = request;
-  const status = trip?.requests[0].status;
+  const { status } = request;
 
   const dateFromMonth = trip?.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[0];
   const dateFromDay = trip?.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[1];
