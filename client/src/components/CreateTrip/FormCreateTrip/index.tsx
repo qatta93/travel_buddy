@@ -151,7 +151,7 @@ const CreateTripForm = () => {
   return (
     <form className="create-form" onSubmit={handleSubmit}>
       <label htmlFor="country" className="create-form__label">
-        Country:
+        <span>Countries *</span>
         <select
           name="countries"
           value={createInput.countries}
@@ -166,7 +166,7 @@ const CreateTripForm = () => {
         </select>
       </label>
       <label htmlFor="date" className="create-form__label create-form__label--date">
-        Date:
+        Dates *
         <input
           name="dateFrom"
           type="date"
@@ -188,7 +188,7 @@ const CreateTripForm = () => {
         />
       </label>
       <label htmlFor="budget" className="create-form__label">
-        Budget:
+        Budget *
         <input
           name="budget"
           type="number"
@@ -227,7 +227,7 @@ const CreateTripForm = () => {
         Other
       </label>
       <label htmlFor="buddies" className="create-form__label">
-        Buddies:
+        Buddies *
         <input
           name="buddies"
           type="number"
@@ -251,7 +251,7 @@ const CreateTripForm = () => {
         />
       </label>
       <label htmlFor="summary" className="create-form__label create-form__label--text-area">
-        Summary:
+        Summary *
         <textarea
           name="summary"
           placeholder="Tell me a little about your trip"
@@ -262,7 +262,7 @@ const CreateTripForm = () => {
         />
       </label>
       <label htmlFor="description" className="create-form__label create-form__label--text-area">
-        Description:
+        Description *
         <textarea
           name="description"
           placeholder="Tell me more!"
@@ -273,7 +273,7 @@ const CreateTripForm = () => {
         />
       </label>
       <label htmlFor="places" className="create-form__label create-form__label--text-area">
-        Places:
+        Places *
         <textarea
           name="places"
           placeholder="Which landmarks will you be visiting? Separate them with a coma (',')."
@@ -297,6 +297,7 @@ const CreateTripForm = () => {
           ))}
         </select>
       </label>
+      <p className="create-form__legend">* Required fields</p>
       <div className="create-form__btn-wrapper">
         <button type="submit" className="create-form__btn">Create trip</button>
       </div>
