@@ -124,6 +124,7 @@ const createTrip = async (newTrip) => {
     budget: newTrip.budget || 0,
     images: newTrip.images || '/images/trip-default.jpg',
     gender_restrictions: newTrip.genderRestrictions || null,
+    video: newTrip.video || '',
   };
 
   const [trip] = await createTripDB(newTripData);
