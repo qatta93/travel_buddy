@@ -35,6 +35,7 @@ const MyTripRequests = () => {
           { name: 'requests', href: `/profile/my-trips/${tripId}` },
         ]}
       />
+      {/* {trip === false ? <p className="request__status">No pending requests</p> : null} */}
       {tripRequests.map((request:IRequest) => (
         <MyTripRequestsCard request={request} setRequests={setRequests} />
       ))}

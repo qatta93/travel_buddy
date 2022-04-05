@@ -29,6 +29,8 @@ const MyTrips = () => {
     getTripsData();
   }, []);
 
+  console.log(filterTripsByUserId.length === 0);
+
   return (
     <section className="my-trips">
       <MainHeader
@@ -40,6 +42,7 @@ const MyTrips = () => {
         ]}
       />
       <div className="my-trips__list">
+        {filterTripsByUserId.length === 0 ? <p className="my-trips__list--empty">You have no upcoming trips!</p> : null}
         {filterTripsByUserId.map((trip:ITrip) => (
           <Link key={trip.id} to={`/profile/my-trips/${trip.id}`} className="my-trips__item">
             <TripCard trip={trip} />
