@@ -68,7 +68,6 @@ const Trip = () => {
               ]}
             />
           </section>
-          <Maps />
           <section className="trip__summary">
             <p className="trip__summary-text">{trip.summary}</p>
           </section>
@@ -121,6 +120,7 @@ const Trip = () => {
           </section>
         </div>
       )}
+      <Maps />
     </main>
   );
 };

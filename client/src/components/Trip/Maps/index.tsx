@@ -22,7 +22,7 @@ const Maps = () => {
 
   useEffect(() => {
     const createMap = async () => {
-      if (map.current) return; // initialize map only once
+      if (map.current) return;
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/streets-v11',
