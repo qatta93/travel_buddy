@@ -5,6 +5,7 @@ import { fetchApi } from '../../helpers/api';
 // import { useAppSelector } from '../../hooks';
 import MainHeader from '../MainHeader';
 import DisplayCard from './DisplayCard';
+import './style.css';
 
 export const DisplayUser = () => {
   const [userDetails, setUserDetails] = useState<IUser | null>(null);
@@ -40,10 +41,11 @@ export const DisplayUser = () => {
         ]}
       />
       {userDetails && (
-        <section className="display-user__card">
+        <section className="display-card">
           <DisplayCard user={userDetails} />
         </section>
       )}
+      <img className="display-user__img" src="/images/bg_desktop.png" alt="car" />
     </main>
   );
 };

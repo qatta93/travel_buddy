@@ -7,54 +7,53 @@ interface DisplayUserProps {
 }
 
 const DisplayCard = ({ user }: DisplayUserProps) => (
-  <main className="display-user__container">
-    <img className="display-user__avatar" alt="user's avatar" src={user.avatar === null ? '/images/avatar.webp' : user.avatar} />
-    <article className="display-user__info">
-      <p className="display-user__info-key">Name:</p>
-      <p className="display-user__info-value">
+  <article className="display-card__container">
+    <img className="display-card__avatar" alt="user's avatar" src={user.avatar === null ? '/images/avatar.webp' : user.avatar} />
+    <div className="display-card__info">
+      <p className="display-card__info-key">Name:</p>
+      <p className="display-card__info-value">
         {user.name}
       </p>
-    </article>
-    <article className="display-user__info">
-      <p className="display-user__info-key">Username:</p>
-      <p className="display-user__info-value">
+    </div>
+    <div className="display-card__info">
+      <p className="display-card__info-key">Username:</p>
+      <p className="display-card__info-value">
         {user.username}
       </p>
-    </article>
-    <article className="display-user__info">
-      <p className="display-user__info-key">Age:</p>
-      <p className="display-user__info-value">
+    </div>
+    <div className="display-card__info">
+      <p className="display-card__info-key">Age:</p>
+      <p className="display-card__info-value">
         {user.age}
       </p>
-    </article>
-    <article className="display-user__info">
-      <p className="display-user__info-key">Country:</p>
-      <p className="display-user__info-value">
+    </div>
+    <div className="display-card__info">
+      <p className="display-card__info-key">Country:</p>
+      <p className="display-card__info-value">
         {user.country}
       </p>
-    </article>
-    <article className="display-user__info">
-      <p className="display-user__info-key">Gender:</p>
-      <p className="display-user__info-value">
+    </div>
+    <div className="display-card__info">
+      <p className="display-card__info-key">Gender:</p>
+      <p className="display-card__info-value">
         {user.gender}
       </p>
-    </article>
-    <article className="display-user__info">
-      <p className="display-user__info-key">Languages:</p>
-      <p className="display-user__info-value">
+    </div>
+    <div className="display-card__info">
+      <p className="display-card__info-key">Languages:</p>
+      <p className="display-card__info-value">
         {user.languages.map((l) => l.language).join(', ')}
       </p>
-    </article>
-    <article className="display-user__summary">
-      <p className="display-user__summary-title">
+    </div>
+    <div className="display-card__summary">
+      <p className="display-card__summary-title">
         About Me
       </p>
-      <p className="display-user__summary-text">
+      <p className="display-card__summary-text">
         {user.summary}
       </p>
-    </article>
-    <div className="display-user__car-bcg" />
-  </main>
+    </div>
+  </article>
 );
 
 export default DisplayCard;

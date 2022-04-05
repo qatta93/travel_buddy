@@ -1,55 +1,70 @@
 * {
   font-size: 1.1rem;
 }
-.display-user__container {
+.display-card__container {
   display:flex;
   flex-direction: column;
+  justify-content: center;
   margin: 0.9rem;
   padding-top: 1.5rem;
 }
 
-.display-user__avatar {
+.display-card__avatar {
   height: 15rem;
   align-self: center;
   margin-bottom: 2rem;
 }
 
-.display-user__info {
-  display:flex;
-  padding: 0.7rem;
-  justify-content:space-between;
+.display-card__info {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
 
+  padding: 0.7rem 2rem;
+  justify-content:space-around;
 }
 
-.display-user__info-key {
+.display-card__info-key {
+  justify-self: start;
   color: var(--dark-blue);
   
 }
 
-.display-user__info-value {
-  align-self: center;
-  text-align: left;
+.display-card__info-value {
+  justify-self: start;
   color: var(--metal);
-  margin-right: 1rem;
+  margin-left: 2rem;
 }
 
-.display-user__summary {
+.display-card__summary {
   display:flex;  
   flex-direction: column;
+  align-self: center;
   align-items: center;
+  min-width: 40%;
+  max-width: 85%;
   margin: 0.9rem;
+  padding: 2rem 0;
 }
 
-.display-user__summary-title {
+.display-card__summary-title {
   color: var(--dark-blue);
   padding-bottom: 0.7rem;
 }
 
-.display-user__summary-text {
+.display-card__summary-text {
 
 }
+.display-card__bg {
+  margin-top: auto;
+  max-width: 100vw;
+}
 
-.display-user__car-bcg {
+.display-card__bg-image {
+  width: 100vw;
+  object-fit: fill;
+  height: 95vh;
+}
+.display-card__car-bcg {
   margin-top: 4rem;
   opacity: 40%;
   height: 10rem;
@@ -59,5 +74,38 @@
 }
 
 @media screen and (min-width: 40rem) {
+  .display-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.4rem;
+
+  }
   
+  .display-card__container {
+    min-width: 40%;
+    max-width: 60%;
+    background-color: rgba(255, 255, 255, 0.945);
+  }
+
+  .display-card__bg {
+    
+  }
+
+  .display-card__info {
+  
+    padding: 0.7rem 4rem;
+  }
+
+  .display-card__info-key {
+    padding-left: 4rem;
+  }
+  .display-card__info-value {
+    padding-left: 2rem;
+  }
+
+  .display-card__summary {
+    min-width: 40%;
+    max-width: 60%;
+  }
 }

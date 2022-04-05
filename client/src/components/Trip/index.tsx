@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { fetchApi } from '../../helpers/api';
 import { ITrip } from '../../types';
 import { useAppSelector } from '../../hooks';
@@ -150,7 +150,9 @@ const Trip = () => {
               <img src={trip.images || '/images/rockies.jpeg'} alt="trip" className="trip__img" />
             </section>
             <section className="trip__user-card">
-              <UserCard id={trip.author.id} />
+              <Link to={`/users/${trip.author.id}`}>
+                <UserCard id={trip.author.id} />
+              </Link>
             </section>
             <section className="trip__button-container">
               {requestButtonActive ? (
