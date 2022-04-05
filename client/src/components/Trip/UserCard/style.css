@@ -4,7 +4,7 @@
   background-color: var(--light-blue);
   border-radius: 0.4rem;
   box-shadow: 0 3px 3px 1px var(--shadow);
-  max-width: 35rem;
+  max-width: 25rem;
 }
 
 .user-card__info {
@@ -21,12 +21,12 @@
 }
 
 .user-card__gender {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   margin-bottom: 0.4rem;
 }
 
 .user-card__summary {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   margin-bottom: 0.2rem;
 }
 
@@ -34,7 +34,10 @@
   display: flex;
   justify-content: space-between;
   margin-top: auto;
-  font-size: 0.9rem;
+}
+
+.user-card__footer-text {
+  font-size: 0.8rem;
 }
 
 .user-card__avatar {
@@ -46,7 +49,7 @@
 
 @media screen and (min-width: 45rem) {
   .user-card {
-    max-width: 50rem;
+    max-width: 45rem;
   }
 
   .user-card__info {
@@ -66,14 +69,14 @@
     font-size: 1.2rem;
   }
 
-  .user-card__footer {
+  .user-card__footer-text {
     font-size: 1.4rem;
   }
 }
 
 @media screen and (min-width: 85rem) {
   .user-card {
-    max-width: 30rem;
+    max-width: 25rem;
   }
 
   .user-card__info {
@@ -93,7 +96,7 @@
     font-size: 0.8rem;
   }
 
-  .user-card__footer {
+  .user-card__footer-text {
     font-size: 0.9rem;
   }
 }
