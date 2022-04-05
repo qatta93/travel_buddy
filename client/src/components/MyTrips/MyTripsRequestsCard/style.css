@@ -1,0 +1,91 @@
+.request-card {
+  margin: 2rem auto;
+  border: 2px solid var(--light-yellow);
+  border-radius: 0.4rem;
+  background-color: white;
+  box-shadow: 2px 5px 3px var(--shadow);
+  width: 100%;
+  width: 17rem;
+  height: 11rem;
+}
+
+.request-card--accepted {
+  border: 2px solid var(--light-gray);
+  order: 1;
+}
+
+.request-card--rejected {
+  border: 2px solid var(--light-gray);
+  order: 2;
+}
+
+.request-card__header {
+  padding: 0.5rem;
+  background-color: var(--light-yellow);
+}
+
+.request-card__header--accepted,
+.request-card__header--rejected {
+  background-color: var(--light-gray);
+}
+
+.request-card__title {
+  padding: 0.5rem 0;
+}
+
+.request-card__email {
+  font-size: 0.7rem;
+}
+
+.request-card__text {
+  padding: 1rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.request-card__buttons {
+  padding: 0 0.5rem 0.5rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.request-card__button {
+  padding: 0.3rem 2.5rem;
+  border: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.request-card__button--accept {
+  background-color: var(--green);
+  box-shadow: 1px 3px 3px var(--shadow);
+}
+
+.request-card__button--accepted {
+  background-color: var(--green);
+  box-shadow: 1px 3px 3px var(--shadow);
+}
+
+.request-card__button--reject {
+  background-color: var(--red);
+  box-shadow: 1px 3px 3px var(--shadow);
+}
+
+.request-card__button--rejected {
+  background-color: var(--red);
+  box-shadow: 1px 3px 3px var(--shadow);
+}
+
+.request-card__button--change {
+  box-shadow: 1px 3px 3px var(--shadow);
+}
+
+.my-trips__no-requests {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+@media screen and (min-width: 30rem) {
+  .request-card {
+    width: 20rem;
+  }
+}

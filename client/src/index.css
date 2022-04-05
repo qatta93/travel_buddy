@@ -28,13 +28,15 @@
 }
 
 :root {
+  --light-yellow: #ffe2649c;
   --yellow: #FECE62;
   --metal: #545454;
-  --dark-blue: #00286E;
+  --dark-blue: #36558c;
   --light-blue: #DBECFC;
   --light-gray: #e5e5e580;
-  --green: #6BEB4B;
-  --red: #fb0d0dbd;
+  --green: #63e443;
+  --red: #ea6258;
+
   --shadow: rgb(207, 207, 207);
 }
 
