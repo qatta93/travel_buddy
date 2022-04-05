@@ -24,8 +24,6 @@ const Trip = () => {
   const user = useAppSelector((state) => state.user.user);
   const { id } = useParams();
 
-  const userId = user?.id;
-
   useEffect(() => {
     const fetchTrip = async () => {
       const data = await fetchApi<ITrip>(`/api/trips/${id}`);
@@ -41,11 +39,15 @@ const Trip = () => {
 
   const createNewRequest = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    if (!user) {
+      return;
+    }
+
     setTextInput(InitialInput);
     const newRequest = {
       tripId: id,
-      // based on google auth
-      userId,
+      userId: user.id,
       message: textInput.description,
     };
 
@@ -58,7 +60,7 @@ const Trip = () => {
     await fetchApi('/api/requests', requestOptions);
   };
 
-  const popUp = () => {
+  const togglePopUp = () => {
     if (popup === 'true') {
       return setPopup('false');
     }
@@ -74,14 +76,24 @@ const Trip = () => {
 
   const seatsLeft = trip && Math.max(trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length, 0);
 
-  const requestButtonActive = user && trip && trip.author.id !== user.id;
+  const requestButtonActive = user && trip && trip.author.id !== user.id && seatsLeft;
+
+  const requestButtonMessage = (): string => {
+    if (!user) {
+      return 'Login to send a request';
+    }
+    if (trip && trip.author.id === user.id) {
+      return 'Your trip looks amazing!';
+    }
+    return 'This trip is full';
+  };
 
   return (
     <main className="trip">
       <section className={popup === 'true' ? 'trip__popup' : 'trip__popup--hide'}>
         <div className="trip__popup-wrapper">
           <form className="create-form" onSubmit={createNewRequest}>
-            <button type="button" className="trip__popup__close" onClick={() => popUp()}>
+            <button type="button" className="trip__popup__close" onClick={() => togglePopUp()}>
               <CloseIcon />
             </button>
             <h1 className="trip__popup__title">Why do you wanna join?</h1>
@@ -94,7 +106,7 @@ const Trip = () => {
                 className="trip__popup__text"
               />
             </label>
-            <button type="submit" className="trip__popup__btn" onClick={() => popUp()}>SEND</button>
+            <button type="submit" className="trip__popup__btn" onClick={() => togglePopUp()}>SEND</button>
           </form>
         </div>
       </section>
@@ -139,19 +151,17 @@ const Trip = () => {
             <section className="trip__user-card">
               <UserCard id={trip.author.id} />
             </section>
-            {requestButtonActive && (
-              <section className="trip__button-container">
-                {seatsLeft ? (
-                  <button
-                    className="trip__request-button"
-                    type="button"
-                    onClick={() => popUp()}
-                  >
-                    Send request!
-                  </button>
-                ) : <p className="trip__request-button--disabled">Sorry, this trip is full</p>}
-              </section>
-            )}
+            <section className="trip__button-container">
+              {requestButtonActive ? (
+                <button
+                  className="trip__request-button"
+                  type="button"
+                  onClick={() => togglePopUp()}
+                >
+                  Send request!
+                </button>
+              ) : <p className="trip__request-button--disabled">{requestButtonMessage()}</p>}
+            </section>
           </>
         ) : <p>Loading...</p>}
       </section>
