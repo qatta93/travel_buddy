@@ -1,11 +1,12 @@
 .request-card {
-  margin: 1rem auto;
+  margin: 2rem auto;
   border: 2px solid var(--yellow);
   border-radius: 0.4rem;
   background-color: white;
   box-shadow: 2px 5px 3px var(--shadow);
-  width: 80%;
-  max-width: 20rem;
+  width: 100%;
+  width: 17rem;
+  height: 11rem;
 }
 
 .request-card--accepted {
@@ -33,7 +34,7 @@
 }
 
 .request-card__email {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .request-card__text {
@@ -85,6 +86,6 @@
 
 @media screen and (min-width: 30rem) {
   .request-card {
-    min-width: 10rem;
+    width: 20rem;
   }
 }
