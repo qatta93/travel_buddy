@@ -23,7 +23,7 @@ const Passengers = ({ passengers }: PassengersProps) => {
       </div>
       <div className={`passengers__container ${isExpanded ? 'passengers__container--visible' : ''}`}>
         {passengers.map((p) => (
-          <Link to={`/users/${p}`} key={p}>
+          <Link to={`/users/${p}`} key={p} className="passengers__card-link">
             <UserCard id={Number(p)} />
           </Link>
         ))}
