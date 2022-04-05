@@ -1,3 +1,8 @@
+.edit-user__img {
+  width: 100vw;
+  opacity: 40%;
+}
+
 @media screen and (min-width: 40rem) {
   .edit-user__form {
     opacity: 80%;
@@ -6,5 +11,9 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+  }
+
+  .edit-user__img {
+    display: none;
   }
 }

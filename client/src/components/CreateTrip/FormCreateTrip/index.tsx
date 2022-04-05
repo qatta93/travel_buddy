@@ -22,6 +22,7 @@ interface CreateInput {
   summary: string,
   images: string,
   places: string,
+  video: string,
   activities: string[],
 }
 
@@ -43,6 +44,7 @@ const createInputInitialValue = {
   description: '',
   summary: '',
   images: '',
+  video: '',
   places: '',
   activities: [],
 };
@@ -151,7 +153,7 @@ const CreateTripForm = () => {
   return (
     <form className="create-form" onSubmit={handleSubmit}>
       <label htmlFor="country" className="create-form__label">
-        Country:
+        <span>Countries *</span>
         <select
           name="countries"
           value={createInput.countries}
@@ -166,7 +168,7 @@ const CreateTripForm = () => {
         </select>
       </label>
       <label htmlFor="date" className="create-form__label create-form__label--date">
-        Date:
+        Dates *
         <input
           name="dateFrom"
           type="date"
@@ -188,7 +190,7 @@ const CreateTripForm = () => {
         />
       </label>
       <label htmlFor="budget" className="create-form__label">
-        Budget:
+        Budget *
         <input
           name="budget"
           type="number"
@@ -200,7 +202,7 @@ const CreateTripForm = () => {
         />
       </label>
       <label htmlFor="gender" className="create-form__label create-form__label--checkbox">
-        Gender:
+        Gender
         <input
           name="female"
           type="checkbox"
@@ -227,7 +229,7 @@ const CreateTripForm = () => {
         Other
       </label>
       <label htmlFor="buddies" className="create-form__label">
-        Buddies:
+        Buddies *
         <input
           name="buddies"
           type="number"
@@ -240,7 +242,7 @@ const CreateTripForm = () => {
         />
       </label>
       <label htmlFor="images" className="create-form__label">
-        Images:
+        Images
         <input
           name="images"
           type="text"
@@ -250,8 +252,19 @@ const CreateTripForm = () => {
           className="create-form__input"
         />
       </label>
+      <label htmlFor="video" className="create-form__label">
+        Video
+        <input
+          name="video"
+          type="text"
+          placeholder="Put the link to your best youtube video"
+          value={createInput.video}
+          onChange={handleChangeInput}
+          className="create-form__input"
+        />
+      </label>
       <label htmlFor="summary" className="create-form__label create-form__label--text-area">
-        Summary:
+        Summary *
         <textarea
           name="summary"
           placeholder="Tell me a little about your trip"
@@ -262,7 +275,7 @@ const CreateTripForm = () => {
         />
       </label>
       <label htmlFor="description" className="create-form__label create-form__label--text-area">
-        Description:
+        Description *
         <textarea
           name="description"
           placeholder="Tell me more!"
@@ -273,7 +286,7 @@ const CreateTripForm = () => {
         />
       </label>
       <label htmlFor="places" className="create-form__label create-form__label--text-area">
-        Places:
+        Places *
         <textarea
           name="places"
           placeholder="Which landmarks will you be visiting? Separate them with a coma (',')."
@@ -284,7 +297,7 @@ const CreateTripForm = () => {
         />
       </label>
       <label htmlFor="activities" className="create-form__label">
-        Activities:
+        Activities
         <select
           name="activities"
           value={createInput.activities}
@@ -297,6 +310,7 @@ const CreateTripForm = () => {
           ))}
         </select>
       </label>
+      <p className="create-form__legend">* Required fields</p>
       <div className="create-form__btn-wrapper">
         <button type="submit" className="create-form__btn">Create trip</button>
       </div>

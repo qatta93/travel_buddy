@@ -15,6 +15,7 @@ const CreateTrip = () => (
     <section className="create-trip__form">
       <FormCreateTrip />
     </section>
+    <img className="create-trip__img" src="/images/bg_desktop.png" alt="car" />
   </main>
 );
 

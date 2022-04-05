@@ -4,7 +4,7 @@ const getAllTripsDB = async () => {
   const data = await sql`
     SELECT 
     t.id, t.budget, t.summary, t.description, t.from, t.to, t.images, t.max_passengers AS "maxPassengers",
-    t.gender_restrictions AS "genderRestrictions",
+    t.gender_restrictions AS "genderRestrictions", t.video, 
     t.author_id AS "authorId", u.username AS "authorUsername", u.age AS "authorAge", u.gender AS "authorGender", 
     c.country, c.id AS "countryId", c.country_code AS "countryCode", c.code AS "code", a.activity, p.place,
     r.user_id AS "requestUserId", r.id AS "requestId", r.status AS "requestStatus"
@@ -25,7 +25,7 @@ const getTripByIdDB = async (id) => {
   const data = await sql`
     SELECT 
     t.id, t.budget, t.summary, t.description, t.from, t.to, t.images, t.max_passengers AS "maxPassengers",
-    t.gender_restrictions AS "genderRestrictions",
+    t.gender_restrictions AS "genderRestrictions", t.video, 
     t.author_id AS "authorId", u.username AS "authorUsername", u.age AS "authorAge", u.gender AS "authorGender", 
     c.country, c.id AS "countryId", c.country_code AS "countryCode", c.code AS "code", a.activity, p.place, 
     r.user_id AS "requestUserId", r.id AS "requestId", r.status AS "requestStatus"

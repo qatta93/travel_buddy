@@ -13,12 +13,14 @@
     "other"
     "images"
     "user"
-    "button";
+    "video"
+    "button"
+    "passengers";
   margin-bottom: auto;
 }
 
 .trip__popup {
-  margin-top: -4rem;
+  top: 0;
   height: 100%;
   width: 100%;
   position: fixed;
@@ -27,53 +29,6 @@
 
 .trip__popup--hide {
   display: none;
-}
-
-.trip__popup-wrapper {
-  margin: 35% 0;
-  background-color: white;
-  height: 25rem;
-}
-
-.trip__popup__title {
-  margin-top: 1rem;
-  text-align: center;
-  font-weight: 400;
-  color: var(--dark-blue);
-}
-
-.trip__popup__text {
-  width: 100%;
-  padding: 0.8rem 1rem;
-  border-radius: 0.3rem;
-  margin: 2rem 0;
-  border: none;
-  box-shadow: inset 0px 5px 8px var(--shadow);
-  color: var(--metal);
-  min-height: 9rem;
-}
-
-.trip__popup__close {
-  margin-top: 5%;
-  margin-left: 85%;
-  border: none;
-  background-color: white;
-  cursor: pointer;
-}
-
-.trip__popup__btn {
-  text-decoration: none;
-  border: transparent;
-  color: var(--metal);
-  padding: 0.5rem 1.3rem;
-  border-radius: 0.4rem;
-  box-shadow: 0 5px 3px var(--shadow);
-  font-weight: bold;
-  font-size: 1.2rem;
-  width: 10rem;
-  margin: 0 auto;
-  background-color: var(--yellow);
-  cursor: pointer;
 }
 
 .trip__main-header {
@@ -137,7 +92,7 @@
   display: flex;
   flex-wrap: wrap;
   padding: 0 2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   align-items: center;
 }
 
@@ -151,6 +106,8 @@
   padding: 0 2rem;
   margin-bottom: 1.5rem;
   height: fit-content;
+  display: flex;
+  justify-content: center;
 }
 
 .trip__button-container {
@@ -158,6 +115,9 @@
   background-color: white;
   padding-top: 1rem;
   height: fit-content;
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 .trip__request-button {
@@ -180,10 +140,28 @@
   text-align: center;
 }
 
-@media screen and (min-width: 30rem ){
-  .trip__popup-wrapper {
-    height: 33rem;
-  }
+.trip__video-container {
+  grid-area: video;
+  margin-bottom: 2rem;
+}
+
+.trip__video {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  height: 50vw;
+  width: 50rem;
+  padding: 0 2rem;
+  max-height: 25rem;
+}
+
+.trip__passengers {
+  grid-area: passengers;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
 }
 
 @media screen and (min-width: 45rem) {
@@ -194,7 +172,9 @@
       "info images"
       "other other"
       "user user"
-      "button button";
+      "video video"
+      "button button"
+      "passengers passengers";
     grid-template-columns: 1fr 1fr;
   }
 
@@ -227,6 +207,7 @@
   .trip__button-container {
     padding-top: 3rem;
   }
+
   .trip__popup-wrapper {
     margin: 30% 0;
     background-color: white;
@@ -249,8 +230,10 @@
       "summary summary summary"
       "info images user"
       "info images button"
-      "other other other";
-    grid-template-columns: 2fr 2fr 3fr;
+      "other other other"
+      "video video video"
+      "passengers passengers passengers";
+    grid-template-columns: 3fr 3fr 3fr;
   }
 
   .trip__info {
@@ -278,10 +261,30 @@
     background-color: transparent;
   }
 
+  .trip__request-button {
+    box-shadow: 3px 5px 3px var(--shadow);
+    border-radius: 0.3rem;
+    max-width: 20rem;
+  }
+
+  .trip__request-button--disabled {
+    border-radius: 0.3rem;
+    max-width: 20rem;
+  }
+
   .trip__other {
     margin: 2rem 0 0;
   }
+
   .trip__popup-wrapper {
     margin: 10% 0;
+  }
+
+  .trip__video {
+    margin-top: 2rem;
+  }
+
+  .trip__passengers {
+    padding-top: 2rem;
   }
 }

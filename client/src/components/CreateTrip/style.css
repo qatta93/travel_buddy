@@ -1,3 +1,8 @@
+.create-trip__img {
+  width: 100vw;
+  opacity: 40%;
+}
+
 @media screen and (min-width: 30rem) {
   .create-trip__form {
     opacity: 80%;
@@ -6,5 +11,9 @@
     background-position: bottom;
     background-size: 135%;
     background-repeat: no-repeat;
+  }
+
+  .create-trip__img {
+    display: none;
   }
 }

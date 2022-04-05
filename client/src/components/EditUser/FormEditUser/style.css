@@ -11,7 +11,7 @@
 
 .edit-user-form__label {
   display: grid;
-  grid-template-columns: 5rem minmax(0, 1fr);
+  grid-template-columns: 6rem minmax(0, 1fr);
   grid-gap: 1rem;
   margin-bottom: 1rem;
   align-items: center;
@@ -46,6 +46,11 @@
   box-shadow: inset 0px 5px 8px var(--shadow);
   color: var(--metal);
   min-height: 5rem;
+}
+
+.edit-user__legend {
+  font-size: 0.8rem;
+  margin: 0.5rem 0 1rem;
 }
 
 .edit-user-form__btn {

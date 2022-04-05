@@ -58,7 +58,7 @@ const App = () => {
           <Route path=":id" element={<RedirectToUserEdit><Trip /></RedirectToUserEdit>} />
         </Route>
         <Route path="users">
-          <Route path=":id" element={<DisplayUser />} />
+          <Route path=":id" element={<RedirectToUserEdit><DisplayUser /></RedirectToUserEdit>} />
         </Route>
         <Route path="login" element={<Login />} />
         <Route

@@ -113,6 +113,15 @@ const getPlaceIdOrCreate = async (place) => {
   return newPlace[0].id;
 };
 
+const extractVideoId = (urlString) => {
+  if (!urlString) {
+    return '';
+  }
+  const url = new URL(urlString);
+  const videoId = url.searchParams.get('v');
+  return videoId || '';
+};
+
 const createTrip = async (newTrip) => {
   const newTripData = {
     author_id: newTrip.authorId || 1,
@@ -124,6 +133,7 @@ const createTrip = async (newTrip) => {
     budget: newTrip.budget || 0,
     images: newTrip.images || '/images/trip-default.jpg',
     gender_restrictions: newTrip.genderRestrictions || null,
+    video: extractVideoId(newTrip.video),
   };
 
   const [trip] = await createTripDB(newTripData);

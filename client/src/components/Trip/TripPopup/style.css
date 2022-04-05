@@ -1,0 +1,52 @@
+.trip-popup {
+  margin: 35% 0;
+  background-color: white;
+  height: 25rem;
+}
+
+.trip-popup__title {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 400;
+  color: var(--dark-blue);
+}
+
+.trip-popup__text {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 0.3rem;
+  margin: 2rem 0;
+  border: none;
+  box-shadow: inset 0px 5px 8px var(--shadow);
+  color: var(--metal);
+  min-height: 9rem;
+}
+
+.trip-popup__close {
+  margin-top: 5%;
+  margin-left: 85%;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.trip-popup__btn {
+  text-decoration: none;
+  border: transparent;
+  color: var(--metal);
+  padding: 0.5rem 1.3rem;
+  border-radius: 0.4rem;
+  box-shadow: 0 5px 3px var(--shadow);
+  font-weight: bold;
+  font-size: 1.2rem;
+  width: 10rem;
+  margin: 0 auto;
+  background-color: var(--yellow);
+  cursor: pointer;
+}
+
+@media screen and (min-width: 30rem ){
+  .trip-popup {
+    height: 33rem;
+  }
+}
