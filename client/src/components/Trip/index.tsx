@@ -6,6 +6,7 @@ import { useAppSelector } from '../../hooks';
 import MainHeader from '../MainHeader';
 import UserCard from './UserCard';
 import CloseIcon from '../Header/CloseIcon';
+// @ts-ignore: Unreachable code error
 import { parseGenderRestrictions, formatDatesTrip } from '../../helpers/misc';
 import './style.css';
 
@@ -23,6 +24,16 @@ const Trip = () => {
   const [popup, setPopup] = useState<string>('false');
   const user = useAppSelector((state) => state.user.user);
   const { id } = useParams();
+
+  useEffect(() => {
+    if (map.current) return; // initialize map only once
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [lng, lat],
+      zoom,
+    });
+  });
 
   useEffect(() => {
     const fetchTrip = async () => {
@@ -125,6 +136,7 @@ const Trip = () => {
                 ]}
               />
             </section>
+            <div ref={mapContainer} className="map-container" />
             <section className="trip__summary">
               <p className="trip__summary-text">{trip.summary}</p>
             </section>

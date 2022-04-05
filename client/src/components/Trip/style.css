@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.map-container {
+  height: 400px;
+  }
+
 .trip__container {
   background-color: var(--light-gray);
   margin-top: 0.3rem;
