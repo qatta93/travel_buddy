@@ -4,6 +4,7 @@
   background-color: var(--light-blue);
   border-radius: 0.4rem;
   box-shadow: 0 3px 3px 1px var(--shadow);
+  max-width: 35rem;
 }
 
 .user-card__info {

@@ -151,6 +151,8 @@
   padding: 0 2rem;
   margin-bottom: 1.5rem;
   height: fit-content;
+  display: flex;
+  justify-content: center;
 }
 
 .trip__button-container {
@@ -158,6 +160,9 @@
   background-color: white;
   padding-top: 1rem;
   height: fit-content;
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 .trip__request-button {
@@ -276,6 +281,12 @@
     padding-top: 0;
     margin: auto 3rem auto 2rem;
     background-color: transparent;
+  }
+
+  .trip__request-button {
+    box-shadow: 3px 5px 3px var(--shadow);
+    border-radius: 0.3rem;
+    max-width: 20rem;
   }
 
   .trip__other {
