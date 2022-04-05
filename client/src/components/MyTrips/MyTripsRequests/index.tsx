@@ -24,7 +24,7 @@ const MyTripRequests = () => {
 
   const tripRequests = requests.filter((req) => req.tripId === tripId);
 
-  return tripRequests ? (
+  return (
     <section className="my-trips-requests">
       <MainHeader
         title="My trip requests"
@@ -45,12 +45,12 @@ const MyTripRequests = () => {
         )
         : null}
       {tripRequests.map((request:IRequest) => (
-        <div className="my-trips-requests__wrapper">
-          <MyTripRequestsCard key={request.id} request={request} setRequests={setRequests} />
+        <div className="my-trips-requests__wrapper" key={request.id}>
+          <MyTripRequestsCard request={request} setRequests={setRequests} />
         </div>
       ))}
     </section>
-  ) : null;
+  );
 };
 
 export default MyTripRequests;
