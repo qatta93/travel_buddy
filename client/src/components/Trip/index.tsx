@@ -6,7 +6,7 @@ import { useAppSelector } from '../../hooks';
 import MainHeader from '../MainHeader';
 import UserCard from './UserCard';
 import CloseIcon from '../Header/CloseIcon';
-import { parseGenderRestrictions } from '../../helpers/misc';
+import { parseGenderRestrictions, formatDatesTrip } from '../../helpers/misc';
 import './style.css';
 
 interface CreateInput {
@@ -78,6 +78,8 @@ const Trip = () => {
 
   const requestButtonActive = user && trip && trip.author.id !== user.id && seatsLeft;
 
+  const tripDates = trip && formatDatesTrip(trip.from, trip.to);
+
   const requestButtonMessage = (): string => {
     if (!user) {
       return 'Login to send a request';
@@ -124,11 +126,7 @@ const Trip = () => {
               />
             </section>
             <section className="trip__info">
-              <div className="trip__dates">
-                <p>{trip.from.slice(0, 10)}</p>
-                <p className="trip__dates-dash">-</p>
-                <p>{trip.to.slice(0, 10)}</p>
-              </div>
+              <p className="trip__dates">{tripDates}</p>
               <p className="trip__description">{trip.description}</p>
             </section>
             <section className="trip__other">
