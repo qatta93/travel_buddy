@@ -8,6 +8,10 @@
   max-width: 20rem;
 }
 
+.request-card__cancel--true {
+  display: none;
+}
+
 .request-card--accepted {
   border: 2px solid var(--light-gray);
   order: 1;

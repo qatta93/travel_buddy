@@ -44,7 +44,6 @@ const Trip = () => {
     setTextInput(InitialInput);
     const newRequest = {
       tripId: id,
-      // based on google auth
       userId,
       message: textInput.description,
     };
