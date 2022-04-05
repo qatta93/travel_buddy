@@ -72,7 +72,7 @@
   .search-form-wrapper {
     opacity: 80%;
     max-width: 100vw;
-    background-image: url('../../../../public/images/bg_desktop.png');
+    background-image: url('/public/images/bg_desktop.png');
     background-position: center;
     background-size: cover;
   }
