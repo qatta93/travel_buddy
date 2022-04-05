@@ -8,6 +8,10 @@
   background-color: var(--light-gray);
 }
 
+.my-trips__list--empty {
+  text-align: center;
+}
+
 @media screen and (min-width: 30rem) {
   .my-trips__list {
     display: flex;
@@ -41,5 +45,8 @@
   }
   .my-trips__img {
     display: none;
+  }
+  .my-trips__list--empty {
+    font-size: 1.5rem;
   }
 }
