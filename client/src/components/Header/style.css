@@ -1,6 +1,5 @@
 .header {
   position: relative;
-  height: 4.5rem;
 }
 
 .header__nav {
@@ -65,7 +64,7 @@
   box-shadow: 0 2px 4px var(--metal);
   font-weight: bold;
   font-size: 0.9rem;
-  cursor: pointer;
+  text-align: center;
 }
 
 .header__link--blue {
@@ -105,5 +104,13 @@
 
   .header__link:hover {
     background-color: var(--yellow);
+  }
+
+  .active {
+    background-color: var(--light-blue);
+  }
+
+  .active:hover {
+    background-color: var(--light-blue);
   }
 }

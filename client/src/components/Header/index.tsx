@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import HamburgerIcon from './HamburgerIcon';
 import CloseIcon from './CloseIcon';
 import { useAppSelector } from '../../hooks';
@@ -7,41 +7,39 @@ import './style.css';
 
 const Header = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
-  const navigate = useNavigate();
   const user = useAppSelector((state) => state.user.user);
 
   const toggleNav = () => {
     setIsNavExpanded((currentState) => !currentState);
   };
 
-  const handleLink = (href: string) => {
+  const handleLink = () => {
     setIsNavExpanded(false);
-    navigate(href);
   };
 
   return (
     <header className="header">
       <nav className="header__nav">
-        <div className="header__logo-container">
-          <Link to="/"><img className="header__logo" src="/images/logo.png" alt="van logo" /></Link>
-          <Link to="/"><h2 className="header__title">Travel Buddy</h2></Link>
-        </div>
+        <Link className="header__logo-container" to="/">
+          <img className="header__logo" src="/images/logo.png" alt="van logo" />
+          <h2 className="header__title">Travel Buddy</h2>
+        </Link>
         <div className="header__menu-container">
           <button type="button" className="header__button" onClick={toggleNav} aria-label="toggle-nav">
             { isNavExpanded ? <CloseIcon /> : <HamburgerIcon />}
           </button>
           <ul className={`header__links-container ${isNavExpanded ? 'header__links-container--visible' : ''}`}>
-            <button type="button" className="header__link" onClick={() => handleLink('/')}>Home Page</button>
-            <button type="button" className="header__link" onClick={() => handleLink('/trips')}>Trips</button>
+            <NavLink className="header__link" to="/" onClick={handleLink}>Home Page</NavLink>
+            <NavLink className="header__link" to="/trips" onClick={handleLink} end>Trips</NavLink>
             {user ? (
               <>
-                <button type="button" className="header__link" onClick={() => handleLink('/create-trip')}>Create Trip</button>
-                <button type="button" className="header__link" onClick={() => handleLink('/profile')}>Profile</button>
+                <NavLink className="header__link" to="/create-trip" onClick={handleLink}>Create Trip</NavLink>
+                <NavLink className="header__link header__link--yellow" to="/profile" onClick={handleLink} end>Profile</NavLink>
               </>
             ) : (
-              <button type="button" className="header__link header__link--yellow" onClick={() => handleLink('/login')}>Login</button>
+              <NavLink className="header__link header__link--yellow" to="/login" onClick={handleLink}>Login</NavLink>
             )}
-            <button type="button" className="header__link header__link--blue" onClick={() => handleLink('/about-us')}>About Us</button>
+            <NavLink className="header__link header__link--blue" to="/about-us" onClick={handleLink}>About Us</NavLink>
           </ul>
         </div>
       </nav>

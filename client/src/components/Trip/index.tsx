@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchApi } from '../../helpers/api';
 import { ITrip } from '../../types';
+import { useAppSelector } from '../../hooks';
 import MainHeader from '../MainHeader';
 import UserCard from './UserCard';
 import CloseIcon from '../Header/CloseIcon';
-import { parseGenderRestrictions } from '../../helpers/misc';
+import { parseGenderRestrictions, formatDatesTrip } from '../../helpers/misc';
 import './style.css';
 
 interface CreateInput {
@@ -20,6 +21,7 @@ const Trip = () => {
   const [trip, setTrip] = useState<ITrip | null>(null);
   const [textInput, setTextInput] = useState<CreateInput>(InitialInput);
   const [popup, setPopup] = useState<string>('false');
+  const user = useAppSelector((state) => state.user.user);
   const { id } = useParams();
 
   useEffect(() => {
@@ -37,28 +39,16 @@ const Trip = () => {
 
   const createNewRequest = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    if (!user) {
+      return;
+    }
+
     setTextInput(InitialInput);
     const newRequest = {
-      // uuid?
-      id: 5,
-      trip_id: id,
-      // based on google auth
-      user_id: 1,
-      status: 'pending',
-      message: textInput.description,
-      sent_on: '2022-08-52T00:00:00.000Z',
-      sentOn: '2022-08-52T00:00:00.000Z',
       tripId: id,
-      userId: 1,
-      username: 'qatta',
-      name: 'Patrycja',
-      email: 'panasiuk.patrycja@gmail.com',
-      user: {
-        id: 1,
-        name: 'Patrycja',
-        username: 'qatta',
-        email: 'panasiuk.patrycja@gmail.com',
-      },
+      userId: user.id,
+      message: textInput.description,
     };
 
     const requestOptions = {
@@ -67,10 +57,10 @@ const Trip = () => {
       body: JSON.stringify(newRequest),
     };
 
-    await fetchApi('http://localhost:5500/api/requests', requestOptions);
+    await fetchApi('/api/requests', requestOptions);
   };
 
-  const popUp = () => {
+  const togglePopUp = () => {
     if (popup === 'true') {
       return setPopup('false');
     }
@@ -84,12 +74,28 @@ const Trip = () => {
     }));
   };
 
+  const seatsLeft = trip && Math.max(trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length, 0);
+
+  const requestButtonActive = user && trip && trip.author.id !== user.id && seatsLeft;
+
+  const tripDates = trip && formatDatesTrip(trip.from, trip.to);
+
+  const requestButtonMessage = (): string => {
+    if (!user) {
+      return 'Login to send a request';
+    }
+    if (trip && trip.author.id === user.id) {
+      return 'Your trip looks amazing!';
+    }
+    return 'This trip is full';
+  };
+
   return (
     <main className="trip">
       <section className={popup === 'true' ? 'trip__popup' : 'trip__popup--hide'}>
         <div className="trip__popup-wrapper">
           <form className="create-form" onSubmit={createNewRequest}>
-            <button type="button" className="trip__popup__close" onClick={() => popUp()}>
+            <button type="button" className="trip__popup__close" onClick={() => togglePopUp()}>
               <CloseIcon />
             </button>
             <h1 className="trip__popup__title">Why do you wanna join?</h1>
@@ -102,11 +108,11 @@ const Trip = () => {
                 className="trip__popup__text"
               />
             </label>
-            <button type="submit" className="trip__popup__btn" onClick={() => popUp()}>SEND</button>
+            <button type="submit" className="trip__popup__btn" onClick={() => togglePopUp()}>SEND</button>
           </form>
         </div>
       </section>
-      <section className="trip-container">
+      <section className="trip__container">
         {trip ? (
           <>
             <section className="trip__main-header">
@@ -119,17 +125,16 @@ const Trip = () => {
                 ]}
               />
             </section>
+            <section className="trip__summary">
+              <p className="trip__summary-text">{trip.summary}</p>
+            </section>
             <section className="trip__info">
-              <div className="trip__dates">
-                <p>{trip.from.slice(0, 10)}</p>
-                <p className="trip__dates-dash">-</p>
-                <p>{trip.to.slice(0, 10)}</p>
-              </div>
+              <p className="trip__dates">{tripDates}</p>
               <p className="trip__description">{trip.description}</p>
             </section>
             <section className="trip__other">
               <p>
-                {trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length}
+                {seatsLeft}
                 {' '}
                 seats left
               </p>
@@ -148,13 +153,15 @@ const Trip = () => {
               <UserCard id={trip.author.id} />
             </section>
             <section className="trip__button-container">
-              <button
-                className="trip__request-button"
-                type="button"
-                onClick={() => popUp()}
-              >
-                Send request!
-              </button>
+              {requestButtonActive ? (
+                <button
+                  className="trip__request-button"
+                  type="button"
+                  onClick={() => togglePopUp()}
+                >
+                  Send request!
+                </button>
+              ) : <p className="trip__request-button--disabled">{requestButtonMessage()}</p>}
             </section>
           </>
         ) : <p>Loading...</p>}

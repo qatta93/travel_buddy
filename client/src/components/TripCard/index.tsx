@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { parseGenderRestrictions } from '../../../helpers/misc';
-import { fetchApi } from '../../../helpers/api';
-import { ITrip, IUser } from '../../../types';
+import { parseGenderRestrictions, formatDatesTrip } from '../../helpers/misc';
+import { fetchApi } from '../../helpers/api';
+import { ITrip, IUser } from '../../types';
 import './style.css';
 
 interface TripCardProps {
@@ -26,16 +26,11 @@ const TripCard = ({ trip }:TripCardProps) => {
     getUsersData();
   }, []);
 
-  const dateFromMonth = trip.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[0];
-  const dateFromDay = trip.from.split(/T.+/g)[0].split(/^.{5}/)[1].split('-')[1];
-  const dateFrom = `${dateFromDay}-${dateFromMonth}`;
-
-  const dateToYear = trip.to.split(/T.+/g)[0].split('-')[0].split(/^.{2}/)[1];
-  const dateToMonth = trip.to.split(/T.+/g)[0].split('-')[1];
-  const dateToDay = trip.to.split(/T.+/g)[0].split('-')[2];
-  const dateTo = `${dateToDay}-${dateToMonth}-${dateToYear}`;
+  const tripDates = formatDatesTrip(trip.from, trip.to);
 
   const countries = trip.countries.map((c) => c.country).join(' | ');
+
+  const seatsLeft = Math.max(trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length, 0);
 
   return (
     <article className="trips__offer">
@@ -43,11 +38,7 @@ const TripCard = ({ trip }:TripCardProps) => {
         <div className="trips__header">
           <h2 className="trips__country">{countries}</h2>
           <h2 className="trips__date">
-            {dateFrom}
-            {' '}
-            -
-            {' '}
-            {dateTo}
+            {tripDates}
           </h2>
         </div>
         <p className="trips__description">
@@ -55,7 +46,7 @@ const TripCard = ({ trip }:TripCardProps) => {
         </p>
         <div className="trips__details">
           <p className="trips__seats">
-            {trip.maxPassengers - trip.requests.filter((r) => r.status === 'accepted').length}
+            {seatsLeft}
             {' '}
             seats
           </p>

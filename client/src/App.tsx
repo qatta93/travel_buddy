@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { fetchApi } from './helpers/api';
 import { useAppDispatch } from './hooks';
 import Header from './components/Header';
@@ -13,15 +13,17 @@ import Requests from './components/Requests';
 import Trip from './components/Trip';
 import CreateTrip from './components/CreateTrip';
 import EditUser from './components/EditUser';
-import RestrictedRoute from './components/RestrictedRoute';
+import RedirectToLogin from './components/RedirectToLogin';
+import RedirectToUserEdit from './components/RedirectToUserEdit';
 import { addUser } from './slices/user';
 import { LoggedInUser } from './types';
+import MyTrips from './components/MyTrips';
+import MyTripRequests from './components/MyTrips/MyTripsRequests';
 import './App.css';
 import { DisplayUser } from './components/DisplayUser';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getLoggedUser = async () => {
@@ -31,9 +33,6 @@ const App = () => {
         return;
       }
       dispatch(addUser(data.data));
-      if (data.data && data.data.username === 'pending') {
-        navigate('/edit-user');
-      }
     };
     getLoggedUser();
   }, []);
@@ -42,20 +41,72 @@ const App = () => {
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="about-us" element={<About />} />
-        <Route path="create-trip" element={<RestrictedRoute><CreateTrip /></RestrictedRoute>} />
+        <Route path="/" element={<RedirectToUserEdit><Home /></RedirectToUserEdit>} />
+        <Route path="about-us" element={<RedirectToUserEdit><About /></RedirectToUserEdit>} />
+        <Route
+          path="create-trip"
+          element={(
+            <RedirectToLogin>
+              <RedirectToUserEdit>
+                <CreateTrip />
+              </RedirectToUserEdit>
+            </RedirectToLogin>
+          )}
+        />
         <Route path="trips">
-          <Route index element={<Search />} />
-          <Route path=":id" element={<Trip />} />
+          <Route index element={<RedirectToUserEdit><Search /></RedirectToUserEdit>} />
+          <Route path=":id" element={<RedirectToUserEdit><Trip /></RedirectToUserEdit>} />
         </Route>
         <Route path="users">
           <Route path=":id" element={<DisplayUser />} />
         </Route>
         <Route path="login" element={<Login />} />
-        <Route path="requests" element={<RestrictedRoute><Requests /></RestrictedRoute>} />
-        <Route path="profile" element={<RestrictedRoute><Profile /></RestrictedRoute>} />
-        <Route path="edit-user" element={<RestrictedRoute><EditUser /></RestrictedRoute>} />
+        <Route
+          path="requests"
+          element={(
+            <RedirectToUserEdit>
+              <RedirectToLogin>
+                <Requests />
+              </RedirectToLogin>
+            </RedirectToUserEdit>
+          )}
+        />
+        <Route
+          path="profile"
+          element={(
+            <RedirectToUserEdit>
+              <RedirectToLogin>
+                <Profile />
+              </RedirectToLogin>
+            </RedirectToUserEdit>
+          )}
+        />
+        <Route path="profile/my-trips">
+          <Route
+            index
+            element={(
+              <RedirectToUserEdit>
+                <RedirectToLogin>
+                  <MyTrips />
+                </RedirectToLogin>
+              </RedirectToUserEdit>
+            )}
+          />
+          <Route
+            path=":id"
+            element={(
+              <RedirectToUserEdit>
+                <RedirectToLogin>
+                  <MyTripRequests />
+                </RedirectToLogin>
+              </RedirectToUserEdit>
+            )}
+          />
+        </Route>
+        <Route
+          path="edit-user"
+          element={(<RedirectToLogin><EditUser /></RedirectToLogin>)}
+        />
       </Routes>
       <Footer />
     </div>

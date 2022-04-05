@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { fetchApi } from '../../../helpers/api';
+// import MainHeader from '../../MainHeader';
 import { IRequest } from '../../../types';
 import './style.css';
 
+type Status = 'pending' | 'accepted' | 'rejected' | 'cancelled';
+
 interface RequestCardProps {
   request: IRequest;
+  setRequests: React.Dispatch<React.SetStateAction<IRequest[]>>;
 }
 
-const RequestCard = ({ request }:RequestCardProps) => {
-  const [status, setStatus] = useState<string>(request.status);
+const updateRequestStatus = (reqs:IRequest[], id:number, status:Status):IRequest[] => (
+  reqs.map((req) => {
+    if (req.id !== id) {
+      return req;
+    }
+    return {
+      ...req,
+      status,
+    };
+  })
+);
 
+const MyTripRequestsCard = ({ request, setRequests }:RequestCardProps) => {
   const acceptRequest = () => {
     const requestId = request.id;
     const putStatusData = async () => {
@@ -22,8 +36,8 @@ const RequestCard = ({ request }:RequestCardProps) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newRequest),
       };
-      await fetchApi(`http://localhost:5500/api/requests/${requestId}`, requestOptions);
-      setStatus('accepted');
+      await fetchApi(`/api/requests/${requestId}`, requestOptions);
+      setRequests((currentRequests) => updateRequestStatus(currentRequests, requestId, 'accepted'));
     };
     putStatusData();
   };
@@ -40,20 +54,20 @@ const RequestCard = ({ request }:RequestCardProps) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newRequest),
       };
-      await fetchApi(`http://localhost:5500/api/requests/${requestId}`, requestOptions);
-      setStatus('rejected');
+      await fetchApi(`/api/requests/${requestId}`, requestOptions);
+      setRequests((currentRequests) => updateRequestStatus(currentRequests, requestId, 'rejected'));
     };
     putStatusData();
   };
 
-  const sentOnYear = request.sentOn.split(/T.+/g)[0].split('-')[0].split(/^.{2}/)[1];
-  const sentOnMonth = request.sentOn.split(/T.+/g)[0].split('-')[1];
-  const sentOnDay = request.sentOn.split(/T.+/g)[0].split('-')[2];
+  const sentOnYear = request?.sentOn.split(/T.+/g)[0].split('-')[0].split(/^.{2}/)[1];
+  const sentOnMonth = request?.sentOn.split(/T.+/g)[0].split('-')[1];
+  const sentOnDay = request?.sentOn.split(/T.+/g)[0].split('-')[2];
   const sentOnDate = `${sentOnDay}-${sentOnMonth}-${sentOnYear}`;
 
   return (
-    <article className={`request-card request-card--${status}`}>
-      <header className={`request-card__header request-card__header--${status}`}>
+    <article className={`request-card request-card--${request.status}`}>
+      <header className={`request-card__header request-card__header--${request.status}`}>
         <h1 className="request-card__title">
           {request.user.name}
           {', '}
@@ -63,7 +77,7 @@ const RequestCard = ({ request }:RequestCardProps) => {
       </header>
       <p className="request-card__text">{request.message}</p>
       <div className="request-card__buttons">
-        {status === 'pending'
+        {request.status === 'pending'
           ? (
             <>
               <button type="button" className="request-card__button request-card__button--accept" onClick={() => acceptRequest()}>accept</button>
@@ -71,7 +85,7 @@ const RequestCard = ({ request }:RequestCardProps) => {
             </>
           )
           : ''}
-        {status === 'accepted'
+        {request.status === 'accepted'
           ? (
             <>
               <button type="button" className="request-card__button request-card__button--accepted">accepted</button>
@@ -79,7 +93,7 @@ const RequestCard = ({ request }:RequestCardProps) => {
             </>
           )
           : ''}
-        {status === 'rejected'
+        {request.status === 'rejected'
           ? (
             <>
               <button type="button" className="request-card__button request-card__button--rejected">rejected</button>
@@ -92,4 +106,4 @@ const RequestCard = ({ request }:RequestCardProps) => {
   );
 };
 
-export default RequestCard;
+export default MyTripRequestsCard;

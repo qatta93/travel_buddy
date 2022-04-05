@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import TripCard from '../TripCard';
+import TripCard from '../../TripCard';
 import { ITrip } from '../../../types';
 import './style.css';
 

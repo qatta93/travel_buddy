@@ -8,6 +8,10 @@
   max-width: 20rem;
 }
 
+.request-card__cancel--true {
+  display: none;
+}
+
 .request-card--accepted {
   border: 2px solid var(--light-gray);
   order: 1;
@@ -77,12 +81,34 @@
   border: 2px solid var(--red);
 }
 
+.request-card__button--pending {
+  background-color: white;
+  border: 2px solid var(--yellow);
+}
+
 .request-card__button--change {
   box-shadow: 1px 3px 3px var(--shadow);
 }
 
 .request__status{
   text-align: center;
+}
+
+.request-card__wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.request-card__cancel {
+  height: 2rem;
+  color: var(--red);
+  cursor: pointer;
+}
+
+.request-card__delete {
+  height: 2rem;
+  color: var(--metal);
+  cursor: pointer;
 }
 
 @media screen and (min-width: 30rem) {

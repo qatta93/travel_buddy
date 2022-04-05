@@ -2,12 +2,13 @@
   position: relative;
 }
 
-.trip-container {
+.trip__container {
   background-color: var(--light-gray);
   margin-top: 0.3rem;
   display: grid;
   grid-template-areas:
     "header"
+    "summary"
     "info"
     "other"
     "images"
@@ -57,6 +58,7 @@
   margin-left: 85%;
   border: none;
   background-color: white;
+  cursor: pointer;
 }
 
 .trip__popup__btn {
@@ -71,12 +73,23 @@
   width: 10rem;
   margin: 0 auto;
   background-color: var(--yellow);
+  cursor: pointer;
 }
 
 .trip__main-header {
   grid-area: header;
   height: fit-content;
   margin-bottom: 1rem;
+}
+
+.trip__summary {
+  grid-area: summary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 4rem 0.5rem;
+  text-align: center;
+  font-style: italic;
 }
 
 .trip__info {
@@ -105,6 +118,7 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem 1rem;
+  text-align: justify;
 }
 
 .trip__other {
@@ -154,12 +168,29 @@
   text-transform: uppercase;
   font-size: 1.2rem;
   padding: 1.2rem;
+  cursor: pointer;
+}
+
+.trip__request-button--disabled {
+  width: 100%;
+  background-color: var(--light-gray);
+  color: var(--metal);
+  font-size: 1.2rem;
+  padding: 1.2rem;
+  text-align: center;
+}
+
+@media screen and (min-width: 30rem ){
+  .trip__popup-wrapper {
+    height: 33rem;
+  }
 }
 
 @media screen and (min-width: 45rem) {
-  .trip {
+  .trip__container {
     grid-template-areas:
       "header header"
+      "summary summary"
       "info images"
       "other other"
       "user user"
@@ -168,6 +199,10 @@
   }
 
   .trip__main-header {
+    margin-bottom: 2rem;
+  }
+
+  .trip__summary {
     margin-bottom: 2rem;
   }
 
@@ -192,12 +227,26 @@
   .trip__button-container {
     padding-top: 3rem;
   }
+  .trip__popup-wrapper {
+    margin: 30% 0;
+    background-color: white;
+    height: 32rem;
+  }
+  .trip__popup__title {
+    font-size: 1.5rem;
+  }
+  
+  .trip__popup__text {
+    font-size: 1rem;
+    min-height: 11rem;
+  }  
 }
 
 @media screen and (min-width: 85rem) {
-  .trip {
+  .trip__container {
     grid-template-areas:
       "header header header"
+      "summary summary summary"
       "info images user"
       "info images button"
       "other other other";
@@ -231,5 +280,8 @@
 
   .trip__other {
     margin: 2rem 0 0;
+  }
+  .trip__popup-wrapper {
+    margin: 10% 0;
   }
 }

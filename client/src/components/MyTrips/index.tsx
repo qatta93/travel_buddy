@@ -1,50 +1,55 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import MainHeader from '../MainHeader';
+import TripCard from '../TripCard';
 import { fetchApi } from '../../helpers/api';
-import RequestCard from './RequestCard';
-import { IRequest } from '../../types';
+import { ITrip } from '../../types';
 import './style.css';
+import { useAppSelector } from '../../hooks';
 
-const Requests = () => {
-  const [requests, setRequests] = useState<IRequest[]>([]);
-  // replace with google auth;
-  const userId = 2;
-  const filterRequestsByUserId = requests.filter((req) => req.user.id === userId);
+const MyTrips = () => {
+  const [trips, setTrips] = useState<ITrip[]>([]);
+
+  const user = useAppSelector((state) => state.user.user);
+  const userId = user?.id;
+
+  const filterTripsByUserId = trips.filter((req) => req.author.id === userId);
 
   useEffect(() => {
-    const getRequestsData = async () => {
-      const data = await fetchApi<IRequest[]>('/api/requests');
+    const getTripsData = async () => {
+      const data = await fetchApi<ITrip[]>('/api/trips');
       if (data.status === 'error') {
         console.error(data.message);
         return;
       }
-      const request = await data.data;
-      setRequests(request);
+      const trip = await data.data;
+      setTrips(trip);
     };
-    getRequestsData();
+
+    getTripsData();
   }, []);
 
   return (
-    <section className="requests">
+    <section className="my-trips">
       <MainHeader
-        title="Requests"
+        title="My trip"
         links={[
           { name: 'home', href: '/' },
-          { name: 'requests', href: '/requests' },
+          { name: 'profile', href: '/profile' },
+          { name: 'my-trips', href: '/profile/my-trips' },
         ]}
       />
-      <div className="request__list">
-        <h1 className="requests__title">Pending requests:</h1>
-        {filterRequestsByUserId.map((request:IRequest) => (
-          <RequestCard key={request.id} request={request} />
+      <div className="my-trips__list">
+        {filterTripsByUserId.map((trip:ITrip) => (
+          <Link key={trip.id} to={`/profile/my-trips/${trip.id}`} className="my-trips__item">
+            <TripCard trip={trip} />
+          </Link>
         ))}
-        {'\n'}
-        <h1 className="requests__title">Accepted / rejected requests:</h1>
       </div>
-      <img className="requests__img" src="/images/bg_desktop.png" alt="car" />
+      <img className="my-trips__img" src="/images/bg_desktop.png" alt="car" />
 
     </section>
   );
 };
 
-export default Requests;
+export default MyTrips;
