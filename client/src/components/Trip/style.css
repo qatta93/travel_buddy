@@ -12,8 +12,8 @@
     "info"
     "other"
     "images"
-    "video"
     "user"
+    "video"
     "button";
   margin-bottom: auto;
 }
@@ -215,8 +215,8 @@
       "summary summary"
       "info images"
       "other other"
-      "video video"
       "user user"
+      "video video"
       "button button";
     grid-template-columns: 1fr 1fr;
   }
