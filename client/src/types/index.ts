@@ -39,6 +39,7 @@ export interface ITrip {
   places: string[],
   requests: ITripRequests[],
   genderRestrictions: string | null,
+  video: string,
 }
 
 export interface IUser {

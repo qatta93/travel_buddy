@@ -64,6 +64,7 @@ describe('GET /api/trips/:id', () => {
       expect(data.from).toEqual((new Date('2022-03-30').toISOString()));
       expect(data.to).toEqual((new Date('2022-03-30').toISOString()));
       expect(data.maxPassengers).toBe(5);
+      expect(data.video).toBe('F1AYXQBSnUc');
       expect(data.activities).toEqual(expect.arrayContaining(['Beach']));
       expect(data.places).toEqual(expect.arrayContaining(['The Rockies']));
       expect(data.genderRestrictions).toBeNull();
@@ -95,6 +96,7 @@ describe('POST /api/trips', () => {
     activities: ['Hiking', 'Mountains'],
     places: ['Forests', 'Windowm lake'],
     genderRestrictions: 'female',
+    video: 'https://www.youtube.com/watch?v=tJk9cFz152s&ab_channel=NationalGeographic',
   };
 
   let tripId;
@@ -130,6 +132,7 @@ describe('POST /api/trips', () => {
       expect(trip.activities).toEqual(expect.arrayContaining(newTrip.activities));
       expect(trip.places).toEqual(expect.arrayContaining(newTrip.places));
       expect(trip.genderRestrictions).toEqual('female');
+      expect(trip.video).toEqual('tJk9cFz152s');
       expect(trip.requests).toEqual([]);
 
       trip.countries.forEach((country) => {

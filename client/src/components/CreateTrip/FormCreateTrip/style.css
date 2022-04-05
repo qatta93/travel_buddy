@@ -11,7 +11,7 @@
 
 .create-form__label {
   display: grid;
-  grid-template-columns: 4rem minmax(0, 1fr);
+  grid-template-columns: 5.5rem minmax(0, 1fr);
   grid-gap: 1rem;
   margin-bottom: 1rem;
   align-items: center;
@@ -19,15 +19,15 @@
 }
 
 .create-form__label--date {
-  grid-template-columns: 4rem minmax(0, 1fr);
+  grid-template-columns: 5.5rem minmax(0, 1fr);
 }
 
 .create-form__label--age {
-  grid-template-columns: 4rem minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: 5.5rem minmax(0, 1fr) minmax(0, 1fr);
 }
 
 .create-form__label--checkbox {
-  grid-template-columns: 4rem 1rem 1fr 1rem 1fr 1rem 2fr;
+  grid-template-columns: 5.5rem 1rem 1fr 1rem 1fr 1rem 2fr;
 }
 
 .create-form__label--text-area {
@@ -70,6 +70,11 @@
 
 .create-form__text-area--long {
   min-height: 10rem;
+}
+
+.create-form__legend {
+  font-size: 0.8rem;
+  margin: 0.5rem 0 1rem;
 }
 
 .create-form__btn {
