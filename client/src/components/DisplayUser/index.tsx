@@ -29,11 +29,11 @@ export const DisplayUser = () => {
       }
 
       if (userDetailsData.status === 'error') {
-        console.log(userDetailsData.message);
+        console.error(userDetailsData.message);
       }
 
       if (tripsData.status === 'error') {
-        console.log(tripsData.message);
+        console.error(tripsData.message);
       }
     };
 
