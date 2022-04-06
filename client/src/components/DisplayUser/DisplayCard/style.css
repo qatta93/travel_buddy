@@ -1,6 +1,7 @@
-* {
+.display-card {
   font-size: 1.1rem;
 }
+
 .display-card__container {
   display:flex;
   flex-direction: column;
