@@ -1,0 +1,34 @@
+.trips-popup {
+  display: flex;
+  align-items: center;
+}
+
+.trips-popup__img {
+  height: 5rem;
+  padding: 0;
+  margin: 0;
+  width: 5rem;
+  border-radius: 100%;
+}
+
+.trips-popup__info {
+  padding: 0 0.5rem;
+}
+
+.trips-popup__title {
+  font-size: 1rem;
+}
+
+.trips-popup__text {
+  line-height: 1rem;
+  font-size: 0.8rem;
+  padding: 0.3rem 0;
+}
+
+.trips-popup__link {
+  margin: 0.4rem auto 0;
+  background-color: var(--yellow);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  color: var(--metal);
+}

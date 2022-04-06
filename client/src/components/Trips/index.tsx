@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import { Link } from 'react-router-dom';
 import TripCard from '../TripCard';
 import { ITrip } from '../../types';
-import Maps from '../Search/Map';
+import Maps from './Map';
 import './style.css';
 
 interface TripsProps {
