@@ -10,6 +10,7 @@ const Header = () => {
   const user = useAppSelector((state) => state.user.user);
 
   const toggleNav = () => {
+    window.scrollTo(0, 0);
     setIsNavExpanded((currentState) => !currentState);
   };
 
@@ -18,32 +19,35 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
-      <nav className="header__nav">
-        <Link className="header__logo-container" to="/">
-          <img className="header__logo" src="/images/logo.png" alt="van logo" />
-          <h2 className="header__title">Travel Buddy</h2>
-        </Link>
-        <div className="header__menu-container">
-          <button type="button" className="header__button" onClick={toggleNav} aria-label="toggle-nav">
-            { isNavExpanded ? <CloseIcon /> : <HamburgerIcon />}
-          </button>
-          <ul className={`header__links-container ${isNavExpanded ? 'header__links-container--visible' : ''}`}>
-            <NavLink className="header__link" to="/" onClick={handleLink}>Home Page</NavLink>
-            <NavLink className="header__link" to="/trips" onClick={handleLink} end>Trips</NavLink>
-            {user ? (
-              <>
-                <NavLink className="header__link" to="/create-trip" onClick={handleLink}>Create Trip</NavLink>
-                <NavLink className="header__link header__link--yellow" to="/profile" onClick={handleLink} end>Profile</NavLink>
-              </>
-            ) : (
-              <NavLink className="header__link header__link--yellow" to="/login" onClick={handleLink}>Login</NavLink>
-            )}
-            <NavLink className="header__link header__link--blue" to="/about-us" onClick={handleLink}>About Us</NavLink>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    <>
+      <div className={`placeholder ${isNavExpanded ? 'placeholder--visible' : ''}`} />
+      <header className={`header ${isNavExpanded ? 'header--fixed' : ''}`}>
+        <nav className="header__nav">
+          <Link className="header__logo-container" to="/">
+            <img className="header__logo" src="/images/logo.png" alt="van logo" />
+            <h2 className="header__title">Travel Buddy</h2>
+          </Link>
+          <div className="header__menu-container">
+            <button type="button" className="header__button" onClick={toggleNav} aria-label="toggle-nav">
+              { isNavExpanded ? <CloseIcon /> : <HamburgerIcon />}
+            </button>
+            <ul className={`header__links-container ${isNavExpanded ? 'header__links-container--visible' : ''}`}>
+              <NavLink className="header__link" to="/" onClick={handleLink}>Home Page</NavLink>
+              <NavLink className="header__link" to="/trips" onClick={handleLink} end>Trips</NavLink>
+              {user ? (
+                <>
+                  <NavLink className="header__link" to="/create-trip" onClick={handleLink}>Create Trip</NavLink>
+                  <NavLink className="header__link header__link--yellow" to="/profile" onClick={handleLink} end>Profile</NavLink>
+                </>
+              ) : (
+                <NavLink className="header__link header__link--yellow" to="/login" onClick={handleLink}>Login</NavLink>
+              )}
+              <NavLink className="header__link header__link--blue" to="/about-us" onClick={handleLink}>About Us</NavLink>
+            </ul>
+          </div>
+        </nav>
+      </header>
+    </>
   );
 };
 

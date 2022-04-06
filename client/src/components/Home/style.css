@@ -41,7 +41,7 @@
 }
 
 .home__bg-video {
-  width: 100vw  !important;
+  width: 100vw;
   object-fit: cover;
 }
 
