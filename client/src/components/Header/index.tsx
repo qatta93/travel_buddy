@@ -23,7 +23,7 @@ const Header = () => {
       <div className={`placeholder ${isNavExpanded ? 'placeholder--visible' : ''}`} />
       <header className={`header ${isNavExpanded ? 'header--fixed' : ''}`}>
         <nav className="header__nav">
-          <Link className="header__logo-container" to="/">
+          <Link className="header__logo-container" to="/" onClick={handleLink}>
             <img className="header__logo" src="/images/logo.png" alt="van logo" />
             <h2 className="header__title">Travel Buddy</h2>
           </Link>

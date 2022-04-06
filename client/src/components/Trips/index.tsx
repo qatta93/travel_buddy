@@ -8,13 +8,14 @@ import './style.css';
 
 interface TripsProps {
   trips: ITrip[],
+  title: string,
 }
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidG9tODQiLCJhIjoiY2wxMXdqd2t4MDEzbTNjbXZ3eW81c2sxYiJ9.P0aH-Hn9LJ0dcCOPcAvmwQ';
 
-const Trips = ({ trips }: TripsProps) => (
+const Trips = ({ trips, title }: TripsProps) => (
   <section className="trips">
-    <h1 className="trips__title">Dream trips list:</h1>
+    <h1 className="trips__title">{title}</h1>
     <Maps trips={trips} />
     <div className="trips__list">
       {trips.map((trip:ITrip) => (

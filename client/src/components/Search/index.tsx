@@ -53,7 +53,7 @@ const Search = () => {
       <section className="search__form">
         <FormSearchTrip setFilters={setFilters} />
         {filteredTrips.length > 0 ? (
-          <Trips trips={filteredTrips} />
+          <Trips trips={filteredTrips} title="Dream trip list" />
         ) : <p className="search__message">No trips matched your search</p>}
       </section>
       <div className="search__car-bcg" />

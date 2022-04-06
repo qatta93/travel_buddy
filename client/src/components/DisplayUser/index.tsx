@@ -57,7 +57,7 @@ export const DisplayUser = () => {
       )}
       {userTrips.length > 0 && (
         <section className="display-user__trips">
-          <Trips trips={userTrips} />
+          <Trips trips={userTrips} title="My trips:" />
         </section>
       )}
       <img className="display-user__img" src="/images/bg_desktop.png" alt="car" />
