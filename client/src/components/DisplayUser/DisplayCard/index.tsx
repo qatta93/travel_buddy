@@ -8,7 +8,7 @@ interface DisplayUserProps {
 
 const DisplayCard = ({ user }: DisplayUserProps) => (
   <article className="display-card__container">
-    <img className="display-card__avatar" alt="user's avatar" src={user.avatar === null ? '/images/avatar.webp' : user.avatar} />
+    <img className="display-card__avatar" alt="user's avatar" src={user.avatar || '/images/avatar.webp'} />
     <div className="display-card__info">
       <p className="display-card__info-key">Name:</p>
       <p className="display-card__info-value">{user.name}</p>

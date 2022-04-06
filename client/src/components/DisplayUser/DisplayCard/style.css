@@ -31,6 +31,9 @@
   border: none;
   box-shadow: inset 0px 5px 8px var(--shadow);
   color: var(--metal);
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
 }
 
 .display-card__summary {
@@ -39,6 +42,7 @@
   align-self: center;
   align-items: center;
   padding: 1rem;
+  width: 100%;
 }
 
 .display-card__summary-title {
@@ -52,6 +56,7 @@
   border: none;
   box-shadow: inset 0px 5px 8px var(--shadow);
   color: var(--metal);
+  width: 100%;
 }
 
 .display-card__bg {
@@ -65,7 +70,7 @@
   height: 95vh;
 }
 
-@media screen and (min-width: 40rem) {
+@media screen and (min-width: 35rem) {
   .display-card {
     display: flex;
     flex-direction: column;
@@ -73,8 +78,7 @@
   }
   
   .display-card__container {
-    min-width: 40%;
-    max-width: 60%;
+    width: 35rem;
     background-color: rgba(255, 255, 255, 0.975);
   }
 
