@@ -24,11 +24,7 @@ const TripMap = ({ countries }: TripMapProps) => {
   const tripCountries = countries.map((c: ICountry) => c.country);
   const mapCountries = countriesData.filter((c) => tripCountries.includes(c.name));
 
-  console.log(mapCountries);
-
   const [avrgLat, avrgLng] = getAvrgLatLng(mapCountries);
-
-  console.log(avrgLat, avrgLng);
 
   const [longitude] = useState<number>(avrgLng);
   const [latitude] = useState<number>(avrgLat);
