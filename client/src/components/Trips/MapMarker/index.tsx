@@ -12,8 +12,7 @@ const MapMarker = ({ trip }:MapProps) => {
   const { countries } = trip;
   const countriesNames = countries.map((c) => c.country);
   const countriesData = countryData.filter((c) => countriesNames.includes(c.name));
-  console.log(trip);
-  console.log(countriesNames[0]);
+
   return (
     <>
       {countriesData.map((c) => (
