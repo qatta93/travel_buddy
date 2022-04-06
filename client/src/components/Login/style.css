@@ -35,9 +35,10 @@
 .login__register {
   font-size: 0.8rem;
   margin: 2rem 0;
+  color: var(--metal);
 }
 
-.login__register-span {
+.login__register-link {
   margin-left: 0.4rem;
   font-size: 0.9rem;
   font-weight: bold;

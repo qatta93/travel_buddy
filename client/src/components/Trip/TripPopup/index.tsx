@@ -42,7 +42,7 @@ const TripPopup = ({ togglePopup, user, tripId }: TripPopupProps) => {
 
   return (
     <div className="trip-popup">
-      <form className="create-form" onSubmit={createNewRequest}>
+      <form className="trip-popup__form" onSubmit={createNewRequest}>
         <button type="button" className="trip-popup__close" onClick={togglePopup}>
           <CloseIcon />
         </button>

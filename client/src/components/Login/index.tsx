@@ -15,7 +15,7 @@ const Login = () => (
       </a>
       <p className="login__register">
         Do not have an account ?
-        <span className="login__register-span">Register</span>
+        <a className="login__register-link" href={`${host}/api/auth/login/google`}>Register</a>
       </p>
       <img className="login__img" src="/images/surfer.png" alt="surfer" />
     </section>

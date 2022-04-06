@@ -29,7 +29,8 @@ const Requests = () => {
         console.error(data.message);
         return;
       }
-      const request = await data.data;
+
+      const request = data.data;
       setRequests(request);
     };
     getRequestsData();

@@ -1,7 +1,7 @@
 .trip-popup {
   margin: 35% 0;
   background-color: white;
-  height: 25rem;
+  height: 28rem;
 }
 
 .trip-popup__title {
@@ -43,6 +43,11 @@
   margin: 0 auto;
   background-color: var(--yellow);
   cursor: pointer;
+}
+
+.trip-popup__form {
+  padding: 0.5rem 2rem;
+  text-align: center;
 }
 
 @media screen and (min-width: 30rem ){

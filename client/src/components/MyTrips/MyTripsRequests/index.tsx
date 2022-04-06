@@ -51,12 +51,11 @@ const MyTripRequests = () => {
             <p className="my-trips__no-requests">They will come soon ☺</p>
           </div>
         )
-        : null}
-      {tripRequests.map((request:IRequest) => (
-        <div className="my-trips-requests__wrapper" key={request.id}>
-          <MyTripRequestsCard request={request} setRequests={setRequests} />
-        </div>
-      ))}
+        : tripRequests.map((request: IRequest) => (
+          <div className="my-trips-requests__wrapper" key={request.id}>
+            <MyTripRequestsCard request={request} setRequests={setRequests} />
+          </div>
+        ))}
     </section>
   );
 };
