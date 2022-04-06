@@ -118,9 +118,12 @@ const Trip = () => {
               </button>
             ) : <p className="trip__request-button--disabled">{requestButtonMessage()}</p>}
           </section>
+          <section className="trip__map">
+            {/* @ts-ignore: Unreachable code error */}
+            <Maps countries={trip.countries} />
+          </section>
         </div>
       )}
-      <Maps />
     </main>
   );
 };

@@ -164,6 +164,10 @@
   padding: 0.5rem 0;
 }
 
+.trip__map {
+  width: 100%;
+}
+
 @media screen and (min-width: 45rem) {
   .trip__container {
     grid-template-areas:
