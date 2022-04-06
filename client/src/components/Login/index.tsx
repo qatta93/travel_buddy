@@ -2,7 +2,7 @@ import React from 'react';
 import MainHeader from '../MainHeader';
 import './style.css';
 
-const host = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5000';
+const host = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5500';
 
 const Login = () => (
   <main className="login">

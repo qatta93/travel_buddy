@@ -19,7 +19,6 @@
 .display-card__info {
   display:grid;
   grid-template-columns: 1fr 1fr;
-
   padding: 0.7rem 2rem;
   justify-content:space-around;
 }
@@ -27,7 +26,6 @@
 .display-card__info-key {
   justify-self: start;
   color: var(--dark-blue);
-  
 }
 
 .display-card__info-value {
@@ -51,9 +49,6 @@
   padding-bottom: 0.7rem;
 }
 
-.display-card__summary-text {
-
-}
 .display-card__bg {
   margin-top: auto;
   max-width: 100vw;
@@ -64,6 +59,7 @@
   object-fit: fill;
   height: 95vh;
 }
+
 .display-card__car-bcg {
   margin-top: 4rem;
   opacity: 40%;
@@ -79,7 +75,6 @@
     flex-direction: column;
     align-items: center;
     font-size: 1.4rem;
-
   }
   
   .display-card__container {
@@ -88,18 +83,14 @@
     background-color: rgba(255, 255, 255, 0.945);
   }
 
-  .display-card__bg {
-    
-  }
-
   .display-card__info {
-  
     padding: 0.7rem 4rem;
   }
 
   .display-card__info-key {
     padding-left: 4rem;
   }
+
   .display-card__info-value {
     padding-left: 2rem;
   }
