@@ -19,6 +19,7 @@ import { addUser } from './slices/user';
 import { LoggedInUser } from './types';
 import MyTrips from './components/MyTrips';
 import MyTripRequests from './components/MyTrips/MyTripsRequests';
+import Users from './components/Users';
 import './App.css';
 import { DisplayUser } from './components/DisplayUser';
 
@@ -58,6 +59,7 @@ const App = () => {
           <Route path=":id" element={<RedirectToUserEdit><Trip /></RedirectToUserEdit>} />
         </Route>
         <Route path="users">
+          <Route index element={<RedirectToUserEdit><Users /></RedirectToUserEdit>} />
           <Route path=":id" element={<RedirectToUserEdit><DisplayUser /></RedirectToUserEdit>} />
         </Route>
         <Route path="login" element={<Login />} />
