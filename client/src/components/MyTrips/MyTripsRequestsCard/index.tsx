@@ -24,7 +24,6 @@ const updateRequestStatus = (reqs:IRequest[], id:number, status:Status):IRequest
 );
 
 const MyTripRequestsCard = ({ request, setRequests }:RequestCardProps) => {
-  console.log(request);
   const acceptRequest = () => {
     const requestId = request.id;
     const putStatusData = async () => {
