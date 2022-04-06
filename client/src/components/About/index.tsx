@@ -12,17 +12,25 @@ const About = () => (
       ]}
     />
     <p className="about__team-text">
-      Alejandro Patrycja Thomas
+      <span className="about__team-text--span">Alejandro</span>
+      <span className="about__team-text--span">Patrycja</span>
+      <span className="about__team-text--span">Thomas</span>
     </p>
     <section className="about__content-container">
-      <p className="about__paragraph">
-        Hi and welcome to our final project! We are three aspirant web developers
-        who went through the salt bootcamp by learning and working on labs together.
-        We would like to think we are a friendly and dynamic team. We all have
-        worked/studied and travelled in far places and are now based in Oslo/Stockholm
-        aspiring to launch our careers as web developers. Feel free to have a chat
-        with any of us.
-      </p>
+      <div className="about__paragraph-wrapper">
+        <p className="about__paragraph">
+          Hi and welcome to our final project! We are three aspirant web developers
+          who went through the salt bootcamp by learning and working on labs together.
+        </p>
+        <p className="about__paragraph">
+          We would like to think we are a friendly and dynamic team. We all have
+          worked/studied and travelled in far places and are now based in Oslo/Stockholm
+          aspiring to launch our careers as web developers.
+        </p>
+        <p className="about__paragraph">
+          Feel free to have a chat with any of us.
+        </p>
+      </div>
       <section className="about_team">
         <img className="about__team-image" src="/images/codingNomads.jpg" alt="coding nomads team" />
       </section>
