@@ -15,15 +15,6 @@
   background-color: var(--light-gray);
 }
 
-.trips__car-bcg {
-  margin-top: 4rem;
-  opacity: 40%;
-  height: 10rem;
-  background-image: url('../../../../public/images/bg_desktop.png');
-  background-position: top;
-  background-size: cover;
-}
-
 @media screen and (min-width: 30rem) {
   .trips__list {
     display: flex;
@@ -32,11 +23,9 @@
     flex-wrap: wrap;
     width: 100%;
   }
+  
   .trips__item {
     max-width: 40rem;
-  }
-  .trips__car-bcg {
-    display: none;
   }
 }
 
