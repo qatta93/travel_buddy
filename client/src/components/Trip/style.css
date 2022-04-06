@@ -9,6 +9,7 @@
   grid-template-areas:
     "header"
     "summary"
+    "map"
     "info"
     "other"
     "images"
@@ -167,7 +168,12 @@
 }
 
 .trip__map {
+  grid-area: map;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  height: 20rem;
 }
 
 @media screen and (min-width: 45rem) {
@@ -175,6 +181,7 @@
     grid-template-areas:
       "header header"
       "summary summary"
+      "map map"
       "info info"
       "images images"
       "other other"
@@ -221,6 +228,7 @@
     background-color: white;
     height: 32rem;
   }
+
   .trip__popup__title {
     font-size: 1.5rem;
   }
@@ -228,7 +236,12 @@
   .trip__popup__text {
     font-size: 1rem;
     min-height: 11rem;
-  }  
+  }
+
+  .trip__map {
+    height: 25rem;
+    padding: 0 2rem;
+  }
 }
 
 @media screen and (min-width: 85rem) {
@@ -236,6 +249,7 @@
     grid-template-areas:
       "header header header"
       "summary summary summary"
+      "map map map"
       "info images user"
       "info images button"
       "other other other"
@@ -294,5 +308,10 @@
 
   .trip__passengers {
     padding-top: 2rem;
+  }
+
+  .trip__map {
+    margin: 1rem 0 2rem;
+    padding: 0 3rem;
   }
 }

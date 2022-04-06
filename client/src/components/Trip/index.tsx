@@ -9,7 +9,7 @@ import UserCard from './UserCard';
 import { parseGenderRestrictions, formatDatesTrip } from '../../helpers/misc';
 import TripPopup from './TripPopup';
 import Passengers from './Passengers';
-import Maps from './Maps';
+import TripMap from './TripMap';
 import './style.css';
 
 const Trip = () => {
@@ -119,8 +119,7 @@ const Trip = () => {
             ) : <p className="trip__request-button--disabled">{requestButtonMessage()}</p>}
           </section>
           <section className="trip__map">
-            {/* @ts-ignore: Unreachable code error */}
-            <Maps countries={trip.countries} />
+            <TripMap countries={trip.countries} />
           </section>
         </div>
       )}
