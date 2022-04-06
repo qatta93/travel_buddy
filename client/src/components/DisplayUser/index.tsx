@@ -46,7 +46,8 @@ export const DisplayUser = () => {
         title={(userDetails && userDetails.username.length > 0 ? `${userDetails.username}` : 'New User')}
         links={[
           { name: 'home', href: '/' },
-          { name: 'user', href: `/api/users/${id}` },
+          { name: 'users', href: '/users' },
+          { name: 'details', href: `/api/users/${id}` },
         ]}
       />
       {userDetails && (

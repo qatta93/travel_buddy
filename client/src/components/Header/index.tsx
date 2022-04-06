@@ -34,6 +34,7 @@ const Header = () => {
             <ul className={`header__links-container ${isNavExpanded ? 'header__links-container--visible' : ''}`}>
               <NavLink className="header__link" to="/" onClick={handleLink}>Home Page</NavLink>
               <NavLink className="header__link" to="/trips" onClick={handleLink} end>Trips</NavLink>
+              <NavLink className="header__link" to="/users" onClick={handleLink} end>Users</NavLink>
               {user ? (
                 <>
                   <NavLink className="header__link" to="/create-trip" onClick={handleLink}>Create Trip</NavLink>
