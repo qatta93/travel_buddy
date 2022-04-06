@@ -68,7 +68,7 @@ const Trip = () => {
             />
           </section>
           <section className="trip__summary">
-            <p className="trip__summary-text">{trip.summary}</p>
+            <p className="trip__summary-text">{`„ ${trip.summary} ”`}</p>
           </section>
           <section className="trip__info">
             <p className="trip__dates">{tripDates}</p>
