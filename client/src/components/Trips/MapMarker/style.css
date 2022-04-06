@@ -32,3 +32,10 @@
   border-radius: 0.5rem;
   color: var(--metal);
 }
+
+.mapboxgl-popup-close-button {
+  height: 1rem;
+  width: 1rem;
+  margin-right: 0.3rem;
+  font-size: 1.5rem;
+}
