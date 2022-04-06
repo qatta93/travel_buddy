@@ -33,7 +33,7 @@ const Profile = () => {
           <Link to="/profile/my-trips" className="profile__btn">My trips</Link>
           <Link to="/edit-user" className="profile__btn">My profile account</Link>
           <Link to="/requests" className="profile__btn">Requests</Link>
-          <button type="submit" className="profile__btn profile__btn--logout" onClick={handleLogout}>LOGOUT</button>
+          <button type="button" className="profile__btn profile__btn--logout" onClick={handleLogout}>LOGOUT</button>
         </section>
       </div>
       <img className="profile__img" src="/images/bg_desktop.png" alt="car" />

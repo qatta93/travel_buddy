@@ -90,7 +90,25 @@
   background-color: var(--yellow);
 }
 
-@media screen and (min-width: 50rem) {
+.header__logout {
+  display: block;
+  padding: 0.8rem 2rem;
+  text-decoration: none;
+  color: var(--metal);
+  border: none;
+  width: 15rem;
+  margin: 0.5rem auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px var(--metal);
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-align: center;
+  background-color: var(--red);
+  cursor: pointer;
+  color: white;
+}
+
+@media screen and (min-width: 65rem) {
   .header__button {
     display: none;
   }
@@ -114,6 +132,15 @@
     box-shadow: none;
     text-transform: uppercase;
     color: var(--metal);
+  }
+
+  .header__logout {
+    border: none;
+    padding: 1rem 0.8rem;
+    width: auto;
+    margin: auto 0.5rem;
+    box-shadow: none;
+    text-transform: uppercase;
   }
 
   .header__link:hover {

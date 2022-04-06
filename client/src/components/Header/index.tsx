@@ -1,13 +1,32 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import HamburgerIcon from './HamburgerIcon';
 import CloseIcon from './CloseIcon';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { fetchApi } from '../../helpers/api';
+import { addUser } from '../../slices/user';
 import './style.css';
 
 const Header = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const user = useAppSelector((state) => state.user.user);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const handleLogout = async () => {
+    const data = await fetchApi('/api/auth/logout', {
+      method: 'POST',
+    });
+
+    if (data.status === 'error') {
+      console.error(data.message);
+      return;
+    }
+
+    dispatch(addUser(null));
+    setIsNavExpanded(false);
+    navigate('/');
+  };
 
   const toggleNav = () => {
     window.scrollTo(0, 0);
@@ -44,6 +63,9 @@ const Header = () => {
                 <NavLink className="header__link header__link--yellow" to="/login" onClick={handleLink}>Login</NavLink>
               )}
               <NavLink className="header__link header__link--blue" to="/about-us" onClick={handleLink}>About Us</NavLink>
+              {user && (
+                <button type="button" className="header__logout" onClick={handleLogout}>Logout</button>
+              )}
             </ul>
           </div>
         </nav>
