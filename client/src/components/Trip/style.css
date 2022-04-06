@@ -9,6 +9,7 @@
   grid-template-areas:
     "header"
     "summary"
+    "map"
     "info"
     "other"
     "images"
@@ -45,6 +46,7 @@
   padding: 1rem 4rem 0.5rem;
   text-align: center;
   font-style: italic;
+  font-family:Georgia, "Times New Roman", Times, serif;
 }
 
 .trip__info {
@@ -61,6 +63,7 @@
   max-width: 15rem;
   margin: 0 auto;
   font-size: 1.1rem;
+  font-weight: bold;
   color: var(--dark-blue);
 }
 
@@ -161,7 +164,16 @@
   background-color: white;
   display: flex;
   justify-content: center;
-  padding: 0.5rem 0;
+  padding-bottom: 1rem;
+}
+
+.trip__map {
+  grid-area: map;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  height: 20rem;
 }
 
 @media screen and (min-width: 45rem) {
@@ -169,7 +181,9 @@
     grid-template-areas:
       "header header"
       "summary summary"
-      "info images"
+      "map map"
+      "info info"
+      "images images"
       "other other"
       "user user"
       "video video"
@@ -184,11 +198,12 @@
 
   .trip__summary {
     margin-bottom: 2rem;
+    font-size: 1.4rem;
   }
 
   .trip__info {
     grid-area: info;
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 5rem;
   }
 
   .trip__img-container {
@@ -205,7 +220,7 @@
   }
 
   .trip__button-container {
-    padding-top: 3rem;
+    padding: 2rem 0;
   }
 
   .trip__popup-wrapper {
@@ -213,6 +228,7 @@
     background-color: white;
     height: 32rem;
   }
+
   .trip__popup__title {
     font-size: 1.5rem;
   }
@@ -220,7 +236,12 @@
   .trip__popup__text {
     font-size: 1rem;
     min-height: 11rem;
-  }  
+  }
+
+  .trip__map {
+    height: 25rem;
+    padding: 0 2rem;
+  }
 }
 
 @media screen and (min-width: 85rem) {
@@ -228,6 +249,7 @@
     grid-template-areas:
       "header header header"
       "summary summary summary"
+      "map map map"
       "info images user"
       "info images button"
       "other other other"
@@ -286,5 +308,10 @@
 
   .trip__passengers {
     padding-top: 2rem;
+  }
+
+  .trip__map {
+    margin: 1rem 0 2rem;
+    padding: 0 3rem;
   }
 }

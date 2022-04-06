@@ -9,6 +9,7 @@ import UserCard from './UserCard';
 import { parseGenderRestrictions, formatDatesTrip } from '../../helpers/misc';
 import TripPopup from './TripPopup';
 import Passengers from './Passengers';
+import TripMap from './TripMap';
 import './style.css';
 
 const Trip = () => {
@@ -68,7 +69,7 @@ const Trip = () => {
             />
           </section>
           <section className="trip__summary">
-            <p className="trip__summary-text">{trip.summary}</p>
+            <p className="trip__summary-text">{`„ ${trip.summary} ”`}</p>
           </section>
           <section className="trip__info">
             <p className="trip__dates">{tripDates}</p>
@@ -116,6 +117,9 @@ const Trip = () => {
                 Send request!
               </button>
             ) : <p className="trip__request-button--disabled">{requestButtonMessage()}</p>}
+          </section>
+          <section className="trip__map">
+            <TripMap countries={trip.countries} />
           </section>
         </div>
       )}

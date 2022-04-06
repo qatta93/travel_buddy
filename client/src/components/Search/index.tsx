@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FormSearchTrip from './FormSearchTrip';
-import Trips from './Trips';
+import Trips from '../Trips';
 import { fetchApi } from '../../helpers/api';
 import MainHeader from '../MainHeader';
 import { ITrip, SearchFilters } from '../../types';
@@ -56,7 +56,7 @@ const Search = () => {
           <Trips trips={filteredTrips} />
         ) : <p className="search__message">No trips matched your search</p>}
       </section>
-
+      <div className="search__car-bcg" />
     </main>
   );
 };

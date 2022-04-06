@@ -1,9 +1,9 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import { Link } from 'react-router-dom';
-import TripCard from '../../TripCard';
-import { ITrip } from '../../../types';
-import Maps from '../Map';
+import TripCard from '../TripCard';
+import { ITrip } from '../../types';
+import Maps from '../Search/Map';
 import './style.css';
 
 interface TripsProps {
@@ -23,7 +23,6 @@ const Trips = ({ trips }: TripsProps) => (
         </Link>
       ))}
     </div>
-    <div className="trips__car-bcg" />
   </section>
 );
 
