@@ -1,0 +1,8 @@
+.trip-popup__title {
+  color: var(--metal);
+  margin: 0 0 0.3rem;
+}
+
+.trip-popup__info {
+  color: var(--dark-blue);
+}
