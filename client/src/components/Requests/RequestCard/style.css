@@ -1,4 +1,4 @@
-.request-card {
+.request-card--user {
   margin: 1rem auto;
   border: 2px solid var(---light-yellow);
   border-radius: 0.4rem;
@@ -6,7 +6,8 @@
   box-shadow: 2px 5px 3px var(--shadow);
   width: 80%;
   max-width: 20rem;
-}
+  height: 8rem;
+} 
 
 .request-card__cancel--true {
   display: none;

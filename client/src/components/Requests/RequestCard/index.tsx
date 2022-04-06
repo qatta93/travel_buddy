@@ -51,7 +51,7 @@ const RequestCard = ({ request }:RequestCardProps) => {
   const tripHostName = trip?.author.username;
 
   return (
-    <article className={`request-card request-card__cancel--${cancelled} request-card--${status}`}>
+    <article className={`request-card--user request-card__cancel--${cancelled} request-card--${status}`}>
       <header className={`request-card__header request-card__header--${status}`}>
         <div className="request-card__wrapper">
           <h1 className="request-card__title">
