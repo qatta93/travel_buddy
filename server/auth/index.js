@@ -3,7 +3,7 @@ const passport = require('./passport');
 require('dotenv').config();
 
 const router = express.Router();
-const host = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000';
+const host = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '';
 
 router.get('/login/google', passport.authenticate('google'));
 
