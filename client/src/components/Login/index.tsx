@@ -2,13 +2,14 @@ import React from 'react';
 import MainHeader from '../MainHeader';
 import './style.css';
 
+const host = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5500';
+
 const Login = () => (
   <main className="login">
     <MainHeader title="LOGIN" links={[{ name: 'home', href: '/' }, { name: 'login', href: '/login' }]} />
     <section className="login__google">
       <h2 className="login__title">Login with your Google account:</h2>
-      {/* <button type="submit" className="login__button"> */}
-      <a className="login__button" href="http://localhost:5500/api/auth/login/google">
+      <a className="login__button" href={`${host}/api/auth/login/google`}>
         <img className="login__button-img" src="/images/google.jpg" alt="google" />
         <p className="login__button-title">Google</p>
       </a>

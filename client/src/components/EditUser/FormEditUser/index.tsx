@@ -120,7 +120,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
   return (
     <form className="edit-user-form" onSubmit={handleSubmit} autoComplete="off">
       <label htmlFor="name" className="edit-user-form__label">
-        Name:
+        Name *
         <input
           name="name"
           type="text"
@@ -132,7 +132,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
         />
       </label>
       <label htmlFor="username" className="edit-user-form__label">
-        Username:
+        Username *
         <input
           name="username"
           type="text"
@@ -144,7 +144,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
         />
       </label>
       <label htmlFor="age" className="edit-user-form__label">
-        Age:
+        Age *
         <input
           name="age"
           type="number"
@@ -158,7 +158,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
         />
       </label>
       <label htmlFor="country" className="edit-user-form__label">
-        Country:
+        Country *
         <select
           name="country"
           placeholder="country"
@@ -171,7 +171,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
         </select>
       </label>
       <label htmlFor="gender" className="edit-user-form__label">
-        Gender:
+        Gender *
         <select
           name="gender"
           className="edit-user-form__input"
@@ -186,7 +186,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
         </select>
       </label>
       <label htmlFor="languages" className="edit-user-form__label">
-        Languages:
+        Languages *
         <select
           name="languages"
           value={editUserInput.languages}
@@ -201,7 +201,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
         </select>
       </label>
       <label htmlFor="avatar" className="edit-user-form__label">
-        Avatar:
+        Avatar
         <input
           name="avatar"
           type="text"
@@ -212,7 +212,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
         />
       </label>
       <label htmlFor="summary" className="edit-user-form__label edit-user-form__label--text-area">
-        About me:
+        About me *
         <textarea
           name="summary"
           placeholder="Tell the others about you!"
@@ -222,6 +222,7 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
           required
         />
       </label>
+      <p className="edit-user__legend">* Required fields</p>
       <div className="edit-user-form__btn-wrapper">
         <button type="submit" className="edit-user-form__btn">Save changes</button>
       </div>

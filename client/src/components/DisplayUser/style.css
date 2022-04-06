@@ -1,19 +1,15 @@
-.create-trip__img {
+.display-user__img {
   width: 100vw;
   opacity: 40%;
 }
 
 @media screen and (min-width: 30rem) {
-  .create-trip__form {
-    opacity: 80%;
-    max-width: 100vw;
+  .display-user {
     background-image: url('/public/images/bg_desktop.png');
     background-position: bottom;
-    background-size: 135%;
-    background-repeat: no-repeat;
+    background-size: cover;
   }
-
-  .create-trip__img {
+  .display-user__img {
     display: none;
   }
 }

@@ -1,0 +1,62 @@
+.passengers {
+  width: 100%;
+}
+
+.passengers__header {
+  display: flex;
+  justify-content: center;
+}
+
+.passengers__container {
+  display: none;
+  margin: 1rem 0 0;
+  padding: 0 2rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.passengers__container--visible {
+  display: flex;
+}
+
+.passengers__card-link {
+  margin: 0.7rem 0;
+}
+
+.passengers__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: var(--light-blue);
+  width: 100%;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.passengers__button-text {
+  color: var(--dark-blue);
+  font-size: 1.2rem;
+  margin-right: 0.8rem;
+  font-family: open-sans;
+}
+
+@media screen and (min-width: 45rem) {
+  .passengers__container {
+    max-width: 40rem;
+    margin: 1rem auto 0;
+  }
+
+  .passengers__card-link {
+    margin: 0.7rem;
+  }
+}
+
+@media screen and (min-width: 45rem) {
+  .passengers__container {
+    max-width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

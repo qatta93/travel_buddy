@@ -4,6 +4,7 @@
   background-color: var(--light-blue);
   border-radius: 0.4rem;
   box-shadow: 0 3px 3px 1px var(--shadow);
+  max-width: 25rem;
 }
 
 .user-card__info {
@@ -19,13 +20,13 @@
   margin-bottom: 0.1rem;
 }
 
-.user-card__country {
-  font-size: 0.9rem;
+.user-card__gender {
+  font-size: 0.8rem;
   margin-bottom: 0.4rem;
 }
 
 .user-card__summary {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   margin-bottom: 0.2rem;
 }
 
@@ -35,8 +36,8 @@
   margin-top: auto;
 }
 
-.user-card__language {
-  font-size: 0.9rem;
+.user-card__footer-text {
+  font-size: 0.8rem;
 }
 
 .user-card__avatar {
@@ -44,4 +45,58 @@
   border-radius: 0 0.3rem 0.3rem 0;
   object-fit: cover;
   height: 100%;
+}
+
+@media screen and (min-width: 45rem) {
+  .user-card {
+    max-width: 45rem;
+  }
+
+  .user-card__info {
+    padding: 1.2rem;
+  }
+
+  .user-card__title {
+    font-size: 1.5rem;
+  }
+
+  .user-card__gender {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .user-card__summary {
+    font-size: 1.2rem;
+  }
+
+  .user-card__footer-text {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (min-width: 85rem) {
+  .user-card {
+    max-width: 25rem;
+  }
+
+  .user-card__info {
+    padding: 0.8rem;
+  }
+
+  .user-card__title {
+    font-size: 1rem;
+  }
+
+  .user-card__gender {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .user-card__summary {
+    font-size: 0.8rem;
+  }
+
+  .user-card__footer-text {
+    font-size: 0.9rem;
+  }
 }

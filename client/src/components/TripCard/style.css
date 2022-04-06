@@ -54,7 +54,7 @@ a {
   object-fit: cover;
 }
 
-@media screen and (min-width: 30rem) {
+@media screen and (min-width: 40rem) {
   .trips__offer {
     width: 90%;
     max-width: 40rem;

@@ -36,11 +36,11 @@ const UserCard = ({ id }: UserCardProps) => {
               {' '}
               y.o.
             </h2>
-            <p className="user-card__country">{user.gender}</p>
+            <p className="user-card__gender">{user.gender}</p>
             <p className="user-card__summary">{user.summary || 'This is a fake description for the user'}</p>
             <div className="user-card__footer">
-              <p>{user.country}</p>
-              <p>
+              <p className="user-card__footer-text">{user.country}</p>
+              <p className="user-card__footer-text">
                 {user.languages.map((l) => l.languageCode).join(', ')}
               </p>
             </div>
