@@ -10,8 +10,14 @@ const Users = () => {
   const [users, setUsers] = useState<IUser[]>([]);
 
   useEffect(() => {
+    let valid = true;
     const fetchUsers = async () => {
       const data = await fetchApi<IUser[]>('/api/users');
+
+      if (!valid) {
+        return;
+      }
+
       if (data.status === 'error') {
         console.error(data.message);
         return;
@@ -20,6 +26,8 @@ const Users = () => {
     };
 
     fetchUsers();
+
+    return () => { valid = false; };
   });
 
   return (

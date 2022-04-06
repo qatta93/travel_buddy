@@ -38,11 +38,17 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    let valid = true;
     const fetchCountriesAndLanguages = async () => {
       const [countriesData, languageData] = await Promise.all([
         fetchApi<ICountry[]>('/api/countries'),
         fetchApi<ILanguage[]>('/api/languages'),
       ]);
+
+      if (!valid) {
+        return;
+      }
+
       if (countriesData.status === 'success') {
         setCountries(countriesData.data);
       }
@@ -52,6 +58,8 @@ const EditUserForm = ({ user }: EditUserFormProps) => {
     };
 
     fetchCountriesAndLanguages();
+
+    return () => { valid = false; };
   }, []);
 
   const handleSubmit = async (event: React.FormEvent) => {

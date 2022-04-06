@@ -11,8 +11,15 @@ const UserCard = ({ id }: UserCardProps) => {
   const [user, setUser] = useState<IUser | null>(null);
 
   useEffect(() => {
+    let valid = true;
+
     const fetchUser = async () => {
       const data = await fetchApi<IUser>(`/api/users/${id}`);
+
+      if (!valid) {
+        return;
+      }
+
       if (data.status === 'error') {
         console.error(data.message);
         return;
@@ -21,6 +28,8 @@ const UserCard = ({ id }: UserCardProps) => {
     };
 
     fetchUser();
+
+    return () => { valid = false; };
   }, []);
 
   return (

@@ -11,8 +11,14 @@ const MyTripRequests = () => {
   const tripId = Number(window.location.pathname.match(/[0-9]*$/g)![0]);
 
   useEffect(() => {
+    let valid = true;
     const getRequestsData = async () => {
       const data = await fetchApi<IRequest[]>('/api/requests/');
+
+      if (!valid) {
+        return;
+      }
+
       if (data.status === 'error') {
         console.error(data.message);
         return;
@@ -20,6 +26,8 @@ const MyTripRequests = () => {
       setRequests(data.data);
     };
     getRequestsData();
+
+    return () => { valid = false; };
   }, []);
 
   const tripRequests = requests.filter((req) => req.tripId === tripId);

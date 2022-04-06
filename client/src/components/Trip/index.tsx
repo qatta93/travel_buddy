@@ -19,8 +19,15 @@ const Trip = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    let valid = true;
+
     const fetchTrip = async () => {
       const data = await fetchApi<ITrip>(`/api/trips/${id}`);
+
+      if (!valid) {
+        return;
+      }
+
       if (data.status === 'error') {
         console.error(data.message);
         return;
@@ -29,6 +36,8 @@ const Trip = () => {
     };
 
     fetchTrip();
+
+    return () => { valid = false; };
   }, []);
 
   const togglePopup = () => setPopup((currentState) => !currentState);

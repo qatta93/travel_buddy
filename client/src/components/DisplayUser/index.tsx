@@ -13,11 +13,16 @@ export const DisplayUser = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    let valid = true;
     const getUserDetailsAndTrips = async () => {
       const [userDetailsData, tripsData] = await Promise.all([
         fetchApi<IUser>(`/api/users/${id}`),
         fetchApi<ITrip[]>('/api/trips'),
       ]);
+
+      if (!valid) {
+        return;
+      }
 
       if (tripsData.status === 'success') {
         const userTripsData = tripsData.data.filter((t) => t.author.id === Number(id));
@@ -38,6 +43,8 @@ export const DisplayUser = () => {
     };
 
     getUserDetailsAndTrips();
+
+    return () => { valid = false; };
   }, []);
 
   return (

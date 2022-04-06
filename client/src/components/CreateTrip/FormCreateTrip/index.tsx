@@ -74,11 +74,16 @@ const CreateTripForm = () => {
   const userId = user?.id;
 
   useEffect(() => {
+    let valid = true;
     const fetchCountriesAndActivities = async () => {
       const [countriesData, activitiesData] = await Promise.all([
         fetchApi<ICountry[]>('/api/countries'),
         fetchApi<IActivity[]>('/api/activities'),
       ]);
+      if (!valid) {
+        return;
+      }
+
       if (countriesData.status === 'success') {
         setCountries(countriesData.data);
       }
@@ -88,6 +93,8 @@ const CreateTripForm = () => {
     };
 
     fetchCountriesAndActivities();
+
+    return () => { valid = false; };
   }, []);
 
   const handleSubmit = async (event: React.FormEvent) => {

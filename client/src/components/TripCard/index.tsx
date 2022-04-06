@@ -14,8 +14,13 @@ const TripCard = ({ trip }:TripCardProps) => {
   const userId = trip.author.id;
 
   useEffect(() => {
+    let valid = true;
     const getUsersData = async () => {
       const data = await fetchApi<IUser>(`/api/users/${userId}`);
+
+      if (!valid) {
+        return;
+      }
       if (data.status === 'error') {
         console.error(data.message);
         return;
@@ -24,6 +29,8 @@ const TripCard = ({ trip }:TripCardProps) => {
       setUser(userInfo);
     };
     getUsersData();
+
+    return () => { valid = false; };
   }, []);
 
   const tripDates = formatDatesTrip(trip.from, trip.to);

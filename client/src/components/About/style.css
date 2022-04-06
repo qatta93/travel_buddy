@@ -3,10 +3,13 @@
   flex-direction: column;
 }
 
+.about__paragraph-wrapper {
+  margin-bottom: 1rem;
+}
+
 .about__paragraph {
-  text-indent: 3rem;
   padding: 0.5rem 2rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-align: justify;
   text-justify: inter-word;
   font-weight: 200;

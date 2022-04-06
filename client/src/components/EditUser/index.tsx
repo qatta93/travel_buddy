@@ -11,12 +11,19 @@ const EditUser = () => {
   const user = useAppSelector((state) => state.user.user);
 
   useEffect(() => {
+    let valid = true;
+
     const getUserDetails = async () => {
       if (!user) {
         return;
       }
 
       const data = await fetchApi<IUser>(`/api/users/${user.id}`);
+
+      if (!valid) {
+        return;
+      }
+
       if (data.status === 'error') {
         console.error(data.message);
         return;
@@ -26,6 +33,8 @@ const EditUser = () => {
     };
 
     getUserDetails();
+
+    return () => { valid = false; };
   }, []);
 
   return (

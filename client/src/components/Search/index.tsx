@@ -26,8 +26,14 @@ const Search = () => {
   const [filters, setFilters] = useState<SearchFilters>(filtersInitialValue);
 
   useEffect(() => {
+    let valid = true;
     const getTripsData = async () => {
       const data = await fetchApi<ITrip[]>('/api/trips');
+
+      if (!valid) {
+        return;
+      }
+
       if (data.status === 'error') {
         console.error(data.message);
         return;
@@ -37,6 +43,8 @@ const Search = () => {
     };
 
     getTripsData();
+
+    return () => { valid = false; };
   }, []);
 
   const filteredTrips = filterTripSearch(trips, filters);

@@ -35,9 +35,6 @@ const About = () => (
         <img className="about__team-image" src="/images/codingNomads.jpg" alt="coding nomads team" />
       </section>
     </section>
-    {/* <video poster="/images/bg_desktop.png" autoplay="autoplay"
-    loop="loop" controls="controls" width="640" height="360">
-    <source src="/videos/mobile.mp4" type="video/mp4"></video> */}
     <section className="about__bg">
       <picture className="about__bg-picture">
         <source media="(orientation: landscape)" srcSet="/images/bg_desktop.png" />

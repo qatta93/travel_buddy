@@ -16,8 +16,15 @@ const MyTrips = () => {
   const filterTripsByUserId = trips.filter((req) => req.author.id === userId);
 
   useEffect(() => {
+    let valid = true;
+
     const getTripsData = async () => {
       const data = await fetchApi<ITrip[]>('/api/trips');
+
+      if (!valid) {
+        return;
+      }
+
       if (data.status === 'error') {
         console.error(data.message);
         return;
@@ -27,6 +34,8 @@ const MyTrips = () => {
     };
 
     getTripsData();
+
+    return () => { valid = false; };
   }, []);
 
   return (

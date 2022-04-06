@@ -48,8 +48,14 @@ const FormSearchTrip = ({ setFilters }: FormProps) => {
   const [countries, setCountries] = useState<ICountry[]>(countriesInitialValue);
 
   useEffect(() => {
+    let valid = true;
     const fetchCountries = async () => {
       const data = await fetchApi<ICountry[]>('/api/countries');
+
+      if (!valid) {
+        return;
+      }
+
       if (data.status === 'error') {
         console.error(data.message);
         return;
@@ -58,6 +64,8 @@ const FormSearchTrip = ({ setFilters }: FormProps) => {
     };
 
     fetchCountries();
+
+    return () => { valid = false; };
   }, []);
 
   const handleSubmit = (event: React.FormEvent) => {

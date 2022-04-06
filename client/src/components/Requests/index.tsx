@@ -16,8 +16,15 @@ const Requests = () => {
   const isAcceptedRejected = filterRequestsByUserId.some((req) => req.status === 'accepted' || 'rejected');
 
   useEffect(() => {
+    let valid = true;
+
     const getRequestsData = async () => {
       const data = await fetchApi<IRequest[]>('/api/requests');
+
+      if (!valid) {
+        return;
+      }
+
       if (data.status === 'error') {
         console.error(data.message);
         return;
@@ -26,6 +33,8 @@ const Requests = () => {
       setRequests(request);
     };
     getRequestsData();
+
+    return () => { valid = false; };
   }, []);
 
   return (
