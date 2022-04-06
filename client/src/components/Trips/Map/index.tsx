@@ -9,8 +9,6 @@ interface MapsProps {
   trips: ITrip[],
 }
 
-const accessToken = 'pk.eyJ1IjoidG9tODQiLCJhIjoiY2wxMXdqd2t4MDEzbTNjbXZ3eW81c2sxYiJ9.P0aH-Hn9LJ0dcCOPcAvmwQ';
-
 const Maps = ({ trips }:MapsProps) => (
   <section className="trips__map-container">
     <Map
@@ -19,7 +17,7 @@ const Maps = ({ trips }:MapsProps) => (
         latitude: 0,
         zoom: 1,
       }}
-      mapboxAccessToken={accessToken}
+      mapboxAccessToken="pk.eyJ1IjoidG9tODQiLCJhIjoiY2wxMXdqd2t4MDEzbTNjbXZ3eW81c2sxYiJ9.P0aH-Hn9LJ0dcCOPcAvmwQ"
       style={{ width: '100%', height: '100%' }}
       mapStyle="mapbox://styles/mapbox/streets-v11"
     >

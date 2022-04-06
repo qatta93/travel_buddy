@@ -4,8 +4,6 @@ import countriesData from './countries.json';
 import { ICountry } from '../../../types';
 import TripMapMarker from '../TripMapMarker';
 
-const accessToken = 'pk.eyJ1IjoicWF0dGEiLCJhIjoiY2wxbTcyMHM1MGh2YjNwbzZqd2R6cXA5dSJ9.hwu5QNqh4Cvw1SBPVC8Rfw';
-
 interface TripMapProps {
   countries: ICountry[],
 }
@@ -25,7 +23,7 @@ const TripMap = ({ countries }: TripMapProps) => {
       }}
       style={{ width: '100%', height: '100%' }}
       mapStyle="mapbox://styles/mapbox/streets-v11"
-      mapboxAccessToken={accessToken}
+      mapboxAccessToken="pk.eyJ1IjoicWF0dGEiLCJhIjoiY2wxbTcyMHM1MGh2YjNwbzZqd2R6cXA5dSJ9.hwu5QNqh4Cvw1SBPVC8Rfw"
     >
       <NavigationControl />
       <FullscreenControl />
