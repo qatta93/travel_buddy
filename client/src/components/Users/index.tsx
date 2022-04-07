@@ -28,7 +28,7 @@ const Users = () => {
     fetchUsers();
 
     return () => { valid = false; };
-  });
+  }, []);
 
   return (
     <section className="users">
