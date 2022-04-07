@@ -33,6 +33,10 @@
   padding: 0.5rem 0;
 }
 
+.request-card__link {
+  color: var(--dark-blue);
+}
+
 .request-card__email {
   font-size: 0.7rem;
 }

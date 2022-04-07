@@ -1,6 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { fetchApi } from '../../../helpers/api';
-// import MainHeader from '../../MainHeader';
 import { IRequest } from '../../../types';
 import './style.css';
 
@@ -69,7 +69,7 @@ const MyTripRequestsCard = ({ request, setRequests }:RequestCardProps) => {
     <article className={`request-card request-card--${request.status}`}>
       <header className={`request-card__header request-card__header--${request.status}`}>
         <h1 className="request-card__title">
-          {request.user.name}
+          <Link to={`/users/${request.user.id}`} className="request-card__link">{request.user.name}</Link>
           {', '}
           {sentOnDate}
         </h1>
