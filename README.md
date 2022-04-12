@@ -52,8 +52,9 @@ So far, we have incorporated the following features:
 
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
+![mobile screenshot](./screenshots/iphone.png)
+![iPad screenshot](./screenshots/ipad.png)
+![laptop screenshot](./screenshots/laptop.png)
 
 
 ## Setup
