@@ -52,9 +52,9 @@ So far, we have incorporated the following features:
 
 
 ## Screenshots
-![mobile screenshot](./screenshots/iphone.png)
-![iPad screenshot](./screenshots/ipad.png)
-![laptop screenshot](./screenshots/laptop.png)
+<img src="./screenshots/iphone.png" width="100">
+<img src="./screenshots/ipad.png" width="200">
+<img src="./screenshots/laptop.png" width="600">
 
 
 ## Setup
