@@ -1,5 +1,5 @@
 # travel buddy
-> Created by codingNoamds, this app was conceived for travelers that wish to find a buddy to travel with. They can either create trips and wait for people to join them, or search through other people's trips and join them in their adventures.
+> Created by codingNomads, this app was conceived for travelers that wish to find a buddy to travel with. They can either create trips and wait for people to join them, or search through other people's trips and join them in their adventures.
 > Our app is hosted in heroku [_Click here to take a look._](https://travel-buddy-cn.herokuapp.com/)
 
 ## Table of Contents
