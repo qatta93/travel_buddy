@@ -24,6 +24,9 @@ module.exports = {
   ],
   rules: {
     "import/prefer-default-export": 0,
+    "linebreak-style": 0,
+    "global-require": 0,
+    "eslint linebreak-style": [0, "error", "windows"],
     "react/function-component-definition": [
       2,
       {
